@@ -1,0 +1,9 @@
+{
+    "path" : "~/Dropbox/work-with-health-data/medical-transcription",
+    "sortOrder" : [
+        {
+            "ascending" : true,
+            "columnIndex" : 2
+        }
+    ]
+}
