@@ -1,14 +1,26 @@
 library(data.table)
 library(magrittr)
 library(stringr)
-dt <- fread("~/data/health-care-data/medical-transcriptions-kaggle/mtsamples.csv",
-            header = TRUE) %>%
-    .[, V1 := NULL]
+library(ggplot2)
 
-# categories in transcription
-bbb = str_replace_all(dt$transcription, "\\.", " ") %>% 
-    str_remove_all(" []+ ") %>%
-    str_squish() %>%
-    str_extract_all("[A-Z][A-Z ]{2,}[A-Z]")
+mt <- fread("mtsample_scraped.csv", header = TRUE)
 
-ccc = unlist(bbb)
+# headers used in transcription ===============================================
+# all headers
+headers <- mt$mt_headers %>%
+    str_split(", ") %>%
+    unlist() %>%
+    .[!. == ""]
+
+# count of each headers
+header_count <- sort(table(headers), decreasing = TRUE)
+
+header_top <- header_count[1:100]
+
+ggplot() + 
+    geom_col(aes(x = factor(names(header_top), levels = names(header_top)),
+                 y = as.integer(header_top))) +
+    coord_flip()
+
+# Word cloud
+# plot
