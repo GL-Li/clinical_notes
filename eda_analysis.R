@@ -68,3 +68,11 @@ names(header_count)
 # DESCRIPTION OF PROCEDURE
 # 
 
+
+# medical notes ===============================================================
+# select 100 from each of Gastroenterology and Neurology for machine learning
+notes = mt[sample_type %in% c("Gastroenterology", "Neurology"), 
+          .(sample_type, medical_transcription)] %>%
+    .[, .SD[1:100], by = sample_type]
+
+fwrite(notes, file="selected_notes.csv", row.names = FALSE)
