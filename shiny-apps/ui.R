@@ -1,15 +1,109 @@
 library(shiny)
-ui <- fluidPage(
-    # fluidRow(
-    #     column(
-    #         12,
-    #         DT::dataTableOutput("search_table")
-    #     )
-    # ),
-    fluidRow(
-        column(
-            12,
-            DT::dataTableOutput("tfidf")
+library(shinydashboard)
+
+dashboardPage(
+    dashboardHeader(title = "Medical Note Analysis"),
+    dashboardSidebar(
+        sidebarMenu(
+            # use only "list" instead of "glyphicon glyphicon-list"
+            menuItem("Overview", tabName = "overview", icon = icon("home")),
+            menuItem("Bag of Words", tabName = "bow", icon = icon("table")),
+            menuItem("Word Cloud", tabName = "wordcloud", icon = icon("cloud")),
+            menuItem("Education", tabName = "education", icon = icon("bar-chart")),
+            menuItem("House", tabName = "house", icon = icon("bar-chart"))
+        )
+    ),
+    dashboardBody(
+        # modify css  ==========================================================
+        tags$head(tags$style(includeCSS("asset/custom.css"))),
+        
+        tabItems(
+            tabItem(
+                "overview",
+                h1("Introduction to medical notes"),
+                includeMarkdown("./Rmd/introduction_to_medical_notes.Rmd"),
+                dataTableOutput("raw_table")
+            ),
+            
+            # bag of words =====================================================
+            tabItem(
+                "bow",
+                fluidRow(
+                    column(
+                        12,
+                        textInput("word", 
+                                  "",
+                                  width = "415px",
+                                  placeholder = "Input a word and see its stats"),
+                        htmlOutput("word_stats")
+                    )
+                ),
+                
+                br(),
+                
+                fluidRow(
+                    column(
+                        12,
+                        DT::dataTableOutput("bows")
+                    )
+                )
+            ),
+            # word cloud ======================================================
+            tabItem(
+                "wordcloud",
+                fluidRow(
+                    column(
+                        6,
+                        fluidRow(
+                            column(
+                                5,
+                                selectInput("cloud_type_1", 
+                                            "Select sample type",
+                                            choices = c("Both", 
+                                                        "Gastroenterology", 
+                                                        "Neurology"),
+                                            selected = "Gastroenterology")
+                            ),
+                            column(
+                                5,
+                                selectInput("cloud_method_1",
+                                            "Select bag of words",
+                                            choices = c("amazon_me", 
+                                                        "medacy_me", 
+                                                        "top_tf", 
+                                                        "top_tfidf"),
+                                            selected = "top_tf")
+                            )
+                        ),
+                        plotOutput("wordcloud_1")
+                    ),
+                    column(
+                        6,
+                        fluidRow(
+                            column(
+                                5,
+                                selectInput("cloud_type_2", 
+                                            "Select sample type",
+                                            choices = c("Both", 
+                                                        "Gastroenterology", 
+                                                        "Neurology"),
+                                            selected = "Neurology")
+                            ),
+                            column(
+                                5,
+                                selectInput("cloud_method_2",
+                                            "Select bag of words",
+                                            choices = c("amazon_me", 
+                                                        "medacy_me", 
+                                                        "top_tf", 
+                                                        "top_tfidf"),
+                                            selected = "top_tf")
+                            )
+                        ),
+                        plotOutput("wordcloud_2")
+                    )
+                )
+            )
         )
     )
 )

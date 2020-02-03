@@ -1,0 +1,1132 @@
+T1	Drug 39 52	chlorhexidine
+T2	Strength 52 288	", "Subcuticular-5-0", "Monocryl", "skin-closure", "100-mL"], ["oral", "antibiotics", "Cipro", "Flagyl", "atrial-fibrillation", "metoprolol", "Premarin-hormone", "replacement.", "creatinine", "0."], ["peroxide", "Vicryl", "subcutaneous"
+T3	Reason 299 318	upper-quadrant-pain
+T4	Drug 322 329	calcium
+T5	Strength 329 358	", "antibiotics"], ["Vicryl",
+T6	Drug 360 366	Vicryl
+T7	Drug 372 378	Ativan
+T8	Strength 378 452	", "hyponatremia"], ["Vicryl", "saline", "Vicryl", "Vicryl", "benzoin"], [
+T9	Drug 532 538	Vicryl
+T10	Strength 538 552	", "Z-stitch",
+T11	Drug 554 560	Vicryl
+T12	Drug 580 585	"fine
+T13	Drug 586 594	Monocryl
+T14	Drug 600 605	Acute
+T15	Strength 605 659	-appendicitis", "anesthesia", "antibiotics", "saline",
+T16	Reason 660 682	"right-upper-quadrant"
+T17	Drug 685 691	Vicryl
+T18	Strength 691 705	", "Vicryl", "
+T19	Drug 705 716	antibiotics
+T20	Drug 787 805	"saline-antibiotic
+T21	Drug 867 875	Marcaine
+T22	Drug 923 931	Marcaine
+T23	Strength 931 943	", "0.25", "
+T24	Drug 943 954	antibiotics
+T25	Drug 960 966	Barium
+T26	Strength 966 990	-enema", "constipation",
+T27	Drug 991 998	"barium
+T28	Drug 999 1007	contrast
+T29	Drug 1013 1025	chemotherapy
+T30	Drug 1029 1034	April
+T31	Strength 1034 1036	",
+T32	Drug 1037 1038	"
+T33	ADE 1038 1070	decreased-leakage-from-his-trach
+T34	Strength 1070 1097	", "Passy", "chemotherapy",
+T35	Reason 1098 1117	"increase-laryngeal
+T36	Drug 1132 1135	TIA
+T37	Strength 1135 1241	/stroke", "bolus"], ["bolus", "bolus"], ["bolus", "decrease-bacterial-growth"], ["Demerol", "25", "proton-
+T38	Form 1241 1245	pump
+T39	Drug 1260 1271	antiemetics
+T40	Drug 1364 1373	Diltiazem
+T41	Strength 1373 1528	", "30-mg", "tid", "pantoprazole", "40-mg", "qd", "epoetin-alfa", "40,", "000-units", "weekly", "iron", "325-mg", "bid", "cholestyramine", "Warfarin", "1",
+T42	Drug 1553 1562	diltiazem
+T43	Strength 1562 1654	", "20-mg", "intravenously", "30-mg", "50", "topical", "benzocaine", "20", "methylene-blue",
+T44	Drug 1656 1662	oxygen
+T45	Drug 1687 1693	Flagyl
+T46	Strength 1693 2018	", "Levaquin", "Reglan", "atenolol", "Mevacor", "Diarrhea", "Reglan", "oxygen", "leukocytosis", "Levaquin", "p.o.", "vancomycin", "oxygen"], ["anesthesia", "dye", "antibiotic", "Mastisol"], ["Diovan", "5-mg", "daily", "Lipitor", "10-mg", "daily", "Lutein", "20-mg", "daily", "folic-acid", "0.8-mg", "daily", "multivitamin", "
+T47	Frequency 2018 2023	daily
+T48	Drug 2100 2106	Vicryl
+T49	Strength 2106 2128	", "Vicryl", "Vicryl",
+T50	Drug 2129 2140	"anesthesia
+T51	Reason 2152 2171	upper-quadrant-pain
+T52	Drug 2195 2201	Vicryl
+T53	Strength 2201 2312	"], ["Marcaine", "antibiotics", "subcutaneous", "heparin", "saline", "local", "injectable-0.25", "Marcaine"], [
+T54	Reason 2345 2372	pain-control-with-oral-pain
+T55	Drug 2376 2380	iron
+T56	Strength 2380 2425	", "325-mg", "p.o.", "t.i.d.", "15-cc", "p.o.
+T57	Drug 2456 2465	Xylocaine
+T58	Strength 2465 2488	", "1%", "Epinephrine",
+T59	Drug 2489 2499	"Xylocaine
+T60	Strength 2499 2509	"], ["mL",
+T61	ADE 2569 2588	Acute-renal-failure
+T62	Drug 2625 2631	Flagyl
+T63	Drug 2635 2643	Levaquin
+T64	Drug 2660 2670	vancomycin
+T65	Strength 2670 2703	"], ["PENICILLIN", "two-glasses",
+T66	ADE 2704 2722	"white-wine", "3-L
+T67	Strength 2757 3028	0.7", "borderline", "chemotherapy", "chemotherapy", "Chemotherapy"], ["conscious-sedation"], ["Include-Serevent", "two", "puffs", "daily", "Nasonex", "two", "sprays", "daily", "penicillin", "anxiety", "HEART-RATE"], ["anemia"], ["constipation", "fiber", "two", "tablets",
+T68	Drug 3051 3058	Demerol
+T69	Strength 3058 3255	", "intravenously"], ["Vistaril", "50-mg", "Atropine", "0.4-mg", "IM", "intravenous", "Demerol", "50-mg", "Versed", "5-mg"], ["100-mg", "Demerol", ",-3-mg", "Versed"], ["50-mg", "Demerol", "3.75-mg
+T70	Drug 3279 3286	Demerol
+T71	Strength 3286 3411	", "100-mg", "Versed", "3-mg", "Demerol", "100-mg", "Versed", "3-mg"], ["sedation"], ["Fentanyl", "100-mcg", "versed", "10-mg
+T72	Drug 3417 3423	Versed
+T73	Strength 3423 3448	", "5-mg", "Demerol", "50
+T74	Drug 3454 3460	Versed
+T75	Strength 3460 3530	", "3-mg", "Demerol", "25-mg"], ["Fentanyl", "75-mcg", "Versed", "6-mg
+T76	Strength 3571 3663	", "epinephrine", "epinephrine", "epinephrine", "epinephrine", "epinephrine", "glucagon"], [
+T77	Strength 3710 3740	5-mg", "Demerol", "Demerol", "
+T78	ADE 3740 3755	nausea-reaction
+T79	Strength 3759 3781	25-mg", "Phenergan", "
+T80	Strength 3785 4107	mg"], ["Versed", "5-mg", "Demerol", "7"], ["Midazolam", "2-mg", "Fentanyl", "100-mcg", "sedation", "saline", "injection"], ["Fentanyl", "100-mcg", "3-mg", "Versed"], ["Fentanyl", "150-mcg", "Versed", "7-mg"], ["sulfasalazine", "cortisone", "oxygen", "steroid", "taper", "steroid", "taper", "immune-suppressive-medication",
+T81	Drug 4108 4121	"azathioprine
+T82	Strength 4121 4194	"], ["Versed", "5-mg", "Demerol", "100"], ["Nexium", "Demerol", "Versed",
+T83	Drug 4196 4205	Cetacaine
+T84	Drug 4215 4223	Nexium"]
+T85	Drug 4227 4233	Versed
+T86	Strength 4233 4254	", "8-mg", "175-mcg",
+T87	Drug 4255 4264	"fentanyl
+T88	Strength 4272 4332	5-mcg", "fentanyl", "conscious-sedation"], ["Fentanyl", "100
+T89	Drug 4364 4372	fentanyl
+T90	Strength 4402 4458	4-mg", "75-mg", "Demerol"], ["sedation", "sedation"], ["
+T91	ADE 4478 4486	diarrhea
+T92	Strength 4486 4662	", "methadone", "Fentanyl", "200-mcg", "0-mg", "Phenergan", "25"], ["fluids", "300-mcg", "fentanyl", "15-mg", "Versed", "oxygen"], ["prednisone", "7-mg", "125-mcg", "fentanyl",
+T93	Drug 4679 4687	propofol
+T94	Strength 4687 4756	"], ["sedation", "Colace"], ["heartburn", "Accupril", "vitamins"], ["
+T95	Drug 4756 4772	Milk-of-Magnesia
+T96	Strength 4772 4781	", "30-mL
+T97	Frequency 4785 4790	daily
+T98	Drug 4790 4798	-p.r.n"]
+T99	Strength 4798 4896	, ["depression", "insulin", "gallstone", "Carafate", "Prilosec", "metformin"], ["Tramadol", "50-mg
+T100	Frequency 4900 4924	every-4-to-6-hours-p.r.n
+T101	Strength 4924 4952	", "hydrocodone", "mg/500-mg
+T102	Frequency 4962 4976	6-hours-p.r.n"
+T103	Strength 4976 5057	, "zolpidem", "10-mg", "at-bedtime", "triamterene", "37.5-mg", "atenolol", "50-mg
+T104	Drug 5060 5070	"vitamin-D
+T105	Strength 5086 5112	mg", "simvastatin", "20-mg
+T106	Drug 5116 5125	ibuprofen
+T107	Strength 5125 5164	", "600-mg", "t.i.d.", "Lyrica", "75-mg
+T108	Reason 5203 5219	bright-red-blood
+T109	Drug 5250 5259	narcotics
+T110	ADE 5263 5286	narcotic-bowel-syndrome
+T111	Strength 5286 5318	.", "statin", "mild-elevations",
+T112	Drug 5319 5333	"complications
+T113	Drug 5364 5374	lisinopril
+T114	Strength 5374 5457	", "40-mg", "daily", "hydrochlorothiazide", "25-mg", "daily", "metformin", "1000-mg
+T115	Drug 5476 5483	Januvia
+T116	Strength 5483 5525	", "100-mg", "daily", "clonazepam", "10-mg
+T117	ADE 5552 5565	legs-syndrome
+T118	Drug 5569 5576	Crestor
+T119	Strength 5576 5585	", "10-mg
+T120	Drug 5589 5595	Flomax
+T121	Strength 5595 5605	", "0.4-mg
+T122	ADE 5627 5663	legs-syndrome", "Barrett's-esophagus
+T123	Drug 5707 5713	Reglan
+T124	Strength 5713 5722	", "10-mg
+T125	Drug 5789 5794	April
+T126	Strength 5794 5800	", "20
+T127	Reason 5816 5835	upper-quadrant-pain
+T128	Drug 5856 5864	Coumadin
+T129	Strength 5886 6000	mL", "intravenous", "contrast", "contrast"], ["intravenous", "contrast", "intravenous", "contrast", "100", "Oral",
+T130	Drug 6001 6010	"contrast
+T131	Drug 6026 6032	pain"]
+T132	Strength 6032 6083	, ["intravenous", "contrast", "correlate", "urinary
+T133	Strength 6202 6287	, ["intravenous", "contrast", "100-mL", "intravenous", "Isovue-", "Oral", "contrast",
+T134	Drug 6289 6295	cervix
+T135	Drug 6323 6332	Omnipaque
+T136	Drug 6359 6366	Toradol
+T137	Strength 6366 6380	", "nausea", "
+T138	Frequency 6380 6390	three-days
+T139	Drug 6469 6482	ciprofloxacin
+T140	Strength 6482 6558	", "for-3-days", "omeprazole", "Colace", "constipation", "Percocet", "pain",
+T141	ADE 6559 6622	"elevated-white-blood-cell-count", "LFTs-were-slightly-elevated
+T142	Drug 6626 6639	narcotic-meds
+T143	Drug 6703 6714	antibiotics
+T144	Strength 6714 6864	", "antibiotics", "heparin", "subcutaneously", "Vicryl", "normal-saline", "saline", "Adaptic", "antibiotics"], ["nitropaste", "morphine", "Lopressor",
+T145	Reason 6865 6882	"positive-results
+T146	Drug 6901 6911	Lisinopril
+T147	Strength 6911 6955	", "5-mg", "daily", "metoprolol", "25-mg", "
+T148	Frequency 6955 6966	twice-daily
+T149	Strength 6966 6989	", "furosemide", "40-mg
+T150	Frequency 6993 7003	once-daily
+T151	Strength 7003 7026	", "Isentress", "400-mg
+T152	Frequency 7030 7040	once-daily
+T153	Drug 7044 7050	Norvir
+T154	Strength 7050 7060	", "100-mg
+T155	Frequency 7064 7074	once-daily
+T156	Drug 7078 7086	Prezista
+T157	Strength 7086 7096	", "400-mg
+T158	Frequency 7100 7110	once-daily
+T159	Drug 7113 7123	"albuterol
+T160	Strength 7123 7142	", "Ambien", "10-mg
+T161	Frequency 7146 7156	once-daily
+T162	Drug 7236 7242	Nexium
+T163	Strength 7242 7344	", "40-mg", "daily", "GI-prophylaxis", "lisinopril", "metoprolol", "pressor", "Lopressor", "5-mg", "IV
+T164	Frequency 7344 7351	-p.r.n.
+T165	Drug 7355 7365	metoprolol
+T166	Strength 7365 7809	", "heparin", "oral", "contrast", "oral", "contrast", "aztreonam", "1-g", "every-8-hours", "Flagyl", "500-mg", "every-8-hours"], ["Cetacaine", "spray,", "100-mcg", "fentanyl", "5-mg"], ["oxygen", "Synthroid", "Tegretol", "Norvasc", "lisinopril", "DDAVP.", "ASA", "PPI"], ["Fentanyl", "250-mcg", "9-mg", "sedation"], ["Demerol", "Versed", "Demerol", "Versed", "sedation"], ["sedation-with", "1", "lidocaine", "sedation", "lidocaine", "bolus"], [
+T167	Drug 7810 7819	Cetacaine
+T168	Strength 7819 7929	"], ["sedation"], ["intravenous", "fentanyl", "75-mcg", "intravenous", "Versed", "5-mg", "Cetacaine", "spray",
+T169	ADE 7930 7936	"local
+T170	Drug 7937 7947	anesthesia
+T171	Drug 7957 7965	Fentanyl
+T172	Strength 7965 8017	", "25-mcg", "Versed", "2-mg", "lidocaine", "spray",
+T173	Drug 8018 8024	"grade
+T174	Drug 8065 8073	Fentanyl
+T175	Strength 8073 8102	", "125-mcg", "Versed", "8-mg
+T176	Drug 8130 8138	Prevacid
+T177	Strength 8138 8411	"], [], ["Fentanyl", "125-mcg", "Versed", "7-mg", "Aciphex", "Cetacaine", "Aciphex", "a-p.r.n.", "basis"], ["Nexium", "40-mg"], ["lidocaine", "spray", "5-mg", "100-mcg", "fentanyl", "omeprazole"], ["Fentanyl", "100-mcg", "5-mg", "Versed"], ["Topical-Cetacaine", "spray"], [
+T178	Drug 8436 8442	Versed
+T179	Strength 8442 8474	", "4-mg", "fentanyl", "75-mcg",
+T180	Reason 8475 8498	"fundus-of-the-stomach"
+T181	Drug 8498 8499	]
+T182	Strength 8499 8547	, ["anticoagulation", "anesthesia", "protamine",
+T183	Reason 8548 8563	"to-reverse-the
+T184	Drug 8564 8571	heparin
+T185	Drug 8577 8585	Marcaine
+T186	Strength 8585 8706	", "Xylocaine", "Vicryl", "Vicryl"], ["cimetidine", "400mg", "qhs", "x-5-days", "2-wk", "Tylenol", "prn", "(1-2", "tabs",
+T187	Frequency 8707 8723	"every-other-day
+T188	Drug 8727 8737	Cimetidine
+T189	Strength 8737 8945	", "400mg", "po", "qhs", "5-days"], [], ["anesthesia", "general-anesthesia", "Vicryl", "4-0", "Monocryl", "Vicryl", "Vicryl", "Vicryl", "Vicryl", "Vicryl", "Monocryl"], ["Iron", "Z", "Loveno"], ["anesthesia",
+T190	ADE 8946 8966	"body-of-the-stomach
+T191	Strength 8966 9047	", "omeprazole", "20-mg"], ["sedation", "50-mg", "Demerol", ",-8-mg", "sedation"]
+T192	Reason 9057 9076	upper-quadrant-pain
+T193	Drug 9080 9087	Demerol
+T194	Strength 9087 9140	", "Versed", "Kinevac", "3-mcg", "Kinevac", "nausea",
+T195	Drug 9161 9167	Pepcid
+T196	Strength 9167 9192	", "sedation", "Demerol",
+T197	Drug 9193 9200	"Versed
+T198	Reason 9206 9261	liquid-in-stomach-with-some-fresh-blood-near-the-fundus
+T199	Strength 9261 9378	", "sedation", "fentanyl", "100-mcg", "midazolam", "4-mg", "50-mcg", "fentanyl", "2-mg", "midazolam", "erythromycin",
+T200	Reason 9379 9412	"bright-red-blood-near-the-fundus
+T201	Strength 9412 9448	", "mg", "erythromycin"], ["5-mg", "
+T202	Route 9448 9452	p.o.
+T203	Strength 9462 9526	", "anesthesia", "Z", "Prevacid", "7.5-mg", "p.o.", "b.i.d."], [
+T204	Drug 9527 9530	Z"]
+T205	Strength 9530 10043	, ["Crohn's-disease", "anesthesia", "aphthous-ulcers", "Begin-prednisone", "30-mg", "p.o.", "daily", "Remicade", "5-mg/kg-IV", "infusion", "Modulon", "50-mL/", "h", "intestine"], ["Demerol", "intravenously"], ["Vistaril", "50-mg", "Atropine", "4-mg", "IM", "Versed", "5.0-mg", "intravenously", "Cetacaine", "spray"], ["peptic-ulcer-disease", "peptic-ulcer-disease", "sedation", "Demerol", "Versed"], ["Demerol", "Versed", "anesthesia", "flex"], ["sedation", "Xylocaine", "sedation", "Betadine", "Betadine", ",-1",
+T206	Drug 10044 10054	"Xylocaine
+T207	Strength 10054 10146	"], ["lidocaine"], ["Nexium", "Cetacaine", "spray"], ["Fentanyl", "200-mcg", "versed", "6-mg
+T208	Drug 10163 10181	anti-inflammatory-
+T209	Strength 10181 10256	medication"], ["Demerol", "Versed", "Demerol", "Versed", "sedation", "b.i.d
+T210	Drug 10264 10278	pump-inhibitor
+T211	Strength 10278 10362	"], ["anesthesia", "coin", "one-unit"], ["foreign-body", "Intravenous", "fluids"], [
+T212	Drug 10362 10373	"anesthesia
+T213	Drug 10452 10472	lidocaine-ointment"]
+T214	Drug 10490 10498	Prilosec
+T215	Strength 10498 10619	", "Pepcid", "Carafate", "Bactrim", "UTI", "Cipro", "500-mg", "b.i.d.", "Omeprazole", "20-mg", "daily", "famotidine", "20
+T216	Drug 10642 10643	]
+T217	Strength 10643 10706	, ["constipation", "fluid", "bolus", "Albuterol", ",-Pulmicort,
+T218	Drug 10745 10754	carnitine
+T219	Strength 10754 10798	", "Depakene", "Reglan", "vitamin-K", "FFP",
+T220	Drug 10799 10819	"blood-transfusion"]
+T221	Drug 10883 10889	fluids
+T222	Strength 10889 10912	", "prednisone", "60-mg
+T223	Drug 10924 10931	Prandin
+T224	Strength 10931 11056	", "Actos", "Lipitor", "Benicar", "Advair", "tapered-dose", "prednisone", "for-4-weeks", "15-mg", "p.o", "seven-days", "40-mg
+T225	Strength 11064 11079	1-week", "30-mg
+T226	Strength 11087 11102	1-week", "20-mg
+T227	Dosage 11120 11127	tapered
+T228	Strength 11127 11166	-dose", "prednisone", "for-4-weeks"], [
+T229	Drug 11167 11175	Cardizem
+T230	Strength 11186 11196	mg", "eye"
+T231	Drug 11269 11274	Imdur
+T232	Strength 11274 11305	", "metoprolol", "Synthroid", "
+T233	Drug 11305 11311	Plavix
+T234	Strength 11311 11377	", "Protoni", "Prilosec", "Protonix", "Prilosec", "Pepcid", "40-mg
+T235	Drug 11393 11398	Imdur
+T236	Strength 11398 11449	", "Synthroid", "metoprolol", "Plavix", "Pepto"], [
+T237	Drug 11496 11503	Lipitor
+T238	Strength 11503 11507	", "
+T239	Drug 11507 11512	Lasix
+T240	Strength 11512 11692	", "Toprol", "Diphenhydramine", "Ibuprofen", "Daypro", "p.r.n.", "insulin", "ibuprofen", "Daypro", "peptic-ulcer-disease", "Gastrointestinal-bleed", "lower-gastrointestinal-bleed",
+T241	Reason 11693 11706	"peptic-ulcer
+T242	Dosage 11739 11752	sliding-scale
+T243	Drug 11778 11792	pump-inhibitor
+T244	Drug 11798 11804	Reglan
+T245	Strength 11804 11813	", "10-mg
+T246	Drug 11852 11857	PPI"]
+T247	Strength 11857 11950	, ["anesthetic", "Vicryl"], ["atrial-fibrillation", "Coumadin", "insulin", "diabetes-mellitus
+T248	Drug 11954 11962	Coumadin
+T249	Drug 11966 11974	Coumadin
+T250	Drug 12003 12010	insulin
+T251	Strength 12010 12129	", "Feosol", "325-mg", "daily", "multivitamins-one", "daily", "Protonix", "40-mg", "b.i.d", "KCl", "20-mEq", "daily", "
+T252	Drug 12129 12134	Lasix
+T253	Strength 12134 12147	", "40-mg", "
+T254	Frequency 12147 12153	b.i.d.
+T255	Drug 12157 12165	atenolol
+T256	Strength 12165 12305	", "50-mg", "daily", "Synthroid", "80-mcg", "daily", "Actos", "30-mg", "daily", "Mevacor", "40-mg", "daily", "lisinopril", "20-mg", "daily",
+T257	Drug 12306 12315	"Coumadin
+T258	Drug 12332 12337	April
+T259	Reason 12396 12415	upper-quadrant-pain
+T260	Drug 12437 12443	Zofran
+T261	Strength 12443 12465	", "Sulfa", "Codeine",
+T262	Drug 12521 12527	Zofran
+T263	Strength 12527 12539	", "Eugene",
+T264	ADE 12540 12564	"elevated-liver-function
+T265	Drug 12576 12582	Imuran
+T266	Strength 12582 12642	", "100-mg", "intermittent-obstructive-symptoms", "Tylenol",
+T267	Drug 12643 12652	"migraine
+T268	Drug 12698 12705	Tylenol
+T269	Strength 12705 12888	", "2-blockers", "Imuran", "Nascobal", "Vicodin", "p.r.n", "Imuran", "Tylenol", "Imuran", "100-mg", "Tylenol", "migraines", "aspirin", "migraine-headaches", "daily", "Zantac", "150-mg
+T270	Strength 12917 12982	Oral", "pharyn"], ["anesthesia", "antibiotics", "side", "Vicryl",
+T271	Drug 13049 13058	lactulose
+T272	Strength 13058 13072	", "Dilantin",
+T273	Drug 13073 13083	"lactulose
+T274	Reason 13095 13114	upper-quadrant-pain
+T275	Strength 13118 13145	2.1-mcg", "intravenous"], [
+T276	Drug 13258 13266	Betadine
+T277	ADE 13276 13290	upper-quadrant
+T278	Strength 13290 13373	", "intravenous", "mannitol", "8000-units", "intravenous", "sodium-heparin", "70-mg
+T279	Strength 13376 13417	"intravenous", "protamine", "bacitracin",
+T280	Drug 13418 13428	"kanamycin
+T281	Reason 13440 13459	upper-quadrant-pain
+T282	Strength 13463 13633	fluid", "low-dose", "antibiotic", "chronic-bronchitis", "Synthroid", "0.5-mg", "1", "tablet", "p.o.", "daily", "Plavix", "75-mg", "p.o.", "daily", "folic-acid", "1-mg", "
+T283	Route 13633 13637	p.o.
+T284	Strength 13637 13677	", "daily", "Diovan", "80-mg", "p.o.", "
+T285	Frequency 13677 13682	daily
+T286	Drug 13686 13693	Renagel
+T287	Strength 13693 13719	", "2", "tablets", "800-mg
+T288	Drug 13746 13751	Lasix
+T289	Strength 13751 13892	", "40-mg", "p.o", "tablets", "twice-a-day", "lovastatin", "20-mg", "p.o.", "daily", "Coreg", "3.125-mg", "p.o.", "twice-a-day", "nebulizer",
+T290	Frequency 13893 13911	"3-hours-as-needed
+T291	Drug 13915 13924	Phenergan
+T292	Strength 13924 13943	", "25-mg", "p.o.",
+T293	Drug 13981 13987	Pepcid
+T294	Strength 13987 13996	", "20-mg
+T295	Route 14000 14004	p.o.
+T296	Strength 14004 14054	", "daily", "Vicodin", "1", "tablet", "p.o.", "q.6
+T297	Frequency 14054 14079	-hours-p.r.n", "as-needed
+T298	Drug 14083 14091	Levaquin
+T299	Strength 14091 14113	", "250-mg", "p.o.", "
+T300	Frequency 14113 14128	every-other-day
+T301	Drug 14155 14163	Premarin
+T302	Drug 14213 14224	antibiotics
+T303	Drug 14228 14236	Betadine
+T304	Drug 14248 14256	Marcaine
+T305	Drug 14309 14315	Vicryl
+T306	Strength 14315 14322	", "5-0
+T307	Drug 14322 14333	-Monocryl"]
+T308	Drug 14368 14376	Marcaine
+T309	Strength 14376 14403	", "Vicryl", "Monocryl"], [
+T310	Drug 14464 14476	polyethylene
+T311	Strength 14476 14507	-glycol", "boluses", "fluid", "
+T312	ADE 14507 14538	uneventful-induction-of-general
+T313	Drug 14539 14549	anesthesia
+T314	Strength 14549 14596	", "25", "Marcaine", "Monocryl", "Monocryl"], [
+T315	Strength 14645 14679	0.25", "Marcaine"], ["anesthesia",
+T316	Drug 14680 14689	"Monocryl
+T317	Drug 14695 14701	Vicryl
+T318	Strength 14701 14733	", "Monocryl", "0.", "Marcaine",
+T319	Drug 14734 14746	"epinephrine
+T320	Drug 14765 14771	Vicryl
+T321	Strength 14771 15258	", "Vicryl", "25", "Marcaine"], ["anesthesia"], ["anesthesia"], ["anesthesia", "Marcaine", "4-0", "Monocryl"], ["endotracheal-intubation", "Marcaine", "Marcaine", "Monocryl"], ["endotracheal-intubation", "Marcaine", "Vicryl", "Monocryl"], ["1-gm", "extrahepatic-biliary-trees", "contrast", "saline", "Vicryl", "Vicryl"], ["Crystalloid", "general-endotracheal-anesthesia", "1%", "lidocaine", "ropivacaine", "Monocryl"], ["Vicryl", "Marcaine", "Vicryl", "benzoin"], ["bleeding,-infection",
+T322	Strength 15299 15331	", "bupivacaine", "epinephrine",
+T323	Drug 15333 15339	Vicryl
+T324	Drug 15340 15346	Rapide
+T325	Strength 15346 15371	", "Mastisol,-Steri"], ["
+T326	Drug 15371 15381	anesthesia
+T327	Drug 15411 15417	Vicryl
+T328	Strength 15417 15523	", "fine", "0.5", "Marcaine", "0.5", "Marcaine", "saline", "Vicryl", "benzoin"], ["Marcaine", "lidocaine",
+T329	Reason 15524 15550	"right-upper-quadrant-pain
+T330	Drug 15554 15565	antibiotics
+T331	Strength 15565 15681	", "Kefzol", "Vicryl"], ["Marcaine", "Vicryl", "2-L", "saline", "Monocryl"], ["endotracheal-intubation", "Marcaine",
+T332	Drug 15683 15687	hole
+T333	Drug 15718 15724	Brolin
+T334	Strength 15724 15792	", "anti-obstruction-stitch", "Anesthesia", "Vicryl", "Monocryl"], [
+T335	Drug 15827 15836	lidocaine
+T336	Strength 15836 15850	", "Marcaine",
+T337	ADE 15851 15877	"nausea-associated-with-it
+T338	Strength 15913 16132	1-gram", "Vicryl"], ["40-cc", "sterile-saline", "Vicryl", "0.", "25", "Marcaine", "antibiotics"], ["anesthesia", "local-anesthesia", "Vicryl", "Vicryl", "outside", "Vicryl", "Vicryl", "20-mL", "Marcaine", "epinephrine",
+T339	Drug 16164 16170	Vicryl
+T340	Strength 16170 16263	", "Vicryl"], ["Lidocaine", "iodine", "lidocaine", "codeine", "povidone-iodine", "lidocaine",
+T341	ADE 16264 16269	"four
+T342	Drug 16317 16336	Hydrochlorothiazide
+T343	Strength 16336 16479	", "25-mg", "p.o.", "Lisinopril", "10-mg", "p.o.", "Albuterol", "p.r.n.", "mild-discomfort", "Abdominal-pain"], ["2-units", "PRBCs", "2-units",
+T344	Drug 16514 16528	pump-inhibitor
+T345	Strength 16528 16578	", "avoid-NSAIDs", "creatinine", "ferritin", "27",
+T346	Drug 16624 16636	azithromycin
+T347	Strength 16636 16688	", "guaifenesin", "N-acetyl", "oral", "antibiotics",
+T348	Drug 16689 16694	"iron
+T349	Drug 16695 16704	-vitamin-
+T350	Strength 16704 16720	C", "folate"], [
+T351	Drug 16751 16762	Antibiotics
+T352	Strength 16762 16793	", "Vicryl", "Marcaine", "0.5",
+T353	Drug 16828 16835	steroid
+T354	Drug 16854 16863	lidocaine
+T355	Drug 16869 16875	Zofran
+T356	Strength 16875 16959	", "Phenergan", "oral", "hypoglycemics", "insulin", "sliding-scale", "chemotherapy",
+T357	Reason 16960 16998	"chemotherapy-in-metastatic-pancreatic
+T358	Drug 17009 17018	Phenergan
+T359	Strength 17018 17093	", "25-mg", "q.6.", "Duragesic", "patch", "Benadryl", "25-50-mg", "p.o.", "
+T360	Frequency 17093 17099	q.i.d.
+T361	Dosage 17103 17116	Sliding-scale
+T362	Drug 17122 17134	chemotherapy
+T363	Strength 17134 17176	"], ["5500"], ["sedation"], ["anesthesia",
+T364	Drug 17177 17188	"anesthesia
+T365	Drug 17305 17316	Ceftriaxone
+T366	ADE 17465 17488	End-stage-liver-disease
+T367	Drug 17492 17497	Alpha
+T368	Strength 17497 17529	", "1", "-antitrypsin-deficiency
+T369	Drug 17533 17542	lactulose
+T370	Strength 17542 17551	", "50-mL
+T371	Drug 17571 17579	"opiates
+T372	Strength 17579 17608	", "Inderal", "10-mg", "10-mg
+T373	Frequency 17612 17623	twice-daily
+T374	Reason 17647 17715	red-blood-in-the-stool", "soft-and-consistent-with-dark-red-blood-in
+T375	Drug 17723 17729	Zantac
+T376	Strength 17729 17785	"], ["stomach-discomfort", "Lomotil", "Levaquin", "PPI",
+T377	Reason 17786 17802	"PUD-prophylaxis
+T378	Drug 17818 17827	Sublazine
+T379	Strength 17827 17841	", ")-0.", "mg
+T380	Strength 17853 17895	midazolam", "mg", "adverse-medication"], [
+T381	Drug 17921 17927	Iodine
+T382	Strength 17927 17957	", "contrast", "One-question",
+T383	Drug 18001 18013	tetracycline
+T384	Strength 18013 18036	", "Reglan", "2-units",
+T385	Drug 18066 18073	Ethanol
+T386	Strength 18073 18182	", "Ethanol", "Thirty-ml", "ethanol", "1-gram", "Ancef", "Vanderbilt"], ["molar-pain", "Prograf", "0.5-mg", "
+T387	Route 18182 18186	p.o.
+T388	Drug 18190 18204	Valganciclovir
+T389	Strength 18204 18293	", "420-mg", "p.o."], ["anesthetic"], ["anesthesia", "intravenous", "antibiotics", "25-mL
+T390	Drug 18299 18308	Xylocaine
+T391	Strength 18308 18315	", "1",
+T392	Drug 18316 18323	"saline
+T393	Strength 18367 18388	25", "Marcaine", "2-0
+T394	Drug 18392 18398	Vicryl
+T395	Strength 18398 18419	", "subcutaneous"], [
+T396	Drug 18505 18511	Vicryl
+T397	Strength 18511 18546	", "sterile-saline", "benzoin"], ["
+T398	Drug 18546 18554	Coumadin
+T399	Strength 18554 18616	", "Versed", "2-mg", "fentanyl", "50-mcg", "distal-esophagus",
+T400	Drug 18617 18626	"propofol
+T401	Strength 18626 18670	-sedation", "bolus", "longstanding-bolus", "
+T402	Drug 18670 18678	Coumadin
+T403	Drug 18682 18690	Protonix
+T404	Strength 18690 18699	", "40-mg
+T405	Frequency 18703 18709	q.12h"
+T406	Drug 18712 18720	Prevacid
+T407	Strength 18720 18738	-SoluTab", "mg", "
+T408	Frequency 18738 18744	b.i.d.
+T409	Drug 18776 18780	fine
+T410	Strength 18780 18903	", "fluoxetine", "2-L", "Compazine", "5-mg", "2", "two-capsules", "Imodium", "Compazine", "10-mg", "tabs", "one", "p.o.", "
+T411	Frequency 18903 18915	q.8", "p.r.n
+T412	Drug 18951 18960	Imodium"]
+T413	Drug 19016 19024	Percocet
+T414	Strength 19024 19066	", "pain", "Tylenol", "intermittent-pain",
+T415	Drug 19121 19129	Percocet
+T416	Strength 19129 19178	", "Percocet", "ibuprofen", "Tylenol", "pain"], [
+T417	Drug 19195 19200	Lasix
+T418	Strength 19200 19234	", "Ecotrin", "Digoxin", "Colace",
+T419	Drug 19236 19244	Coumadin
+T420	Drug 19248 19256	coumadin
+T421	Drug 19260 19268	Coumadin
+T422	Drug 19274 19280	Ambien
+T423	Strength 19280 19307	", "Codeine", "Premarin", "
+T424	Strength 19309 19319	625-mg", "
+T425	Route 19319 19323	p.o.
+T426	Strength 19323 19357	", "q.o.d.", "Aciphex", "20-mg", "
+T427	Route 19357 19361	p.o.
+T428	Strength 19361 19396	", "q.-daily", "Toprol", "50-mg", "
+T429	Route 19396 19400	p.o.
+T430	Strength 19400 19435	", "q.-daily", "Norvasc", "5-mg", "
+T431	Route 19435 19439	p.o.
+T432	Strength 19439 19481	", "q.-daily", "multivitamin", "Caltrate",
+T433	Drug 19485 19492	complex
+T434	Strength 19492 19527	-vitamins", "calcium", "magnesium",
+T435	Drug 19528 19536	"vitamin
+T436	Drug 19593 19594	]
+T437	Strength 19594 19772	, ["MMSE", "Muscatine", "anxiety"], ["anaplastic-astrocytoma", "term-side-effects", "chemotherapy", "eight-possible-agents", "steroids", "sq-m", "everyday", "thalidomide", "100",
+T438	Drug 19824 19832	Dilantin
+T439	Strength 19832 19846	", "Depakene",
+T440	Reason 19847 19860	"poor-seizure
+T441	Drug 19872 19880	Tegretol
+T442	Strength 19880 20012	", "Dilantin", "Phenobarbital", "Depakote", "Acetazolamide", "Mysoline", "Dilantin", "Tegretol"], ["daily", "neck-pain", "Medrol", "
+T443	ADE 20012 20036	caused-his-blood-sugars"
+T444	Strength 20036 20338	, "ACTOplus", "albuterol", "Astelin", "Diovan", "aspirin", "81-mg", "fish-oil", "Lipitor", "Lorazepam", "multivitamins", "Nasacort", "Pulmicort", "ranitidine", "Singulair", "Viagra", "Zetia", "Zyrtec", "Lidoderm", "patches", "Dyazide", "Zithromax", "amoxicillin", "intermittent-chest-discomfort", "Deep
+T445	Drug 20358 20367	Neurontin
+T446	Strength 20367 20405	"], [], ["ASA", "gadolinium-contrast",
+T447	Drug 20407 20415	Decadron
+T448	Drug 20454 20461	Demerol
+T449	Strength 20461 20562	", "codeine", "Lotensin", "metoprolol", "Darvocet", "Synthroid", "Zocor", "Valtrex", "1-g", "t.i.d.",
+T450	Drug 20582 20590	steroids
+T451	Drug 20678 20685	Heparin
+T452	Strength 20685 20687	",
+T453	Drug 20688 20698	"protamine
+T454	Strength 20704 20709	1.0mg
+T455	Drug 20757 20768	Aldosterone
+T456	Strength 20768 20788	", "Prolactin", "15.
+T457	Drug 20792 20807	Fludrocortisone
+T458	Strength 20807 20837	", "0.05-mg", "BID", "fluids",
+T459	Drug 20866 20881	Fludrocortisone
+T460	Drug 20932 20940	Betadine
+T461	Strength 20940 20987	", "5", "Marcaine", "lidocaine", "antibiotics",
+T462	Drug 21025 21033	Betadine
+T463	Strength 21033 21035	",
+T464	Drug 21036 21043	"Vicryl
+T465	Drug 21063 21070	Tylenol
+T466	Strength 21070 21072	",
+T467	Drug 21073 21079	"Advil
+T468	Drug 21095 21101	Ativan
+T469	Drug 21138 21145	Heparin
+T470	Drug 21149 21157	Coumadin
+T471	Drug 21161 21169	Coumadin
+T472	Drug 21189 21192	ASA
+T473	Strength 21192 21201	", "for-1
+T474	Drug 21238 21244	Colace
+T475	Strength 21244 21272	", "Quinidine", "Synthroid",
+T476	Drug 21274 21279	Lasix
+T477	Strength 21279 21419	", "Lanoxin", "Tenormin", "Briquet's-syndrome", "chlorambucil", "prednisone-chemotherapy", "5-more-cycles", "chlorambucil", "prednisone"], [
+T478	Strength 21446 21481	symptoms", "Flonase", "two-sprays",
+T479	ADE 21482 21495	"each-nostril
+T480	Drug 21513 21519	Zyrtec
+T481	Strength 21519 21528	", "10-mg
+T482	Drug 21532 21542	penicillin
+T483	Strength 21542 21566	"], ["amoxicillin", "low
+T484	Strength 21580 21703	10-day", "Cipro", "UTI", "Cipro", "Aleve", "aspirin", "multivitamin", "iron", "aspirin", "BACK"], ["steroid", "injections",
+T485	Drug 21731 21738	Lipitor
+T486	Strength 21738 21753	", "Pulmicort",
+T487	Drug 21766 21773	Xopenex
+T488	Strength 21773 21851	", ",-Patanol,-Duac-topical-gel,", "Loprox", "cream", "Penicillin", "aspirin",
+T489	Reason 21852 21873	"mild-postural-tremor
+T490	Drug 21882 21886	arms
+T491	Strength 21886 22009	"], ["Mestinon", "30mg", "tid", "60mg", "tid", "30mg", "tid", "Viokase", "Probenecid", "Mestinon", "30mg", "tid", "XRT"], [
+T492	Reason 22040 22061	legs-seemed-to-worsen
+T493	Drug 22074 22079	Avone
+T494	Drug 22108 22116	baclofen
+T495	Strength 22116 22171	", "Medrol-Dosepak", "intravenous-Solu-Medrol", "500-mg
+T496	Drug 22201 22211	prednisone
+T497	Strength 22211 22337	", "Medrol", "taper", "steroids", "April", "20", "Zanaflex", "oral", "prednisone", "10-mg", "tablets", "one-half", "tablet", "
+T498	Frequency 22337 22342	daily
+T499	ADE 22349 22382	reduce-the-swelling", "prednisone
+T500	Strength 22414 22530	VICODIN", "Dawson's-fingers", "5-point-scale", "oral", "steroids", "steroids", "obvious-side-effects", "steroids", "
+T501	Drug 22530 22537	Zanafle
+T502	Strength 22537 22590	x", "baclofen", "Neurontin", "mg", "b.i.d.-or-t.i.d",
+T503	Frequency 22591 22598	"needed
+T504	Strength 22605 22635	300", "mg", "b.i.d.-or-t.i.d",
+T505	Frequency 22636 22653	"four-times-daily
+T506	Strength 22653 22699	", "Neurontin", "Klonopin", "0.", "mg-1-mg", "
+T507	Frequency 22699 22705	t.i.d.
+T508	Strength 22705 22807	", "q.i.d", "Valium", "5-10-mg", "t.i.d.", "q.i.d.", "Copaxone", "methotrexate", "CellCept", "weekly",
+T509	Drug 22828 22835	Aricept
+T510	Strength 22835 22932	", "frank-depression", "movement-disorders", "Fiorinal,-p.r.n", "aspirin", "Premarin", "America",
+T511	Drug 22977 22984	Aricept
+T512	Strength 22984 23037	", "Aricept", "Aricept", "Aricept", "Aricept", "10-mg
+T513	Drug 23052 23058	Plavix
+T514	Strength 23058 23127	", "aspirin", "levothyroxine", "lisinopril", "hydrochlorothiazide", "
+T515	Drug 23127 23132	Lasix
+T516	Strength 23132 23246	", "insulin", "simvastatin", "joint-pain", "antiplatelet-therapy", "statin"], ["Aleve", "six-hours", "depression",
+T517	Reason 23247 23264	"symptoms-worsen"
+T518	Drug 23269 23276	Topamax
+T519	Strength 23276 23398	", "Maxalt", "migraine", "prednisone", "50-mg", "migraine-prophylaxis", "Fioricet", "p.r.n.", "basis"], ["Aricept", "10-mg
+T520	Drug 23420 23429	carbidopa
+T521	Strength 23429 23454	", "levodopa", "25/100-mg
+T522	Strength 23472 23538	day", "citalopram", "Celexa)", "40-mg", "daily", "Colace", "100-mg
+T523	Drug 23557 23568	finasteride
+T524	Strength 23568 23588	", "Proscar)", "5-mg
+T525	Drug 23606 23612	Flomax
+T526	Strength 23612 23636	", "(tamsulosin)", "4-mg
+T527	Strength 23647 23678	day", "multivitamin", "iron", "
+T528	Frequency 23678 23688	once-a-day
+T529	Strength 23688 23724	", "omeprazole", "Prilosec)", "20-mg
+T530	Drug 23742 23747	senna
+T531	Strength 23747 23757	", "8.6-mg
+T532	Drug 23776 23783	Tylenol
+T533	Strength 23783 23793	", "650-mg
+T534	Drug 23810 23822	promethazine
+T535	Strength 23822 23831	", "25-mg
+T536	Strength 23875 24204	seizure", "Trileptal", "Keppra", "lamotrigine", "seizure", "minor-headaches", "Lamotrigine", "150-mg", "p.o.", "b.i.d.", "verapamil", "hydrochlorothiazide", "Flagyl", "aspirin", "lamotrigine", "lamotrigine", "150-mg", "p.o.", "lamotrigine"], ["Carbatrol", "300-mg", "b.i.d.", "Avapro", "lisinopril", "Carbatrol", "200", "b.i.d.",
+T537	Reason 24205 24223	"obstructive-sleep
+T538	Drug 24235 24244	Synthroid
+T539	Strength 24244 24255	", "100-mcg
+T540	Drug 24279 24287	Betadine
+T541	Drug 24302 24310	Cavitron
+T542	Strength 24310 24359	", "Subcutaneous", "Vicryl", "Vicryl", "2-units",
+T543	Drug 24415 24425	anesthesia
+T544	Reason 24437 24457	manner-with-Betadine
+T545	Drug 24481 24487	Vicryl
+T546	Drug 24511 24519	Betadine
+T547	Strength 24519 24541	", "iodine", "saline",
+T548	Drug 24638 24644	Vicryl
+T549	Strength 24644 24690	"], ["anesthetic", "Xylocaine", "epinephrine",
+T550	Drug 24692 24698	Bergen
+T551	Reason 24757 24766	carcinoma
+T552	Drug 24782 24790	Cavitron
+T553	Strength 24790 24854	", "150-mL"], ["assassin", "double-simultaneous-stimulation"], [
+T554	Drug 24880 24889	oxacillin
+T555	Strength 24889 24983	", "Nafcillin", "2gm", "IV", "q4", "Rifampin", "600mg", "q", "12hrs", "Gentamicin", "130mg", "
+T556	Frequency 24983 24984	q
+T557	Drug 24993 25001	Mannitol
+T558	Drug 25007 25018	Selverstone
+T559	Strength 25018 25055	-Clamp", "Nimodipine"], ["insulin", "
+T560	Drug 25055 25058	NPH
+T561	Drug 25059 25066	Humulin
+T562	Strength 25070 25081	1", "2U", "
+T563	Frequency 25081 25084	qAM
+T564	Dosage 25089 25091	6U
+T565	Drug 25099 25104	Advil
+T566	Strength 25104 25161	", "prn", "microglobulin", "Iron", "3", "ASA", "325mg", "
+T567	Frequency 25161 25163	qd
+T568	Reason 25169 25191	chills/night-sweats/CP
+T569	Drug 25195 25202	Lithium
+T570	Strength 25202 25265	", "300mg", "bid", "Accupril", "20mg", "bid", "ASA", "325mg", "
+T571	Frequency 25265 25267	qd
+T572	Form 25311 25315	pill
+T573	Drug 25366 25367	]
+T574	Strength 25367 25412	, ["Micronase", "5mg", "qd", "HCTZ", "ASA", "
+T575	Drug 25427 25436	meclizine
+T576	Strength 25436 25438	",
+T577	Drug 25439 25449	"Meclizine
+T578	Strength 25449 25528	"], ["ASA", "Dilantin", "seizure-prophylaxis", "Tenormin", "Premarin", "2mcg/ml
+T579	Drug 25595 25603	contrast
+T580	Drug 25640 25645	facet
+T581	Drug 25659 25664	facet
+T582	Strength 25664 25744	"], [], ["intravenous", "contrast"], ["confused", "UTI", "amoxacillin", "empiric
+T583	Drug 25744 25754	-Vitamin-B
+T584	Strength 25754 25777	12", "1000mcg", "IM", "
+T585	Frequency 25777 25779	qd
+T586	Strength 25783 25882	7-days", "Thiamine", "100mg", "qd", "Folate", "1mg", "qd", "ASA", "325mg", "qd", "UTI", "contrast",
+T587	Drug 25883 25895	"Vitamin-B"]
+T588	Drug 25919 25925	Plavix
+T589	Strength 25925 25970	", "aspirin", "oral", "Zithromax", "cough", "
+T590	Drug 25970 25977	Xopenex
+T591	Drug 26014 26023	Zithromax
+T592	Strength 26023 26040	", "albuterol", "
+T593	Drug 26040 26049	Zithromax
+T594	Drug 26055 26061	Plavix
+T595	Strength 26061 26144	", "aspirin", "slurred-speech", "Z-Pak", "cortisone-shot", "Ibuprofen", "p.r.n.", "
+T596	ADE 26144 26156	Chronic-neck
+T597	Strength 26179 26261	200mg"], ["Transcatheter-infusion", "papaverine", "anesthesia", "entire-duration",
+T598	ADE 26263 26298	continuous-heparinized-saline-flush
+T599	Drug 26325 26331	saline
+T600	Strength 26331 26359	-flush", "mg", "papaverine",
+T601	Drug 26360 26371	"papaverine
+T602	Drug 26440 26446	Valium
+T603	Strength 26446 26555	", "10-20-mg", "at-bedtime", "Flomax", "0.4-mg", "daily", "cefazolin", "500-mg", "q.i.d.,-and", "Lotrimin", "
+T604	Form 26555 26560	cream
+T605	Drug 26628 26639	ceftriaxone
+T606	Strength 26639 26765	", "Lotrimin", "500-cc", "Flomax", "0.4-mg", "daily"], ["potassium", "Pravachol", "Prevacid", "Synthroid", "Diovan", "Amaryl",
+T607	Drug 26766 26774	"Vitamin
+T608	Strength 26774 26878	-B", "Coreg", "Coumadin", "furosemide", "Actos", "aspirin", "colchicine", "Cipro", "Percocet", "Ultram",
+T609	Reason 26879 26944	"Diabetes-and-hypothyroidism", "numb-in-both-feet", "brain-stroke
+T610	Drug 26984 26990	Zantac
+T611	Strength 26990 27100	", "150mg", "bid", "Proventil", "MDI-bid", "Azmacort-MDI", "bid", "Doxycycline", "100mg", "bid", "Premarin", "
+T612	Strength 27102 27159	625mg", "qd", "Provera", "2.5mg", "qd", "ASA", "325mg", "
+T613	Frequency 27159 27161	qd
+T614	Drug 27196 27202	Ticlid
+T615	Strength 27202 27218	", "250mg", "bid
+T616	Drug 27298 27306	Zonegran
+T617	Strength 27306 27320	", "Keppra", "
+T618	Dosage 27320 27323	One
+T619	Drug 27368 27378	Depakene"]
+T620	Drug 27396 27409	amitriptyline
+T621	Drug 27415 27421	Lyrica
+T622	Drug 27431 27437	Medrol
+T623	Strength 27437 27513	-Dosepak", "spinal-epidural-injections"], ["Neurontin", "Lidoderm", "patch",
+T624	Reason 27514 27522	"C-spine
+T625	Drug 27529 27534	spine
+T626	Strength 27534 27557	"], ["pain", "steroid",
+T627	ADE 27558 27605	"injections-in-her-neck", "rheumatoid-arthritis
+T628	Drug 27674 27679	Motor
+T629	Strength 27679 27832	-units", "Motor-units", "Motor-units"], ["Tylenol", "as-needed", "Colace", "b.i.d.", "Tylenol", "pain"], ["bradycardia", "Mannitol", "1g", "Dilantin"], [
+T630	Drug 27833 27838	Lasix
+T631	Strength 27838 27903	", "40mg", "qd", "Zantac", "150mg", "qd", "Lanoxin", "0.125mg", "
+T632	Frequency 27903 27905	qd
+T633	Strength 27920 28004	2.5mg", "bid", "Salsalate", "750mg", "tid", "ASA", "325mg", "qd", "Ginseng)", "100mg
+T634	Strength 28005 28116	, "bid", "DVT"], ["sternal-abscess", "minor-myocardial-infarction", "accept", "one", "saline"], ["propranolol",
+T635	Reason 28117 28132	"for-the-tremor
+T636	Drug 28136 28145	primidone
+T637	Strength 28145 28172	", "clonazepam", "anxiety",
+T638	Reason 28173 28192	"migraine-headaches
+T639	Drug 28209 28217	Klonopin
+T640	Strength 28217 28223	", "0.
+T641	Drug 28227 28236	Primidone
+T642	Strength 28236 28281	", "100"], ["Darvocet", "anxiety", "Paxil", "
+T643	Drug 28281 28286	Xanax
+T644	Strength 28286 28311	", "Tylenol", "650-mg", "
+T645	Frequency 28311 28323	q.6", "p.r.n
+T646	Drug 28328 28333	Xanax
+T647	Strength 28333 28339	", "0.
+T648	Drug 28359 28364	Lasix
+T649	Strength 28364 28858	", "80-mg", "daily", "Isordil", "10-mg", "t.i.d", "KCl", "20-mEq", "b.i.d.", "lactulose", "10-g", "daily", "Cozaar", "50-mg", "daily", "Synthroid", "75-mcg", "daily", "Singulair", "10-mg", "daily", "Lumigan", "one", "drop", "Pravachol", "20-mg", "daily", "Feldene", "20-mg", "daily", "Paxil", "20-mg", "daily", "Minipress", "2-mg", "daily", "Provera", "Advair", "2", "one", "puff", "b.i.d", "one", "tablet", "b.i.d.", "Timoptic", "one", "drop", "OU", "daily", "verapamil", "80-mg", "b.i.d."], [
+T650	Drug 28885 28892	Bactrim
+T651	Strength 28892 28935	", "antiretroviral-medications", "insulin",
+T652	Drug 28937 28944	Bactrim
+T653	Strength 28944 29009	", "Bactrim", "Bactrim", "Bactrim", "Neurontin", "taper-the", "mg
+T654	Strength 29012 29034	"t.i.d.", "Neurontin",
+T655	Drug 29035 29043	"Bactrim
+T656	Drug 29049 29055	Plavix
+T657	Strength 29055 29167	", "75-mg", "p.o", "metoprolol", "25-mg", "p.o.", "q.d.", "Flomax", "0.4-mg", "p.o", "Zocor", "20-mg", "p.o.", "
+T658	Frequency 29167 29171	q.d.
+T659	Strength 29171 29222	", "Detrol", "LA-4-mg", "p.o", "lisinopril", "10-mg
+T660	Route 29226 29230	p.o.
+T661	Strength 29230 29234	", "
+T662	Frequency 29234 29238	q.d.
+T663	Strength 29238 29253	", "Imodium", "
+T664	Frequency 29253 29258	daily
+T665	Drug 29273 29278	Lasix
+T666	Strength 29278 29424	"], ["contrast", "20", "8-mg", "Decadron", "prophylaxis"], ["somnolent", "iron", "ACE", "SPEP", "steroids", "gadolinium-contrast", "somnolent"], [
+T667	Drug 29430 29442	chemotherapy
+T668	Drug 29448 29455	Tylenol
+T669	Strength 29455 29477	", "500mg", "q5-6", "2
+T670	Strength 29490 29565	", "gadolinium", "x", "4.0", "0.8units"], ["intravenous", "gamma-globulin",
+T671	Reason 29566 29578	"three-times
+T672	Drug 29591 29599	Percocet
+T673	Strength 29599 29615	", "5", "mg", "4
+T674	Frequency 29615 29633	-6-hours-p.r.n", "
+T675	Drug 29633 29642	Neurontin
+T676	Strength 29642 29709	", "100-mg", "insulin", "Protoni", "40-mg", "Toprol-XL", "50-mg", "
+T677	Frequency 29709 29713	q.d.
+T678	Strength 29713 29737	", "Norvasc", "10-mg", "
+T679	Frequency 29737 29741	q.d.
+T680	Strength 29741 29767	", "glipizide", "10-mg", "
+T681	Frequency 29767 29771	q.d.
+T682	Strength 29771 29816	", "fluticasone", "50-mcg", "nasal", "spray",
+T683	Drug 29818 29823	Lasix
+T684	Strength 29823 29860	", "mg", "b.i.d.", "Zocor", "1-mg", "
+T685	Frequency 29860 29863	q.d
+T686	ADE 29884 29917	upper-extremity", "Barre-syndrome
+T687	Drug 29921 29925	IVIG
+T688	Strength 29925 29974	", "back-pain", "Neurontin", "Neurontin", "300-mg
+T689	Strength 29978 29988	300-mg", "
+T690	Frequency 29988 29994	b.i.d.
+T691	Strength 29994 30062	", "baclofen", "Percocet", "aspirin", "162-mg", "Neurontin", "300-mg
+T692	Strength 30079 30091	1-week", "mg
+T693	ADE 30150 30177	upper-eyelid-began-to-droop
+T694	Drug 30181 30188	Lanoxin
+T695	Strength 30188 30192	", "
+T696	Drug 30192 30197	Lasix
+T697	Strength 30197 30349	", "KCL", "ASA", "Voltaren", "DL-(high)", "prednisone"], ["Spine", "Dilantin", "Zantac", "Proventil-MDI", "Tylenol", "pyelonephritis"], ["Zonegran", "mg
+T698	Frequency 30352 30358	"q.h.s
+T699	Strength 30358 30401	.", "Zonegran", "localized-pain", "Motrin",
+T700	Strength 30403 30413	400-mg", "
+T701	Frequency 30413 30419	b.i.d.
+T702	Drug 30443 30452	Glyburide
+T703	Strength 30452 30556	", "Avandia", "metformin", "lisinopril", "Lipitor", "aspirin", "metoprolol", "Zonegran", "Zonegran", "mg
+T704	Frequency 30559 30565	"q.h.s
+T705	Strength 30565 30637	.", "Zonegran", "Neurontin", "Lyrica", "diabetes-control"], ["One-unit",
+T706	Drug 30665 30671	Vicryl
+T707	Strength 30671 30686	", "Vicryl"], [
+T708	Drug 30721 30730	lactulose
+T709	Strength 30730 30744	", "Dilantin",
+T710	Drug 30745 30757	"lactulose"]
+T711	Drug 30761 30771	Sertraline
+T712	Strength 30771 30852	", "Fluoxetine", "Fluoxetine", "Huntington-Disease", "(d", "Elavil", "25mg", "qhs
+T713	Drug 30858 30864	Haldol
+T714	Strength 30864 30906	", "tablets", "5-mg", "Tylenol", "tablet",
+T715	Strength 30941 31014	nortriptyline", "Tylenol", "Lexapro", "depression", "alprazolam", "0.5-mg
+T716	Frequency 31025 31032	"b.i.d.
+T717	Strength 31032 31062	", "Artane", "2-mg", "p.o.", "
+T718	Frequency 31062 31068	b.i.d.
+T719	Drug 31072 31078	Haldol
+T720	Strength 31078 31092	", "2.5-mg", "
+T721	Route 31092 31096	p.o.
+T722	Strength 31106 31130	", "Norvasc", "10-mg", "
+T723	Route 31130 31134	p.o.
+T724	Strength 31134 31169	", "daily", "nortriptyline", "50-mg
+T725	Drug 31190 31196	Haldol
+T726	Strength 31196 31223	", "anxiety", "CODEINE", "U
+T727	Drug 31286 31300	"Acetaminophen
+T728	Strength 31300 31718	", "Haldol", "40", "tablets", "Tylenol", "depression", "AXIS", "Prilosec", "200-mg", "p.o.", "daily", "nortriptyline", "50-mg", "p.o.", "Haldol", "2-mg", "p.o", "Artane", "2-mg", "p.o.", "daily", "Xanax", "0.5-mg", "p.o.", "fexofenadine", "180-mg", "p.o.", "daily", "Flonase", "50-mcg", "two", "sprays", "b.i.d.", "amlodipine", "10-mg", "p.o.", "daily", "lorazepam", "0.5-mg", "p.o.", "q.6", "p.r.n."], ["daily", "2-mg
+T729	Drug 31742 31751	Singulair
+T730	Strength 31751 31760	", "10-mg
+T731	Drug 31778 31783	Xyzal
+T732	Strength 31783 31806	", "5-mg", "Spiriva", "
+T733	Frequency 31806 31816	once-a-day
+T734	Drug 31820 31826	Advair
+T735	Strength 31826 31862	", "twice-a-day", "Prevacid", "30-mg
+T736	Drug 31881 31888	Os-Cal"
+T737	Strength 31888 31897	, "500-mg
+T738	Drug 31915 31927	multivitamin
+T739	Drug 31945 31952	aspirin
+T740	Strength 31952 31961	", "81-mg
+T741	Drug 31976 31983	heparin
+T742	Drug 32000 32009	Treatment
+T743	Strength 32009 32040	).Carotid", "4-units", "pRBCs",
+T744	Drug 32041 32050	"Dejerine
+T745	Strength 32081 32162	, "epinephrine", "lidocaine", "epinephrine", "lidocaine", "epinephrine", "gorin",
+T746	ADE 32163 32183	"acute-renal-failure
+T747	Drug 32187 32197	Nifedipine
+T748	Strength 32197 32220	", "ASA", "Amiodarone",
+T749	Drug 32222 32229	Capoten
+T750	Strength 32229 32313	", "Isordil", "Tylenol", "Darvocet", "prn", "Reglan", "prn", "Coumadin", "Valium", "
+T751	Frequency 32313 32316	prn
+T752	Drug 32375 32380	Guide
+T753	Strength 32380 32390	", "grade-
+T754	Drug 32412 32419	Vicodin
+T755	Strength 32419 32455	", "intracranial-bleed", "morphine",
+T756	Reason 32456 32461	"pain
+T757	Drug 32484 32494	Vigabatrin
+T758	Strength 32494 32593	", "infantile-spasms", "phenobarbital", "valproic-acid", "Topamax", "Zonegran", "Lamictal", "200-mg
+T759	Strength 32612 32699	150-mg", "tablet", "25-mg", "tablets", "Zonegran", "25-mg", "daily", "baclofen", "10-mg
+T760	Drug 32722 32729	Xopenex
+T761	Strength 32729 32743	", "Atrovent",
+T762	Drug 32772 32780	Zonegran
+T763	Strength 32780 32782	",
+T764	Drug 32783 32792	"Lamictal
+T765	Drug 32914 32923	Lorazepam
+T766	Strength 32923 32969	", "metoprolol", "metoprolol"], ["gadolinium",
+T767	Drug 33076 33084	Betadine
+T768	Strength 33084 33114	", "1", "Xylocaine", "-gauge-6
+T769	ADE 33114 33126	-inch-needle
+T770	Drug 33193 33202	lidocaine
+T771	Strength 33202 33218	"], ["sedation",
+T772	Drug 33246 33257	amoxicillin
+T773	Strength 33257 33370	", "blood-culture", "antibiotics", "antibiotics", "Versed", "1-mg", "sleepy,-the-respiratory-monitors", "20-mcg",
+T774	Drug 33371 33380	"fentanyl
+T775	ADE 33422 33440	sleepy", "pressure
+T776	ADE 33469 33475	thighs
+T777	Strength 33475 33491	", "gabapentin",
+T778	Reason 33492 33517	"to-reduce-the-discomfort
+T779	Strength 33517 33678	", "Gabapentin", "300-mg", "b.i.d.", "multivitamin", "intravenous", "methylprednisolone", "methylprednisolone", "gabapentin", "gabapentin-dose-from", "300-mg", "
+T780	Frequency 33678 33684	b.i.d.
+T781	Strength 33708 33720	600-mg", "mg
+T782	Drug 33746 33752	Keppra
+T783	Strength 33752 33762	", "1500",
+T784	Frequency 33763 33775	"twice-a-day
+T785	Drug 33779 33787	Decadron
+T786	Strength 33787 33795	", "6-mg
+T787	Drug 33819 33828	oxycodone
+T788	Strength 33828 33874	", "aspirin", "Prilosec", "Dilantin", "300", "
+T789	Frequency 33874 33879	a-day
+T790	Drug 33883 33889	Flagyl
+T791	Strength 33889 34035	"], ["fissure/temporal-lobe", "hemosiderin", "Dilantin", "ASA", "Diltiazem"], [], ["Codeine", "headaches", "Migraine", "Inderal", "40mg", "tab", "
+T792	Frequency 34035 34041	b.i.d.
+T793	Drug 34045 34047	x-
+T794	Strength 34047 34069	1-week", "1", "tab", "
+T795	Frequency 34069 34075	b.i.d.
+T796	Drug 34079 34081	x-
+T797	Strength 34081 34101	1-week", "1", "tab",
+T798	Frequency 34102 34109	"t.i.d.
+T799	Reason 34113 34134	stress-in-migraine"],
+T800	Drug 34181 34200	gadolinium-contrast
+T801	Drug 34206 34212	NSAIDs
+T802	Strength 34212 34292	", "ASA", "ASA", "325-mg", "qd"], ["Sulfasalazine", "qid", "Tylenol", "650mg", "
+T803	Frequency 34292 34299	q4hours
+T804	Drug 34346 34358	amphotericin
+T805	Strength 34358 34571	"], ["carpal-tunnel-syndrome", "Prednisone", "Prednisone", "methotrexate", "Cyclosporin", "Imuran", "Cytoxan", "Plaquenil", "Prednisone", "20mg", "qd", "Cytoxan", "75mg", "qd", "Zantac", "150mg", "bid", "Vasotec",
+T806	Strength 34573 34738	10mg", "bid", "Premarin", "0.625", "qd", "Provera", "2.5mg", "qd", "CaCO", "3-500mg", "bid", "Vit-D", "50,00", "0units", "qweek", "Vit-E", "qd", "MVI", "1", "tab", "
+T807	Frequency 34738 34740	qd
+T808	Drug 34744 34752	Coumadin
+T809	Drug 34756 34764	Dilantin
+T810	Drug 34825 34833	Decadron
+T811	Strength 34833 35061	", "Phenytoin", "6-beats", "Dilantin", "200mg", "qd", "Decadron", "5mg", "q6", "Carboplatin"], ["ASA", "/-PCN", "rash", "Ticlopidine", "250mg", "bid", "Heparin", "anticoagulation", "Isordil", "20", "tid", "Metoprolol", "25mg", "
+T812	Frequency 35061 35069	q12hours
+T813	Strength 35069 35095	", "Ticlid", "250mg", "bid
+T814	Drug 35101 35110	Compazine
+T815	Strength 35110 35397	", "One-child", "3-day", "Florinef", "seizures"], ["every-day", "heparin", "Prednisone", "80-mg", "qd", "malar-rash", "Depo-Provera", "Prednisone", "80mg", "qd", "Heparin", "anticardiolipin", "5mg", "tid", "heparin", "ASA", "325mg", "bid", "heparin", "heparin", "Solu-Medrol", "125mg", "
+T816	Frequency 35397 35406	q12-hours
+T817	Strength 35406 35627	", "ASA", "Warfarin", "Prednisone", "60mg", "qd", "Solu-Medrol", "ASA", "81mg", "qd", "Plaquenil", "200mg", "bid", "Warfarin", "Warfarin"], ["seizure-prophylaxis", "neutropenia", "Depakene", "Tegretol", "BUE", "Tegretol",
+T818	Drug 35628 35637	"Diazepam
+T819	Strength 35637 35776	"], ["10mg", "Decardron", "100gm", "Mannitol", "Medicine", "Bactrim", "DS", "qd", "Diflucan", "100mg", "qd", "Acyclovir", "400mg", "bid", "
+T820	Drug 35776 35781	Xanax
+T821	Strength 35781 35802	", "Stavudine", "40mg
+T822	Drug 35813 35822	Rifabutin
+T823	Strength 35822 35835	", "300mg", "
+T824	Frequency 35835 35837	qd
+T825	Drug 35861 35871	gadolinium
+T826	Drug 35884 35897	Pyrimethamine
+T827	Strength 35897 35956	", "75mg", "qd", "Sulfadiazine", "2-g", "bid"], ["heparin",
+T828	Reason 35957 35970	"peptic-ulcer
+T829	Drug 35997 36004	Heparin
+T830	Strength 36004 36006	",
+T831	Drug 36007 36017	"Vitamin-B
+T832	Strength 36017 36179	12", "injection", "q.-week", "Lopressor", "faucet", "drop.\"", "heparin", "warfarin"], ["slurred-speech", "ASA", "Prednisone", "60mg", "qd", "Tagamet", "400mg", "
+T833	Frequency 36179 36182	qhs
+T834	Strength 36203 36233	5mg", "Cytoxan", "Cytoxan"], [
+T835	Drug 36233 36240	"Vit-B1
+T836	Strength 36240 36325	2", "microglobulin", "slow-slurred-speech", "Decadron", "6mg", "qhours", "Cytoxan", "
+T837	Strength 36338 36346	1.25gm",
+T838	Reason 36347 36364	"rhythmic-jerking
+T839	Drug 36379 36387	Dilantin
+T840	Drug 36393 36404	Parkinson's
+T841	Strength 36404 36476	-Disease", "Sinemet", "Sinemet-CR-2", "TID", "Lopressor", "25mg", "qhs",
+T842	Drug 36477 36485	"Vitamin
+T843	Strength 36485 36557	-E", "1tab", "TID", "Premarin", "1.25mg", "qd", "Synthroid", "0.75mg", "
+T844	Frequency 36557 36559	qd
+T845	Strength 36577 36611	2.5mg", "isocyamine", "0.125mg", "
+T846	Frequency 36611 36613	qd
+T847	Frequency 36633 36641	1tab-TID
+T848	Drug 36690 36704	Indomethacin"]
+T849	Drug 36708 36720	chemotherapy
+T850	ADE 36724 36741	urinary-retention
+T851	Drug 36745 36753	cisterna
+T852	Drug 36765 36772	Heparin
+T853	Drug 36776 36783	Heparin
+T854	Reason 36831 36879	sinus-tachycardia-with-rate-dependent-junctional
+T855	Drug 36891 36898	esmolol
+T856	Strength 36898 36922	", "labetalol", "ASA", "
+T857	Drug 36922 36931	Procardia
+T858	Drug 36938 36947	Labetalol
+T859	Drug 36969 36979	gadolinium
+T860	Drug 37047 37055	Naprosyn
+T861	Strength 37055 37076	", "Macrodantin"], ["
+T862	Drug 37076 37088	gadolinium"]
+T863	Drug 37096 37101	NSAID
+T864	Strength 37101 37142	", "Spine", "Spine", "Coumadin", "4mg", "
+T865	Frequency 37142 37144	qd
+T866	Drug 37148 37159	Propranolol
+T867	Strength 37159 37202	", "Procardia-XL", "Altace", "Zaroxolyn", "
+T868	Drug 37202 37210	Coumadin
+T869	Drug 37276 37282	Iodine
+T870	Strength 37282 37294	", "BCNU", "
+T871	Drug 37294 37306	Procarbazine
+T872	Drug 37307 37319	chemotherapy
+T873	Drug 37340 37351	Carboplatin
+T874	Strength 37351 37426	", "5FU/Carboplatin", "Decadron", "12mg", "/day", "Steroid", "myopathy"], [
+T875	Drug 37475 37480	Spine
+T876	Strength 37480 37492	", "Folate",
+T877	Reason 37493 37505	"deep-venous
+T878	Drug 37520 37527	heparin
+T879	Drug 37531 37539	Coumadin
+T880	Strength 37539 37555	", "Decadron", "
+T881	Drug 37555 37563	Coumadin
+T882	Strength 37567 37576	7.5mg", "
+T883	Frequency 37576 37578	qd
+T884	Drug 37582 37588	Zoloft
+T885	Strength 37588 37600	", "50mg", "
+T886	Frequency 37600 37602	qd
+T887	Drug 37606 37613	Lithium
+T888	Strength 37613 37733	", "300mg", "bid", "microglobulin", "Decadron", "Cytoxan", "prednisone", "Cytoxan", "Antibiotics", "bacterial-meningitis
+T889	Reason 37780 37796	brain-and-spinal
+T890	Drug 37806 37813	Cytoxan
+T891	Strength 37813 37849	", "Imuran", "Imuran", "prednisone",
+T892	Drug 37886 37894	Coumadin
+T893	Drug 37900 37907	Pitocin
+T894	Strength 37907 37977	", "minor-abdominal-discomfort", "Ibuprofen", "Darvocet", "analgesia",
+T895	Strength 38019 38098	1000mg", "qd", "PMNS", "Broad-spectrum-antibiotics", "Solu-Medrol", "1g", "qd",
+T896	Reason 38099 38141	"gadolinium-and-was-associated-with-spinal
+T897	Strength 38183 38367	3.6g", "3-doses", "Prednisone", "60-mg", "po", "qd", "antibiotics", "Solu-Medrol", "Prednisone", "60mg", "qd", "Zantac", "50", "qd", "Propulsid", "20mg", "tid", "Enoxaparin", "20mg", "
+T898	Frequency 38367 38369	qd
+T899	Drug 38391 38403	Praziquantel
+T900	Strength 38403 38471	", "40mg/kg/day"], ["vitamin", "Coumadin", "2mg", "qd", "Digoxin", "
+T901	Strength 38473 38506	25mg", "qd", "Prazosin", "2mg", "
+T902	Frequency 38506 38508	qd
+T903	Drug 38521 38529	coumadin
+T904	Drug 38564 38570	Farmer
+T905	Strength 38570 38581	", "Lucid",
+T906	Drug 38582 38590	"Flaccid
+T907	Drug 38674 38684	metoprolol
+T908	Strength 38684 38854	", "Benadryl", "ECASA", "Diltiazem", "Isordil", "Enalapril", "Indomethacin", "Terbutaline", "MDI", "Ipratropium-MDI", "Folic-Acid", "Thiamine", "Decadron"], ["One-month",
+T909	Strength 38966 39147	depression", "Actos", "Ambien", "aspirin", "Coreg", "Entocort", "folic-acid", "Flomax", "iron", "Lexapro", "20-mg", "q.h.s.", "Lipitor", "Pentasa", "Plavix", "Protonix", "Toprol", "
+T910	Drug 39147 39155	Celebrex
+T911	Strength 39155 39200	", "Zetia", "Crohn's-disease", "sleep-apnea",
+T912	Reason 39201 39213	"Deep-Tendon
+T913	Drug 39278 39286	Lamictal
+T914	Strength 39286 39411	", "2", "Lamictal", "generalized-seizure", "Lamictal", "generalized-tonic-clonic-seizure", "generalized-seizure", "Keppra", "
+T915	Drug 39435 39441	Keppra
+T916	Strength 39441 39476	", "Keppra", "500-mg", "b.i.d."], [
+T917	Drug 39491 39499	Darvocet
+T918	Strength 39499 39603	", "Flexeril"], ["having-dehydration", "intravenous", "fluids", "Effexor", "25-mg", "trazodone", "100-mg
+T919	Reason 39614 39631	sleep-maintenance
+T920	Drug 39644 39649	Korea
+T921	Strength 39649 39728	", "DHEA-sulfate", "Remeron", "15-mg", "h.s."], ["Lipitor", "Lipitor", "Zetia",
+T922	Drug 39748 39758	amlodipine
+T923	Strength 39758 39811	", "Diovan", "Zetia", "hydrochlorothiazide", "Lovaza-
+T924	Drug 39812 39820	fish-oil
+T925	Strength 39821 39856	", "Niaspan", "aspirin", "Chantix",
+T926	Reason 39857 39869	"Deep-Tendon
+T927	Drug 39884 39896	chemotherapy
+T928	Strength 39896 40033	", "chemotherapy", "carboplatin", "cyclophosphamide", "doxorubicin", "chemotherapy", "nasal-congestion", "fluconazole", "Bactrim", "32-mg
+T929	Strength 40071 40129	-Saturday", "daily", "Fluconazole", "3", "Zofran", "1.5-mg
+T930	Frequency 40140 40156	-hours-as-needed
+T931	Drug 40170 40182	chemotherapy
+T932	Strength 40182 40308	", "Bactrim", "twice-a-day", "fluconazole", "fluconazole", "chemotherapy", "carboplatin", "cyclophosphamide", "doxorubicin", "
+T933	Reason 40308 40321	prior-history
+T934	ADE 40325 40336	neutropenia
+T935	Drug 40340 40352	chemotherapy
+T936	Strength 40352 40385	", "chemotherapy", "fluconazole",
+T937	Reason 40386 40401	"recent-history
+T938	Drug 40405 40411	thrush
+T939	Strength 40411 40438	"], ["sedation", "Diastat",
+T940	Strength 40442 40463	mL", "b.i.d", "mg", "
+T941	Frequency 40463 40469	b.i.d.
+T942	Drug 40473 40482	lorazepam
+T943	Strength 40482 40535	", "1-mg", "p.r.n.", "acetaminophen", "azithromycin",
+T944	Reason 40536 40547	"jerky-limb
+T945	Drug 40563 40571	Copaxone
+T946	Strength 40571 40597	", "Copaxone", "Copaxone",
+T947	Frequency 40598 40614	"every-other-day
+T948	Drug 40620 40626	statin
+T949	Strength 40626 40688	", "statin", "brush-his-teeth", "Prozac", "Metformin", "500-mg
+T950	Drug 40713 40720	Lipitor
+T951	Strength 40720 40752	", "10-mg", "lisinopril", "20-mg
+T952	Drug 40767 40777	metoprolol
+T953	Strength 40777 40849	", "50-mg", "Uroxatral", "10-mg", "Detrol-LA", "4-mg", "aspirin", "81-mg
+T954	Reason 40909 40945	infection-associated-with-the-spinal
+T955	Drug 40964 40965	]
+T956	Strength 40965 41064	, ["seizure-medication", "seizure", "breakthrough-seizure", "Diastat", "convulsive-seizure", "20-mg
+T957	Reason 41068 41085	generalized-tonic
+T958	Strength 41105 41111	1.5-mg
+T959	Drug 41115 41124	lorazepam
+T960	Strength 41124 41432	-x", "fosphenytoin", "15", "generalized-tonic-seizure", "Keppra", "Lamictal", "allergic-reaction", "rash", "hypotension", "valproic-acid", "Tranxene", "taper", "Topamax", "Include-Diastat", "20-mg", "Topamax", "25-mg", "b.i.d", "Tranxene", "15-mg", "b.i.d.", "Depakote", "125-mg", "t.i.d", "Depacon", "250-mg
+T961	Drug 41436 41443	Topamax
+T962	Strength 41443 41705	", "Tranxene", "Topamax", "25-mg", "50-mg", "at-night"], ["gabapentin", "pain-control", "insulin", "diabetes", "Trazodone", "simvastatin", "hydrochlorothiazide", "Prevacid", "lisinopril", "glipizide", "gabapentin", "insulin", "Neurontin", "oxycodone", "30-mg", "
+T963	Frequency 41705 41709	q.d.
+T964	Strength 41730 41747	60-mg", "q.d"], [
+T965	Reason 41762 41776	blood-pressure
+T966	Drug 41786 41797	antibiotics
+T967	ADE 41801 41818	urinary-retention
+T968	Drug 41822 41837	Fludrocortisone
+T969	Strength 41837 41952	", "0.1-mg", "p.o.", "q.d.", "midodrine", "5-mg", "p.o.", "q.i.d.", "Cymbalta", "30-mg", "p.o.", "Prilosec", "20-mg
+T970	Drug 41963 41969	Lortab
+T971	Strength 41969 41982	", "10-mg", "
+T972	Route 41982 41986	p.o.
+T973	Strength 41986 42006	", "Amoxil", "500-mg
+T974	Drug 42016 42027	"vitamin-D-
+T975	Strength 42027 42096	10", "00-units", "per-day", "Metamucil-p.r.n.,-enteric", "aspirin", "
+T976	Frequency 42096 42106	once-a-day
+T977	Drug 42110 42116	Colace
+T978	Strength 42116 42229	", "200-mg", "p.o.", "q.d.", "Senokot", "three", "tablets", "p.o.", "p.r.n.", "Reglan", "10-mg", "p.o.", "q.6", "
+T979	Drug 42229 42234	Xanax
+T980	Strength 42234 42249	", "0.25-mg", "
+T981	Route 42249 42253	p.o.
+T982	Frequency 42257 42269	q.8", "p.r.n
+T983	Drug 42274 42280	Ambien
+T984	Strength 42280 42300	", "5-mg", "p.o.", "
+T985	Frequency 42300 42312	q.h.s.-p.r.n
+T986	Drug 42317 42325	Dilaudid
+T987	Strength 42325 42356	", "2-mg", "tablets", "p.o.", "
+T988	Frequency 42356 42361	p.r.n
+T989	Drug 42366 42374	Protonix
+T990	Strength 42374 42402	", "40-mg", "Megace", "400",
+T991	Drug 42403 42411	"Vitamin
+T992	Strength 42411 42477	-B", "rheumatoid-arthritis", "cryoglobulins", "midodrine", "2.5-mg
+T993	Strength 42512 42516	5-mg
+T994	Strength 42568 42572	5-mg
+T995	Drug 42610 42617	Tylenol
+T996	Strength 42617 42722	", "650", "p.o.", "q.6", "p.r.n.", "headache"], ["Clozaril", "Risperdal", "lithium", "Clozaril", "1200-mg
+T997	Drug 42726 42735	Risperdal
+T998	Strength 42735 42762	", "lithium", "Clozaril", "
+T999	ADE 42762 42777	anti-psychotics
+T1000	Drug 42820 42827	Zyprexa
+T1001	Strength 42827 42859	", "AXIS", "benzodiazepines"], [
+T1002	Drug 42935 42941	Ativan
+T1003	Strength 42941 43007	", "Imitrex", "Levoxyl", "albuterol", "metered-dose", "inhaler", "
+T1004	Frequency 43007 43016	as-needed
+T1005	Drug 43020 43026	Zofran
+T1006	Drug 43108 43116	Percocet
+T1007	Strength 43116 43553	", "daily", "Celebrex", "200-mg", "levothyroxine", "0.025-mg", "Vytorin", "10/40-mg", "lisinopril", "10-mg", "Coreg", "10-mg", "glucosamine", "chondroitin", "aspirin", "81-mg", "Lipitor", "40-mg", "levothyroxine", "two-days", "carcinoma", "seizure-disorder", "TowerWisconsin-Card", "State"], ["amitriptyline", "prophylactic-treatment", "Motrin", "abortive-treatment.2", "papaverine", "headaches", "papaverine", "lisinopril", "glipizide",
+T1008	Drug 43554 43564	"metformin
+T1009	Drug 43565 43586	-vitamin-D", "Centrum
+T1010	Strength 43586 43636	-multivitamin", "tablets", "Actos", "lorazepam", "
+T1011	Frequency 43636 43645	as-needed
+T1012	Drug 43649 43656	Vytorin
+T1013	Strength 43656 43676	", "Celexa", "pain",
+T1014	Reason 43677 43716	"foods-times,-which-worsen-migraine", "
+T1015	Strength 43716 43741	10-mg", "Motrin", "800-mg
+T1016	Reason 43777 43805	"reduce-migraine-symptoms"],
+T1017	Drug 43808 43814	Keppra
+T1018	Strength 43814 43846	", "oral", "solution", "0-mg", "
+T1019	Frequency 43846 43852	b.i.d.
+T1020	Reason 43861 43876	prevent-febrile
+T1021	Drug 43908 43914	Keppra
+T1022	Strength 43914 44012	", "febrile-seizures", "generalized-seizures", "sedation", "Keppra", "300-mg", "p.o.", "b.i.d.", "
+T1023	Frequency 44012 44017	daily
+T1024	Drug 44093 44100	CODEINE
+T1025	Strength 44100 44121	", "oxygen", "lepto",
+T1026	Drug 44170 44177	aspirin
+T1027	Strength 44177 44232	"], ["minor-procedure-area", "chlorhexidine", "phenol",
+T1028	ADE 44233 44268	"injections-in-this-area-injections
+T1029	Drug 44272 44278	phenol
+T1030	Strength 44278 44472	", "5-mL", "phenol", "phenol", "150-units", "1-mL"], ["botulinum-toxin", "injection", "minor-procedure-area", "chlorhexidine", "6-mL", "phenol", "phenol-injections", "phenol", "100-units", "1-mL
+T1031	Drug 44478 44491	chlorhexidine
+T1032	Strength 44491 44563	", "4-mL", "phenol", "Phenol", "injections", "phenol", "50-units", "1-mL
+T1033	Drug 44616 44624	Coumadin
+T1034	Drug 44628 44634	Keppra
+T1035	Strength 44634 44752	", "Decadron", "two-times"], ["aspiration-and-infusion", "anesthesia", "usual-sterile-manner", "nostril", "arachnoid",
+T1036	Drug 44754 44764	Bacitracin
+T1037	Strength 44764 44797	"], ["Imitrex", "Motrin", "800-mg
+T1038	Drug 44868 44874	oxygen
+T1039	Strength 44874 44910	", "oxygen", "methadone", "tablets",
+T1040	Frequency 44911 44929	"four-times-a-day"
+T1041	Strength 44929 44946	, "morphine", "mg
+T1042	Drug 44971 44979	Dilaudid
+T1043	Strength 44979 45013	", "two", "tablets", "by-mouth", "
+T1044	Frequency 45013 45028	every-two-hours
+T1045	Drug 45051 45060	Neurontin
+T1046	Strength 45060 45071	", "1600-mg
+T1047	Drug 45096 45103	Effexor
+T1048	Strength 45103 45116	-XR", "250-mg
+T1049	Drug 45134 45141	Cytomel
+T1050	Strength 45141 45151	", "25-mcg
+T1051	Drug 45169 45177	Seroquel
+T1052	Strength 45177 45191	", "100-mg", "
+T1053	Route 45191 45195	p.o.
+T1054	Strength 45195 45310	", "q.-day", "levothyroxine", "300-mcg", "p.o.", "q.-day", "Prinivil", "20-mg", "p.o.", "q.-day", "Mevacor", "40-mg
+T1055	Route 45314 45318	p.o.
+T1056	Strength 45318 45322	", "
+T1057	Frequency 45322 45327	q-day
+T1058	Drug 45395 45403	Tegretol
+T1059	Strength 45403 45467	", "toxicity-(hallucinations", "Trileptal", "Trileptal", "300-mg
+T1060	Drug 45531 45538	steroid
+T1061	Strength 45538 45584	", "injections"], ["local-ER", "valium", "5-mg
+T1062	Strength 45588 45627	1.0g.", "seizures", "Librium", "taper",
+T1063	Reason 45628 45647	"possible-alcoholic
+T1064	Drug 45664 45672	Betadine
+T1065	Strength 45672 45740	", "Vicryl", "saline", "saline", "Vicryl", "saline", "Vicryl", "skin
+T1066	Frequency 45811 45822	-half-hours
+T1067	ADE 45826 45847	sleepy-in-the-morning
+T1068	Drug 45893 45904	hydrocodone
+T1069	Strength 45904 45917	", "10/325-mg
+T1070	Strength 45927 45997	6-hours", "Flexeril", "10-mg", "p.o.", "at-bedtime", "Xanax", "0.25-mg
+T1071	Drug 46026 46035	Neurontin
+T1072	Strength 46035 46045	", "200-mg
+T1073	Drug 46066 46077	propranolol
+T1074	Strength 46077 46086	", "10-mg
+T1075	Strength 46119 46127	5-mg", "
+T1076	Route 46127 46131	p.o.
+T1077	Drug 46150 46157	Namenda
+T1078	Strength 46157 46252	", "10-mg", "p.o.", "daily", "Aricept", "10-mg", "p.o.", "daily", "degenerative-joint-disease",
+T1079	ADE 46253 46305	"the-patient's-low-blood-pressure-and-heart-rate-low
+T1080	Drug 46335 46343	Protonix
+T1081	Strength 46343 46352	", "40-mg
+T1082	Drug 46356 46363	Aricept
+T1083	Strength 46363 46419	", "Flexeril", "gabapentin", "pain-control", "Percocet",
+T1084	Drug 46420 46437	"morphine-sulfate
+T1085	Reason 46443 46466	-needed", "calcium-with
+T1086	Drug 46466 46478	-vitamin-D"]
+T1087	Drug 46548 46560	chemotherapy
+T1088	Drug 46632 46639	Topamax
+T1089	Strength 46639 46721	", "25-mg", "seizure", "Diastat", "7.5-mg", "lorazepam", "2-mg", "Topamax", "50-mg
+T1090	Strength 46740 46745	75-mg
+T1091	Drug 46761 46765	for-
+T1092	Strength 46765 46785	2-weeks", "75-mg", "
+T1093	Frequency 46785 46796	twice-daily
+T1094	Strength 46796 46914	", "Topama", "Topama", "Keppra", "Zonegran", "Lamictal"], ["anesthesia", "chlorhexidine", "microscissors", "Cavitron",
+T1095	Drug 46945 46953	Cavitron
+T1096	Strength 46953 47002	", "Cavitron", "Duragen", "Vicryls", "Vicryl"], [
+T1097	Drug 47033 47041	Dilantin
+T1098	Strength 47041 47233	", "300-mg", "daily", "Dilantin", "Dilantin", "Dilantin"], ["Local-anesthesia", "1", "Xylocaine", "epinephrine", "1", "Xylocaine", "infiltration"], ["temporal-arteritis", "temporal-arteritis",
+T1099	Drug 47234 47244	"Xylocaine
+T1100	Strength 47248 47276	1", "Monocryl", "Xylocaine",
+T1101	Drug 47277 47286	"Monocryl
+T1102	Drug 47292 47297	Advil
+T1103	Strength 47297 47361	", "Motrin", "Tylenol"], ["Lanoxin", "amoxicillin", "Hydergine",
+T1104	Drug 47363 47371	Cardizem
+T1105	Strength 47371 47375	", "
+T1106	Drug 47375 47380	Lasix
+T1107	Strength 47380 47391	", "Micro",
+T1108	Reason 47392 47420	"chronic-atrial-fibrillation
+T1109	Drug 47424 47432	Coumadin
+T1110	Reason 47458 47472	bilateral-knee
+T1111	Drug 47488 47494	Plavix
+T1112	Strength 47494 47537	", "aspirin", "81-mg", "Proscar", "5-mg", "
+T1113	Frequency 47537 47545	q.d-and-
+T1114	Drug 47545 47554	Synthroid
+T1115	Strength 47554 47569	", "mg", "q.d",
+T1116	Drug 47570 47582	"cholesterol
+T1117	Drug 47626 47634	Marcaine
+T1118	Strength 47634 47636	",
+T1119	Drug 47637 47649	"epinephrine
+T1120	Strength 47649 47692	"], ["antibiotics", "hemostasis", "Vicryl",
+T1121	Drug 47694 47706	Ace-bandages
+T1122	Drug 47737 47740	FFP
+T1123	Drug 47743 47753	"vitamin-K
+T1124	Reason 47835 47854	atrial-fibrillation
+T1125	Drug 47875 47884	Lopressor
+T1126	Strength 47884 47917	", "Coumadin", "aspirin", "325-mg
+T1127	Drug 47935 47948	penicillamine
+T1128	Strength 47948 48012	", "metoprolol", "aspirin", "Coumadin", "penicillamine", "250-mg
+T1129	Drug 48044 48054	metoprolol
+T1130	Strength 48054 48065	", "12.5-mg
+T1131	Drug 48084 48091	aspirin
+T1132	Strength 48091 48101	", "325-mg

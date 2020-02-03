@@ -1,0 +1,16 @@
+.skin-blue .wrapper {
+    background-color: #ecf0f5;
+}
+            
+.skin-blue .main-sidebar {
+    background-color: rgb(50, 50, 50);
+}
+.dataTables_filter {
+    display: none;
+}
+tbody {
+    vertical-align: top;
+}
+#DataTables_Table_0_length {
+    display: none;
+}
