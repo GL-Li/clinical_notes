@@ -2,6 +2,8 @@ library(data.table)
 library(magrittr)
 library(stringr)
 library(ggplot2)
+library(wordcloud)
+library(RColorBrewer)
 
 load("RData/saved.RData")
 
@@ -16,5 +18,7 @@ get_word_count <- function(type, col){
         unlist() %>%
         table() %>%
         as.data.table() %>%
-        set_colnames(c("word", "freq"))
+        set_colnames(c("word", "count")) %>%
+        .[order(-count)] %>%
+        .[, word := factor(word, levels = word)]
 }

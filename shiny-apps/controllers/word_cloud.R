@@ -1,42 +1,108 @@
-library(wordcloud2)
-library(RColorBrewer)
+type_1 <- reactive(input$cloud_type_1)
+col_1 <- reactive(input$cloud_method_1)
 
-output$wordcloud_1 <- renderCachedPlot({
-    type <- input$cloud_type_1
-    col = input$cloud_method_1
-    word_count <- get_word_count(type, col)
-    #min_freq <- ifelse(col == "Both", 10, 3)
-    
-    set.seed(1234)  # reproducible cloud
-    wordcloud(words = word_count[, word],         
-              freq = word_count[, count],       
-              scale = c(2, 0.2),    
-              max.words = 200,
-              #min.freq = 1,                  
-              rot.per = 0.2,                
-              random.order=FALSE, 
-              colors=brewer.pal(8, "Dark2"))
+type_2 <- reactive(input$cloud_type_2)
+col_2 <- reactive(input$cloud_method_2)
 
-},
-cacheKeyExpr = {list(input$cloud_type_1, input$cloud_method_1)})
+output$wordcloud_1 <- renderCachedPlot(
+    {
+        # type <- input$cloud_type_1
+        # col < input$cloud_method_1
+        word_count <- get_word_count(type_1(), col_1())
+        #min_freq <- ifelse(col == "Both", 10, 3)
+        
+        # add a point to make the cloud look better
+        if (type_1() == "Neurology" & col_1() == "top_tfidf"){
+            tmp <- data.table(word = "", count = 30)
+            word_count <- rbindlist(list(tmp, word_count))
+        }
+        
+        set.seed(1234)  # reproducible cloud
+        par(mar = rep(0, 4))  # set wordcloud margin to 0
+        wordcloud(words = word_count[, word],         
+                  freq = word_count[, count],       
+                  scale = c(3.5, 0.3),    
+                  max.words = 300,
+                  min.freq = 2,                  
+                  rot.per = 0.2,                
+                  random.order=FALSE, 
+                  colors=brewer.pal(8, "Dark2"))
+        
+    },
+    bg="transparent",
+    cacheKeyExpr = {list(input$cloud_type_1, input$cloud_method_1)}
+)
 
-output$wordcloud_2 <- renderCachedPlot({
-    type <- input$cloud_type_2
-    col = input$cloud_method_2
-    word_count <- get_word_count(type, col)
-    #min_freq <- ifelse(col == "Both", 10, 3)
-    
-    # add a point to make the cloud 
-    
-    set.seed(1234)  # reproducible cloud
-    wordcloud(words = word_count[, word],         
-              freq = word_count[, count],       
-              scale = c(2, 0.2),  
-              max.words = 200,
-              #min.freq = 1,                  
-              rot.per = 0.2,                
-              random.order=FALSE, 
-              colors=brewer.pal(8, "Dark2"))
-    
-},
-cacheKeyExpr = {list(input$cloud_type_2, input$cloud_method_2)})
+output$wordcloud_2 <- renderCachedPlot(
+    {
+        # type <- input$cloud_type_2
+        # col = input$cloud_method_2
+        word_count <- get_word_count(type_2(), col_2())
+        #min_freq <- ifelse(col == "Both", 10, 3)
+        
+        # add a point to make the cloud look better. The maximum count was 9
+        # too small compared to 33 in Gastroentoogy 
+        if (type_2() == "Neurology" & col_2() == "top_tfidf"){
+            tmp <- data.table(word = "", count = 30)
+            word_count <- rbindlist(list(tmp, word_count))
+        }
+        
+        set.seed(1234)  # reproducible cloud
+        par(mar = rep(0, 4))  # set wordcloud margin to 0, base plot
+        wordcloud(words = word_count[, word],         
+                  freq = word_count[, count],       
+                  scale = c(3.5, 0.3),  
+                  max.words = 300,
+                  min.freq = 2,                  
+                  rot.per = 0.2,                
+                  random.order=FALSE, 
+                  colors=brewer.pal(8, "Dark2"))
+        
+    },
+    bg="transparent",
+    cacheKeyExpr = {list(input$cloud_type_2, input$cloud_method_2)}
+)
+
+output$bar_1 <- renderPlot(
+    {
+        word_count <- get_word_count(type_1(), col_1()) %>%
+            .[1:10]
+        ggplot(word_count, aes(word, count)) +
+            geom_col() +
+            coord_flip() +
+            ggtitle("Word Count") +
+            theme(
+                panel.grid.major = element_blank(),
+                panel.grid.minor = element_blank(),
+                axis.ticks = element_blank(),
+                axis.title = element_blank(),
+                axis.text.y = element_text(size = 12),
+                axis.text.x = element_text(size = 12),
+                panel.background = element_rect(fill = "transparent"),
+                plot.background = element_rect(fill = "transparent", color = NA)
+            )
+    }, 
+    bg = "transparent"
+)
+
+output$bar_2 <- renderPlot(
+    {
+        word_count <- get_word_count(type_2(), col_2()) %>%
+            .[1:10]
+        ggplot(word_count, aes(word, count)) +
+            geom_col() +
+            coord_flip() +
+            ggtitle("Word Count") +
+            theme(
+                panel.grid.major = element_blank(),
+                panel.grid.minor = element_blank(),
+                axis.ticks = element_blank(),
+                axis.title = element_blank(),
+                axis.text.y = element_text(size = 12),
+                axis.text.x = element_text(size = 12),
+                panel.background = element_rect(fill = "transparent"),
+                plot.background = element_rect(fill = "transparent", color = NA)
+            )
+    }, 
+    bg = "transparent"
+)

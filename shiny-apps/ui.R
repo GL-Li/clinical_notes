@@ -58,7 +58,7 @@ dashboardPage(
                             column(
                                 5,
                                 selectInput("cloud_type_1", 
-                                            "Select sample type",
+                                            "Select bag of words",
                                             choices = c("Both", 
                                                         "Gastroenterology", 
                                                         "Neurology"),
@@ -75,7 +75,8 @@ dashboardPage(
                                             selected = "top_tf")
                             )
                         ),
-                        plotOutput("wordcloud_1")
+                        plotOutput("wordcloud_1", width = "90%", height = "400px"),
+                        plotOutput("bar_1", width = "90%", height = "200px")
                     ),
                     column(
                         6,
@@ -100,7 +101,8 @@ dashboardPage(
                                             selected = "top_tf")
                             )
                         ),
-                        plotOutput("wordcloud_2")
+                        plotOutput("wordcloud_2", width = "90%", height = "400px"),
+                        plotOutput("bar_2", width = "90%", height = "200px")
                     )
                 )
             )

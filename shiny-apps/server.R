@@ -1,7 +1,7 @@
 library(shiny)
 library(DT)
 
-server <- function(input, output){
+server <- function(input, output, session){
     # overview
     source("./controllers/overview.R", local = TRUE)
     
