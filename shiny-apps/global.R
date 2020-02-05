@@ -19,6 +19,7 @@ get_word_count <- function(type, col){
         table() %>%
         as.data.table() %>%
         set_colnames(c("word", "count")) %>%
+        .[word != ""] %>%    # medaCy generate nothing from some notes
         .[order(-count)] %>%
         .[, word := factor(word, levels = word)]
 }

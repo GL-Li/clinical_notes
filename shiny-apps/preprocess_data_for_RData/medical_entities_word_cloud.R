@@ -107,21 +107,19 @@ note_bows <- sum_tfidf %>%
 
 
 # create data for word cloud
-get_word_count <- function(vector_col){
-    count <- vector_col %>%
-        str_split(" ") %>%
-        unlist() %>%
-        table() %>%
-        as.data.table() %>%
-        set_colnames(c("word", "count"))
-}
-amazon_count <- get_word_count(amazon_me[, amazon_me])
-medacy_count <- get_word_count(medacy_me[, medacy_me])
-top_tf_count <- get_word_count(note_bows[, top_tf])
-top_tfidf_count <- get_word_count(note_bows[, top_tfidf])
+# get_word_count <- function(vector_col){
+#     count <- vector_col %>%
+#         str_split(" ") %>%
+#         unlist() %>%
+#         table() %>%
+#         as.data.table() %>%
+#         set_colnames(c("word", "count"))
+# }
+# amazon_count <- get_word_count(amazon_me[, amazon_me])
+# medacy_count <- get_word_count(medacy_me[, medacy_me])
+# top_tf_count <- get_word_count(note_bows[, top_tf])
+# top_tfidf_count <- get_word_count(note_bows[, top_tfidf])
 
 
 # save to RData ===============================================================
-save(note_bows, word_stats, amazon_count, medacy_count, 
-     top_tf_count, top_tfidf_count,
-     file = "../RData/saved.RData")
+save(note_bows, file = "../RData/saved.RData")

@@ -68,7 +68,7 @@ output$bar_1 <- renderPlot(
         word_count <- get_word_count(type_1(), col_1()) %>%
             .[1:10]
         ggplot(word_count, aes(word, count)) +
-            geom_col() +
+            geom_col(fill = "grey") +
             coord_flip() +
             ggtitle("Word Count") +
             theme(
@@ -76,8 +76,7 @@ output$bar_1 <- renderPlot(
                 panel.grid.minor = element_blank(),
                 axis.ticks = element_blank(),
                 axis.title = element_blank(),
-                axis.text.y = element_text(size = 12),
-                axis.text.x = element_text(size = 12),
+                axis.text = element_text(size = 12),
                 panel.background = element_rect(fill = "transparent"),
                 plot.background = element_rect(fill = "transparent", color = NA)
             )
@@ -90,7 +89,7 @@ output$bar_2 <- renderPlot(
         word_count <- get_word_count(type_2(), col_2()) %>%
             .[1:10]
         ggplot(word_count, aes(word, count)) +
-            geom_col() +
+            geom_col(fill = "grey") +
             coord_flip() +
             ggtitle("Word Count") +
             theme(
@@ -98,8 +97,7 @@ output$bar_2 <- renderPlot(
                 panel.grid.minor = element_blank(),
                 axis.ticks = element_blank(),
                 axis.title = element_blank(),
-                axis.text.y = element_text(size = 12),
-                axis.text.x = element_text(size = 12),
+                axis.text = element_text(size = 12),
                 panel.background = element_rect(fill = "transparent"),
                 plot.background = element_rect(fill = "transparent", color = NA)
             )

@@ -1,4 +1,5 @@
 ~%2FDropbox%2Fwork-with-health-data%2Fmedical-notes%2Feda_analysis.R="B8639423"
+~%2FDropbox%2Fwork-with-health-data%2Fmedical-notes%2Fmachine-learning%2Ftext_vectorization.R="DAE1FD0E"
 ~%2FDropbox%2Fwork-with-health-data%2Fmedical-notes%2Fshiny-apps%2FRmd%2Fintroduction_to_medical_notes.Rmd="3CC32115"
 ~%2FDropbox%2Fwork-with-health-data%2Fmedical-notes%2Fshiny-apps%2FRmd%2Fsearch_note.Rmd="F5AF8857"
 ~%2FDropbox%2Fwork-with-health-data%2Fmedical-notes%2Fshiny-apps%2Fasset%2Fcustom.css="B5089D53"
@@ -6,6 +7,7 @@
 ~%2FDropbox%2Fwork-with-health-data%2Fmedical-notes%2Fshiny-apps%2Fcontrollers%2Foverview.R="3B0624B8"
 ~%2FDropbox%2Fwork-with-health-data%2Fmedical-notes%2Fshiny-apps%2Fcontrollers%2Fword_cloud.R="FA26892D"
 ~%2FDropbox%2Fwork-with-health-data%2Fmedical-notes%2Fshiny-apps%2Fglobal.R="4539DC7F"
+~%2FDropbox%2Fwork-with-health-data%2Fmedical-notes%2Fshiny-apps%2Fpreprocess_data_for_RData%2Fclustering.R="A179299"
 ~%2FDropbox%2Fwork-with-health-data%2Fmedical-notes%2Fshiny-apps%2Fpreprocess_data_for_RData%2Fmtsample_gastroenterology_neurology.csv="30CA4AC1"
 ~%2FDropbox%2Fwork-with-health-data%2Fmedical-notes%2Fshiny-apps%2Fpreprocess_data_for_RData%2Fpreprocess_data_and_save_RData.R="E2CEC923"
 ~%2FDropbox%2Fwork-with-health-data%2Fmedical-notes%2Fshiny-apps%2Fserver.R="705F7A79"
