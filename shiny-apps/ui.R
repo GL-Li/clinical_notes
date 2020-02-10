@@ -111,7 +111,18 @@ dashboardPage(
             ),
             tabItem(
                 "cluster",
-                h1("Identify Medical Subdomains")
+                h1("Identify Medical Subdomains"),
+                fluidRow(
+                    column(
+                        8,
+                        h2("kmeans")
+                    ),
+                    column(
+                        4,
+                        plotOutput("kmeans_img", height = "auto")
+                    )
+                ),
+                plotOutput("dend")
             )
             
 #---            

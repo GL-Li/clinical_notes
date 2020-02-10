@@ -10,4 +10,7 @@ server <- function(input, output, session){
     
     # word cloud
     source("./controllers/word_cloud.R", local = TRUE)
+    
+    # clustering
+    source("./controllers/clustering.R", local = TRUE)
 }

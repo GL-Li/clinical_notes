@@ -4,8 +4,12 @@ library(stringr)
 library(ggplot2)
 library(wordcloud)
 library(RColorBrewer)
+library(caret)
+library(progress)
+library(dendextend)
 
-load("RData/saved.RData")
+load("RData/medical_entities_bow.RData")
+load("RData/clustering.RData")
 
 # get word count 
 get_word_count <- function(type, col){
