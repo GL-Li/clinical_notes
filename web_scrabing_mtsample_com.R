@@ -1,15 +1,21 @@
+# last reviewed: 20200211
+
+# To scrape all sample medical transcriptions at mtsamples.com.
+# Often scraping with the XPath and css selector returns nothing so we choose 
+# to scrape all text and then use regular expression to extract the needed
+# data from the text.
+
 library(rvest)
 library(stringr)
-
-# sample_url <- "https://www.mtsamples.com/site/pages/sample.asp?Type=3-Allergy%20/%20Immunology&Sample=386-Allergic%20Rhinitis"
+library(progress)
 
 
 # scrape data of one sample
 scrape_one_sample <- function(sample_url){
     sample_page <- read_html(sample_url)
     
-    # category in transcribes
-    mt_headers <- sample_page %>%
+    # get string of section titles seperated by ",". css selector works here
+    sections <- sample_page %>%  
         html_nodes(css = "b") %>%
         html_text() %>%
         str_extract("[A-Z][A-Z /]+[A-Z]") %>%
@@ -18,6 +24,7 @@ scrape_one_sample <- function(sample_url){
         setdiff("NOTE") %>%
         paste(collapse = ", ")
     
+    # get all text of the sample. Other contents are extracted from sample_text
     sample_text <- sample_page %>%
         html_node(xpath = '//*[@id="sampletext"]') %>%
         html_text() %>%
@@ -44,13 +51,13 @@ scrape_one_sample <- function(sample_url){
     keywords <- str_extract(sample_text, "(?<=Keywords: \r\n).*(?=\r\n)") %>%
         str_trim() %>% str_squish()
 
-    
+    # rename for easy use later
     df <- data.frame(
-        sample_type = sample_type,
-        sample_name = sample_name,
+        specialty = sample_type,  # sample type / medical specialty
+        name = sample_name,
         description = description,
-        medical_transcription = transcription,  # mt for medical transcription
-        mt_headers = mt_headers,
+        note = transcription,  # clinical note
+        sections = sections,
         keywords = keywords,
         stringsAsFactors = FALSE
     )
@@ -60,7 +67,6 @@ scrape_one_sample <- function(sample_url){
 
 
 # get url to each sample in one page
-page_url <- "https://www.mtsamples.com/site/pages/browse.asp?type=21%2DEndocrinology&page=2"
 get_sample_urls <- function(page_url){
     sample_urls <- read_html(page_url) %>%
         html_nodes(xpath = '//*[@id="Browse"]') %>%
@@ -71,11 +77,11 @@ get_sample_urls <- function(page_url){
         str_replace_all(" ", "%20")
     return(sample_urls)
 }
+#page_url <- "https://www.mtsamples.com/site/pages/browse.asp?type=21%2DEndocrinology&page=2"
 # bbb <- get_sample_urls(page_url)
 
 
-# scrape one page for example this is one page:
-# https://www.mtsamples.com/site/pages/browse.asp?type=21%2DEndocrinology&page=2
+# scrape all samples in one page
 scrape_one_page <- function(page_url){
     df_page <- data.frame(
         specialty = character(0),
@@ -92,11 +98,11 @@ scrape_one_page <- function(page_url){
     }
     return(df_page)
 }
+# page_url <- "https://www.mtsamples.com/site/pages/browse.asp?type=21%2DEndocrinology&page=2"
 # ccc <- scrape_one_page(page_url)
 
 
-# get the number of pages of a medical specialty, the first page of a specialty is
-# https://www.mtsamples.com/site/pages/browse.asp?type=96-Hematology%20-%20Oncology
+# get the number of pages of a sample type / medical specialty
 get_number_pages <- function(type_url){
     text <- read_html(type_url) %>%
         html_node(xpath = '//*[@id="wrapper"]') %>%
@@ -116,7 +122,7 @@ get_number_pages <- function(type_url){
 
 
 # get the url of each page of a Sample Type / Medical Specialty using the first 
-# page url of a Sample Type
+# page url of a Sample Type Medical specialty
 get_page_urls <- function(type_url){
     number_pages <- get_number_pages(type_url)
     if (number_pages == 1){
@@ -131,6 +137,7 @@ get_page_urls <- function(type_url){
     
     return(page_urls)
 }
+# type_url <- "https://www.mtsamples.com/site/pages/browse.asp?type=85-Surgery"
 # eee <- get_page_urls(type_url)
 
 
@@ -164,12 +171,10 @@ scrape_all_samples <- function(home_url){
     )
     type_urls <- get_type_urls(home_url)
     
+    # give an estimated number of total pages to scrape, used to track the 
+    # scraping progress
     total_pages <- 500
-    # for (type_url in type_urls){
-    #     page_urls <- get_page_urls(type_url)
-    #     total_pages <- total_pages + length(page_urls)
-    # }
-    
+
     for (type_url in type_urls){
         page_urls <- get_page_urls(type_url)
         for (page_url in page_urls){
@@ -181,7 +186,8 @@ scrape_all_samples <- function(home_url){
         }
     }
     
-    csv_file <- paste0("mtsample_", str_remove_all(Sys.Date(), "-"), ".csv")
+    # save the scraped data
+    csv_file <- paste0("./data/mtsample_", str_remove_all(Sys.Date(), "-"), ".csv")
     write.csv(mt, file=csv_file, row.names = FALSE)
     
     return(mt)
