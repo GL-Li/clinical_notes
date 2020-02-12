@@ -7,7 +7,6 @@
 
 library(rvest)
 library(stringr)
-library(progress)
 
 
 # scrape data of one sample
@@ -159,6 +158,11 @@ get_type_urls <- function(home_url){
 
 # scrape all samples from home site
 scrape_all_samples <- function(home_url){
+    if (!dir.exists("data")){
+        cat("create a new directory data/ under current directory to save scraping.")
+        dir.create("data")
+    }
+    
     page_count <- 0
     mt <-  data.frame(
         specialty = character(0),
@@ -187,11 +191,10 @@ scrape_all_samples <- function(home_url){
     }
     
     # save the scraped data
-    csv_file <- paste0("./data/mtsample_", str_remove_all(Sys.Date(), "-"), ".csv")
+    csv_file <- paste0("./data/mtsamples_", str_remove_all(Sys.Date(), "-"), ".csv")
     write.csv(mt, file=csv_file, row.names = FALSE)
-    
-    return(mt)
+    cat(paste0("Scraped data saved successfully to ", csv_file))
 }
 
 home_url <- "https://www.mtsamples.com/"
-mt_all <- scrape_all_samples(home_url)
+scrape_all_samples(home_url)

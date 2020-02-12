@@ -1,0 +1,9 @@
+The clinical notes at [mtsamples.com](https://www.mtsamples.com/) are provided by users and has been verified by various experts???ref to be close to the real clinical notes. We scraped all notes using R `rvest` package ([code](https://github.com/GL-Li/clinical_notes/blob/master/web_scrabing_mtsample_com.R)). 
+
+The 4999 sample clinical notes at this website has been categorized into 40 sample types / medical specialties. Most of the categories are distinct medical specialties (specialty for short) dealing with unique organ systems, such as cardiovascular / pulmonary,  gastroenterology and urology. Some of them cover more broad range including consult - history and phy., radiology, surgery, and discharge summary. 
+
+As we mentioned, the headers of sections variies from notes to notes. From the 4999 clinical notes, we found 1910 unique headers. Most of them are rare, only appearing in a few of clinical notes: 230 in one notes, 773 in two notes, 200 in three notes, and 84% of them in less than ten notes. 
+
+Using the as-is section headers, there is no single section header appears in the majority of clinical notes. The most popular section "ANESTHESIA" appears in 27% of notes. The lack of dominance, however, does not suggest that the content of clinical notes lack a consistent theme???. It is more likely because of how the sectins are named. For example, the combined sections " PREOPERATIVE DIAGNOSIS" and "PREOPERATIVE DIAGNOSES" score 35%, and obviously they are the same. Actually there are 72 unique section headers containing "DIAGNOSIS" or "DIAGNOSES". Even worse, 154 unique section headers contain "HISTORY". A lot of work is needed to clean this mess up.
+
+ 

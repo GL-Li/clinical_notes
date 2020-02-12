@@ -13,7 +13,16 @@
 }
 .nav-tabs{
     font-weight: normal;
-    font-size: 22px;
+    font-size: 25px;
+}
+.tab-content {
+    margin-top: 5px;
+}
+.container-fluid {
+    padding-left: 0;
+    padding-right: 0;
+    margin-left: 0;
+    margin-right: 0;
 }
 tbody {
     vertical-align: top;

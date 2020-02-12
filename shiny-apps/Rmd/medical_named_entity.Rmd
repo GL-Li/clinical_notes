@@ -1,0 +1,21 @@
+One central??? task for clinical text mining is medical named entity recognition. Medical named entities are specific terms that have medical meaning, such as diseases, drugs, symptoms, and tests. We will try to extract medical named entities from the clinical notes with tow methods: [Amazon Comprehend Medical](https://aws.amazon.com/comprehend/medical/), a commercial service provided by Amazon and Python package [medaCy](https://github.com/NLPatVCU/medaCy), a open source project developed by a team of researchers at Virginia Commonwealth University.
+
+### Amazon Comprehend Medical
+With Amazon Comprehend Medical, an identified medical text is assigned in one of the categories of 'ANATOMY', 'MEDICAL_CONDITION', 'MEDICATION', 'PROTECTED_HEALTH_INFORMATION', and 'TEST_TREATMENT_PROCEDURE' and labeled with one of the types of 'ADDRESS', 'AGE', 'BRAND_NAME', 'DATE', 'DX_NAME', 'GENERIC_NAME', 'ID', 'NAME', 'PROCEDURE_NAME', 'PROFESSION', 'SYSTEM_ORGAN_SITE', 'TEST_NAME', 'TREATMENT_NAME'. The text may also has a traits, though often the traits remain empty. One of the most useful information in traits is negate, which means the patient does not have what described in the text.
+
+Here is an example of a medical entity recognized by Comprehend Medical:
+
+```
+{'Id': 6,
+  'BeginOffset': 364,
+  'EndOffset': 381,
+  'Score': 0.9676284193992615,
+  'Text': 'sigmoid colectomy',
+  'Category': 'TEST_TREATMENT_PROCEDURE',
+  'Type': 'PROCEDURE_NAME',
+  'Traits': []}
+```
+Medical named entities of bulk clincal notes can be extracted easily with Python API ([code](???)). But keep in mind that one entity costs one cent and typically text of size 1M character costs you $100. New users have 3-month free tier with 25000 entities quota per month. Do not bankrupt yourself.
+
+
+### medaCy

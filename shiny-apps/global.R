@@ -8,8 +8,11 @@ library(caret)
 library(progress)
 library(dendextend)
 
+load("RData/dat_all.RData")
 load("RData/medical_entities_bow.RData")
 load("RData/clustering.RData")
+
+
 
 # get word count 
 get_word_count <- function(type, col){

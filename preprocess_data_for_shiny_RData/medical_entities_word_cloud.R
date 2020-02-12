@@ -122,4 +122,4 @@ note_bows <- sum_tfidf %>%
 
 
 # save to RData ===============================================================
-save(note_bows, file = "./shiny-apps/RData/medical_entities_bow.RData")
+save(note_bows, word_stats, file = "./shiny-apps/RData/medical_entities_bow.RData")
