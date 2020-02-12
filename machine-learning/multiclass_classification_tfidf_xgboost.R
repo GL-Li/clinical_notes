@@ -7,27 +7,14 @@ library(stringr)
 library(ggplot2)
 library(tidyr)
 
-get_metrics <- function(y_true, y_pred, cutoff = 0.5){
-  auc <- ModelMetrics::auc(y_true, y_pred)
-  f1 <- ModelMetrics::f1Score(y_true, y_pred, cutoff)
-  sensitivity <- ModelMetrics::sensitivity(y_true, y_pred, cutoff)
-  specificity <- ModelMetrics::specificity(y_true, y_pred, cutoff)
-  
-  cat("confusion matrix:\n       y_true\n")
-  y_pred <- round(y_pred)
-  print(table(y_pred_class, y_true))
-  cat("   \n")
-  
-  return(c(auc = auc, f1 = f1, sensitivity = sensitivity, specificity = specificity))
-}
 
 # prepare data starting from medical note text==================================
 
 dat <- fread("data/mtsamples_multi_class.csv") %>%
-  .[, medical_note := str_replace_all(medical_note, "\\.", "\\. ")] %>%
-  .[, y := as.integer(factor(sample_type)) - 1]
+  .[, note := str_replace_all(note, "\\.", "\\. ")] %>%
+  .[, y := as.integer(factor(specialty)) - 1]
 
-notes <- dat[, medical_note]
+notes <- dat[, note]
 # initialize tokenizer specifing maximum words
 tk <- text_tokenizer(num_words = 3000)
 # update tk in place with a vector or list of documents
@@ -149,7 +136,7 @@ n <- nrow(cm)
 cm_dt <- as.data.table(matrix(unlist(cm), ncol = 1)) %>%
   .[, x := rep(0:(n-1), n)] %>%
   .[, y := rep(0:(n-1), each = n)]
-classes <- unique(dat$sample_type) %>%
+classes <- unique(dat$specialty) %>%
   str_replace(" / ", "\n")
 
 ggplot() + 

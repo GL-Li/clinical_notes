@@ -3,27 +3,14 @@ library(keras)
 library(data.table)
 library(magrittr)
 library(stringr)
-
-get_metrics <- function(y_true, y_pred, cutoff = 0.5){
-  y_pred_class <- round(y_pred)
-  auc <- ModelMetrics::auc(y_true, y_pred)
-  f1 <- ModelMetrics::f1Score(y_true, y_pred, cutoff)
-  sensitivity <- ModelMetrics::sensitivity(y_true, y_pred, cutoff)
-  specificity <- ModelMetrics::specificity(y_true, y_pred, cutoff)
-  
-  cat("confusion matrix:\n       y_true\n")
-  print(ModelMetrics::confusionMatrix(y_true, y_pred))
-  cat("   \n")
-  
-  return(c(auc = auc, f1 = f1, sensitivity = sensitivity, specificity = specificity))
-}
+source("utilities.R")
 
 # prepare data starting from medical note text
-dat <- fread("shiny-apps/preprocess_data_for_RData/mtsample_gastroenterology_neurology.csv") %>%
-  .[, medical_note := str_replace_all(medical_note, "\\.", "\\. ")] %>%
-  .[, y := as.integer(factor(sample_type)) - 1]
+dat <- fread("data/mtsample_gastroenterology_neurology.csv") %>%
+  .[, note := str_replace_all(note, "\\.", "\\. ")] %>%
+  .[, y := as.integer(factor(specialty)) - 1]
 
-notes <- dat[, medical_note]
+notes <- dat[, note]
 # initialize tokenizer specifing maximum words
 tk <- text_tokenizer(num_words = 3000)
 # update tk in place with a vector or list of documents
@@ -77,11 +64,11 @@ evaluate(model, X_test, y_test, verbose = 0)
 
 # get model metrics use custum defined function
 pred <- predict(model, X_test)
-get_metrics(y_test, pred)
-plot(y_test, pred)
+metrics_binary(y_test, pred)
 
 
-save_model_tf(object = model, filepath = "model")
 
-reloaded_model <- load_model_tf("model")
-all.equal(predict(model, mnist$test$x), predict(reloaded_model, mnist$test$x))
+save_model_tf(object = model, filepath = "trained_models/binary_tfidf_neural_network")
+
+reloaded_model <- load_model_tf("trained_models/binary_tfidf_neural_network")
+all.equal(predict(model,X), predict(reloaded_model, X))

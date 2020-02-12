@@ -8,6 +8,13 @@
 .dataTables_filter {
     display: none;
 }
+.content-wrapper{
+    background-color: rgb(255, 255, 255);
+}
+.nav-tabs{
+    font-weight: normal;
+    font-size: 22px;
+}
 tbody {
     vertical-align: top;
 }

@@ -6,7 +6,7 @@ dashboardPage(
     dashboardSidebar(
         sidebarMenu(
             # use only "list" instead of "glyphicon glyphicon-list"
-            menuItem("Medical Notes", tabName = "medical_note", icon = icon("home")),
+            menuItem("Clinical Notes", tabName = "clinical_note", icon = icon("home")),
             menuItem("Medical Entities", tabName = "medical_entity", icon = icon("table")),
             menuItem("Word Cloud", tabName = "wordcloud", icon = icon("cloud")),
             menuItem("Clustering", tabName = "cluster", icon = icon("brain")),
@@ -18,12 +18,20 @@ dashboardPage(
         tags$head(tags$style(includeCSS("asset/custom.css"))),
         
         tabItems(
-            # medical_note =========================================================
+            # clinical note =========================================================
             tabItem(
-                "medical_note",
-                h1("Introduction to medical notes"),
-                includeMarkdown("./Rmd/introduction_to_medical_notes.Rmd"),
-                dataTableOutput("raw_table")
+                "clinical_note",
+                h2("Introduction to Clinical Notes"),
+                tabsetPanel(
+                    tabPanel(
+                        "What is clinical notes", 
+                        includeMarkdown("./Rmd/introduction_to_clinical_notes.Rmd")
+                    ),
+                    tabPanel(
+                        "Clincal notes at mtsamples.com", 
+                        dataTableOutput("raw_table")
+                    )
+                )
             ),
             
             # medical_entities =====================================================
@@ -51,7 +59,7 @@ dashboardPage(
                     )
                 )
             ),
-            # word cloud ======================================================
+            # .. word cloud ======================================================
             tabItem(
                 "wordcloud",
                 fluidRow(
@@ -61,7 +69,7 @@ dashboardPage(
                             column(
                                 4,
                                 selectInput("cloud_type_1", 
-                                            "Select bag of words",
+                                            "Select specialty",
                                             choices = c("Both", 
                                                         "Gastroenterology", 
                                                         "Neurology"),
@@ -87,7 +95,7 @@ dashboardPage(
                             column(
                                 4,
                                 selectInput("cloud_type_2", 
-                                            "Select sample type",
+                                            "Select specialty",
                                             choices = c("Both", 
                                                         "Gastroenterology", 
                                                         "Neurology"),

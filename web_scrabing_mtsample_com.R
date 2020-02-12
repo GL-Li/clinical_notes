@@ -78,11 +78,11 @@ get_sample_urls <- function(page_url){
 # https://www.mtsamples.com/site/pages/browse.asp?type=21%2DEndocrinology&page=2
 scrape_one_page <- function(page_url){
     df_page <- data.frame(
-        sample_type = character(0),
-        sample_name = character(0),
+        specialty = character(0),
+        name = character(0),
         description = character(0),
-        medical_transcription = character(0),
-        mt_headers = character(0),
+        note = character(0),
+        sections = character(0),
         keywords = character(0),
         stringsAsFactors = FALSE
     )
@@ -154,11 +154,11 @@ get_type_urls <- function(home_url){
 scrape_all_samples <- function(home_url){
     page_count <- 0
     mt <-  data.frame(
-        sample_type = character(0),
-        sample_name = character(0),
+        specialty = character(0),
+        name = character(0),
         description = character(0),
-        medical_transcription = character(0),
-        mt_headers = character(0),
+        note = character(0),
+        sections = character(0),
         keywords = character(0),
         stringsAsFactors = FALSE
     )

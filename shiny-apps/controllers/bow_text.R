@@ -2,7 +2,7 @@
 bow_proxy <- dataTableProxy("bows")
 
 output$bows <- DT::renderDataTable({
-    note_bows
+    note_bows[, sum_tfidf := NULL]  # no need to show it
 },
 rownames = FALSE,
 #filter = list(position = 'top', clear = FALSE),

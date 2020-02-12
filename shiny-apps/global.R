@@ -13,7 +13,7 @@ load("RData/clustering.RData")
 
 # get word count 
 get_word_count <- function(type, col){
-    bow <- note_bows[sample_type == type, get(col)]
+    bow <- note_bows[specialty == type, get(col)]
     if (type == "Both"){
         bow = note_bows[, get(col)]
     }

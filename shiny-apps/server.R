@@ -3,7 +3,7 @@ library(DT)
 
 server <- function(input, output, session){
     # overview
-    source("./controllers/overview.R", local = TRUE)
+    source("./controllers/clinical_notes.R", local = TRUE)
     
     # bag of words and text analysis
     source("./controllers/bow_text.R", local = TRUE)
