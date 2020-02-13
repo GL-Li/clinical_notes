@@ -3,19 +3,26 @@ One central??? task for clinical text mining is medical named entity recognition
 ### Amazon Comprehend Medical
 With Amazon Comprehend Medical, an identified medical text is assigned in one of the categories of 'ANATOMY', 'MEDICAL_CONDITION', 'MEDICATION', 'PROTECTED_HEALTH_INFORMATION', and 'TEST_TREATMENT_PROCEDURE' and labeled with one of the types of 'ADDRESS', 'AGE', 'BRAND_NAME', 'DATE', 'DX_NAME', 'GENERIC_NAME', 'ID', 'NAME', 'PROCEDURE_NAME', 'PROFESSION', 'SYSTEM_ORGAN_SITE', 'TEST_NAME', 'TREATMENT_NAME'. The text may also has a traits, though often the traits remain empty. One of the most useful information in traits is negate, which means the patient does not have what described in the text.
 
-Here is an example of a medical entity recognized by Comprehend Medical:
+Here is an example of a medical entity recognized by Comprehend Medical. It has an Id for the text, the starting and ending position of the text in the string of clinical notes, the probability score of the recognition, the exact text extracted, category, type, and traits of the extracted text.
 
 ```
 {'Id': 6,
-  'BeginOffset': 364,
-  'EndOffset': 381,
-  'Score': 0.9676284193992615,
-  'Text': 'sigmoid colectomy',
-  'Category': 'TEST_TREATMENT_PROCEDURE',
-  'Type': 'PROCEDURE_NAME',
-  'Traits': []}
+ 'BeginOffset': 364,
+ 'EndOffset': 381,
+ 'Score': 0.9676284193992615,
+ 'Text': 'sigmoid colectomy',
+ 'Category': 'TEST_TREATMENT_PROCEDURE',
+ 'Type': 'PROCEDURE_NAME',
+ 'Traits': []}
 ```
-Medical named entities of bulk clincal notes can be extracted easily with Python API ([code](???)). But keep in mind that one entity costs one cent and typically text of size 1M character costs you $100. New users have 3-month free tier with 25000 entities quota per month. Do not bankrupt yourself.
+Medical named entities of bulk clincal notes can be extracted easily with Python API ([code](https://github.com/GL-Li/clinical_notes/blob/master/python/extract_medical_named_entity_with_amazon_comprehend_medical.py)). But keep in mind that one entity costs one cent and typically text of size 1M character costs you $100. New users have 3-month free tier with 25000 entities quota per month. Do not bankrupt yourself.
 
 
 ### medaCy
+Python package medaCy uses different categories for medical named entities: 'ADE', 'Dosage', 'Drug', 'Duration', 'Form', 'Frequency', 'Reason', 'Route', 'Strength'. The examples below shows three entities extracted from one clinical notes. The entity is in a simpler form than that extracted by Amazon Comprehend Medical, having only category, starting and ending position in the string of clinical notes, and the extracted text.
+
+```
+[('Drug', 1397, 1405, 'peroxide'),
+ ('Drug', 2008, 2014, 'Vicryl'),
+ ('Route', 2015, 2027, 'subcutaneous')]
+```
