@@ -68,18 +68,17 @@ output$bar_1 <- renderPlot(
         word_count <- get_word_count(type_1(), col_1()) %>%
             .[1:10]
         ggplot(word_count, aes(word, count)) +
-            geom_col(fill = "grey") +
+            geom_col(fill = "grey80") +
+            geom_text(aes(word, count, label = count), hjust = 1, color = "gray20") +
+            scale_y_continuous(expand = c(0, 0)) +
             coord_flip() +
-            ggtitle("Word Count") +
-            theme(
-                panel.grid.major = element_blank(),
-                panel.grid.minor = element_blank(),
-                axis.ticks = element_blank(),
-                axis.title = element_blank(),
-                axis.text = element_text(size = 12),
-                panel.background = element_rect(fill = "transparent"),
-                plot.background = element_rect(fill = "transparent", color = NA)
-            )
+            labs(x = NULL,
+                 y = NULL,
+                 title = "Count of Top 10 Words") +
+            theme(panel.background = element_blank(),
+                  axis.ticks = element_blank(),
+                  axis.text.x = element_blank(),
+                  axis.text.y = element_text(size = 12))
     }, 
     bg = "transparent"
 )
@@ -89,18 +88,17 @@ output$bar_2 <- renderPlot(
         word_count <- get_word_count(type_2(), col_2()) %>%
             .[1:10]
         ggplot(word_count, aes(word, count)) +
-            geom_col(fill = "grey") +
+            geom_col(fill = "grey80") +
+            geom_text(aes(word, count, label = count), hjust = 1, color = "gray20") +
+            scale_y_continuous(expand = c(0, 0)) +
             coord_flip() +
-            ggtitle("Word Count") +
-            theme(
-                panel.grid.major = element_blank(),
-                panel.grid.minor = element_blank(),
-                axis.ticks = element_blank(),
-                axis.title = element_blank(),
-                axis.text = element_text(size = 12),
-                panel.background = element_rect(fill = "transparent"),
-                plot.background = element_rect(fill = "transparent", color = NA)
-            )
+            labs(x = NULL,
+                 y = NULL,
+                 title = "Count of Top 10 Words") +
+            theme(panel.background = element_blank(),
+                  axis.ticks = element_blank(),
+                  axis.text.x = element_blank(),
+                  axis.text.y = element_text(size = 12))
     }, 
     bg = "transparent"
 )

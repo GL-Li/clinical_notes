@@ -11,7 +11,8 @@ get_tfidf <- function(df, col){
     tokens <- as_tibble(df) %>%
         select(id, !!col) %>%
         unnest_tokens(word, !!col) %>%
-        anti_join(stop_words) %>%
+        # anti_join(stop_words) %>%    # this stop_words is too broad
+        anti_join(data.table(word = tm::stopwords())) %>%  # smaller collection
         count(id, word, sort = TRUE) %>%
         # keep words with letters only
         filter(str_detect(word, "^[a-z]+$"))

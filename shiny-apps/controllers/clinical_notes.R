@@ -36,9 +36,9 @@ output$section_count <- renderPlot({
                   color = "gray20") +
         scale_y_continuous(expand = c(0, 0), 
                            labels = scales::percent_format()) +
-        labs(x = "Section Header",
-             y = "Frequency in Clinical Notes",
-             title = "Top 20 Section Headers (As-Is)") +
+        labs(x = NULL,
+             y = NULL,
+             title = "Frequencies of Top 20 Section Headers (As-Is)") +
         coord_flip() + 
         theme(panel.background = element_blank(),
               axis.ticks = element_blank(),

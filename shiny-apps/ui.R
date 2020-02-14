@@ -6,11 +6,10 @@ dashboardPage(
     dashboardSidebar(
         sidebarMenu(
             # use only "list" instead of "glyphicon glyphicon-list"
-            menuItem("Clinical Notes", tabName = "clinical_note", icon = icon("home")),
+            menuItem("Clinical Notes", tabName = "clinical_note", icon = icon("table")),
             menuItem("Medical Named Entities", tabName = "medical_entity", icon = icon("table")),
-            menuItem("Word Cloud", tabName = "wordcloud", icon = icon("cloud")),
             menuItem("Clustering", tabName = "cluster", icon = icon("brain")),
-            menuItem("House", tabName = "house", icon = icon("bar-chart"))
+            menuItem("Binary Classification", tabName = "binary", icon = icon("brain"))
         )
     ),
     dashboardBody(
@@ -18,15 +17,18 @@ dashboardPage(
         tags$head(tags$style(includeCSS("asset/custom.css"))),
         
         tabItems(
-            # clinical note =========================================================
+            # clinical note ====================================================
             tabItem(
                 "clinical_note",
                 h1("Introduction to Clinical Notes"),
                 tabsetPanel(
+                    # .. clinical notes ====
                     tabPanel(
                         "What is clinical notes", 
                         includeMarkdown("./Rmd/introduction_to_clinical_notes.Rmd")
                     ),
+                    
+                    # .. mtsamples ====
                     tabPanel(
                         "Clincal notes at mtsamples.com", 
                         fluidPage(
@@ -52,6 +54,7 @@ dashboardPage(
                 "medical_entity",
                 h1("Medical Named Entities"),
                 tabsetPanel(
+                    # .. extraction ====
                     tabPanel(
                         "Extraction",
                         includeMarkdown("Rmd/medical_named_entity.Rmd"),
@@ -64,12 +67,19 @@ dashboardPage(
                         br(),
                         DT::dataTableOutput("bows")
                     ),
+                    
+                    # .. wordcloud ====
                     tabPanel(
                         "Wordcloud",
+                        includeMarkdown("Rmd/wordcloud.Rmd"),
+                        br(),
+                        
                         fluidRow(
+                            # word cloud 1
                             column(
                                 6,
                                 fluidRow(
+                                    column(1),
                                     column(
                                         4,
                                         selectInput("cloud_type_1", 
@@ -87,15 +97,18 @@ dashboardPage(
                                                                 "medacy_me", 
                                                                 "top_tf", 
                                                                 "top_tfidf"),
-                                                    selected = "top_tf")
+                                                    selected = "amazon_me")
                                     )
                                 ),
-                                plotOutput("wordcloud_1", width = "90%", height = "400px"),
+                                plotOutput("wordcloud_1", width = "90%", height = "300px"),
                                 plotOutput("bar_1", width = "90%", height = "200px")
                             ),
+                            
+                            # word cloud 2
                             column(
                                 6,
                                 fluidRow(
+                                    column(1),
                                     column(
                                         4,
                                         selectInput("cloud_type_2", 
@@ -113,10 +126,10 @@ dashboardPage(
                                                                 "medacy_me", 
                                                                 "top_tf", 
                                                                 "top_tfidf"),
-                                                    selected = "top_tf")
+                                                    selected = "amzone_me")
                                     )
                                 ),
-                                plotOutput("wordcloud_2", width = "90%", height = "400px"),
+                                plotOutput("wordcloud_2", width = "90%", height = "300px"),
                                 plotOutput("bar_2", width = "90%", height = "200px")
                             )
                         )
@@ -125,24 +138,38 @@ dashboardPage(
                 
                 
             ),
+            
             # clustering ======================================================
-
             tabItem(
                 "cluster",
                 h1("Identify Medical Subdomains"),
-                fluidRow(
-                    column(
-                        8,
-                        h2("kmeans")
+                
+                tabsetPanel(
+                    # .. kmeans ====
+                    tabPanel(
+                        "kmeans",
+                        fluidRow(
+                            column(
+                                8,
+                                h2("kmeans")
+                            ),
+                            column(
+                                4,
+                                plotOutput("kmeans_img", height = "auto")
+                            )
+                        )
                     ),
-                    column(
-                        4,
-                        plotOutput("kmeans_img", height = "auto")
+                    # .. hcluster ====
+                    tabPanel(
+                        "hclustering",
+                        plotOutput("dend")
                     )
-                ),
-                plotOutput("dend")
-            )
+                )
+            ),
             
+            # binary classification ===========================================
+
+                        
 #---            
         )
     )

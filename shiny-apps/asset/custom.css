@@ -24,6 +24,10 @@
     margin-left: 0;
     margin-right: 0;
 }
+#wordcloud_1{
+    margin: 0 0 0 0;
+    padding: 0 0 0 0;
+}
 tbody {
     vertical-align: top;
 }

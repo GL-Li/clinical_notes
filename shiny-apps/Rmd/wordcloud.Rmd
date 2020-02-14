@@ -1,0 +1,8 @@
+Select from the dropdown to compare the bag of words created by Amazon Comprehend Medical (amazon_me), medaCy (medacy_me), top ten term frequency (top_tf) and top 10 term frequency inverse document frequency (to_tfidf). 
+
+- The Amazon Comprehend Medical is able to capture key medical terms. The top 3 are abdomen, gallbladder, and stomach for gastroenerology and brain, extremities, and head for neurology. All of them are common in the respective medical specialties.
+- The medaCy focuses more on words related to medication. The top three are vicryl, versed, and daily for gastroenterology and qd, p.o., and daily for neurology. 
+    - qd stands for Latin "quaque die", which means once a day
+    - p.o. for Latin "per os", by mouth
+- The term frequency method picks more generic??? words. The top three are patient, procedure, and normal for gastoenterology and right, left, and patient for neurology. It is a bit strange why words right and left are most frequent for neurology.
+- The tfidf method picks more specific words than the term frequency method. The top three are colon, scope, and gallbladder for gastroenterology, highly related to this medical specialty. The top three are temporal, tumor, and unremarkable for neurology, no obvious connection the specialty. In addition, each of them only appears in 9 documents, not frequent words at all.

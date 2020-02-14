@@ -19,10 +19,15 @@ Medical named entities of bulk clincal notes can be extracted easily with Python
 
 
 ### medaCy
-Python package medaCy uses different categories for medical named entities: 'ADE', 'Dosage', 'Drug', 'Duration', 'Form', 'Frequency', 'Reason', 'Route', 'Strength'. The examples below shows three entities extracted from one clinical notes. The entity is in a simpler form than that extracted by Amazon Comprehend Medical, having only category, starting and ending position in the string of clinical notes, and the extracted text.
+Python package medaCy is under development and currently focuses on the recoginition of drugs. It uses categories 'ADE', 'Dosage', 'Drug', 'Duration', 'Form', 'Frequency', 'Reason', 'Route', 'Strength' to discribe the extracted entities ([code](https://github.com/GL-Li/clinical_notes/blob/master/python/extract_medical_named_entity_with_medacy.py)). The examples below shows three entities extracted from one clinical notes. The entity is in a simpler form than that extracted by Amazon Comprehend Medical, having only category, starting and ending position in the string of clinical notes, and the extracted text.
 
 ```
 [('Drug', 1397, 1405, 'peroxide'),
  ('Drug', 2008, 2014, 'Vicryl'),
  ('Route', 2015, 2027, 'subcutaneous')]
 ```
+ 
+### Compare Amazon Comprehend and medaCy
+In the table below, we display the medical named entities extracted with the two methods from clinical notes in specialties gastroenterology and neurology. Amazon Comprehend Medical (amazon_me) extracts much more information than medaCy does. Obviously, medaCy (medacy_me) misses many medical entities using its currently available [light clinical notes model](https://github.com/NLPatVCU/medaCy/blob/master/examples/models/clinical_notes_model.md). 
+ 
+For comparison, we also listed top 10 words with the highest term frequency (top_tf) and term frequency inverse document frequency (to_tfidf). 
