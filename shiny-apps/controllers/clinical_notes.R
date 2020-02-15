@@ -1,7 +1,7 @@
 # The raw table of notes =======================================================
-output$raw_table <- renderDataTable({
+output$raw_table <- DT::renderDataTable({
     # only display first sample for each specialty
-    dat_all[, .SD[1], by = specialty] 
+    dt_first <- dat_all[, .SD[1], by = specialty]
 },
 rownames = FALSE,
 # filter = list(position = 'top', clear = FALSE),

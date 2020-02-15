@@ -51,7 +51,7 @@ dashboardPage(
                             )
                         ),
                         p("In the table below, we list one example note for each category."),
-                        dataTableOutput("raw_table")
+                        DT::dataTableOutput("raw_table")
                     )
                 )
             ),
@@ -91,9 +91,10 @@ dashboardPage(
                                         4,
                                         selectInput("cloud_type_1", 
                                                     "Select specialty",
-                                                    choices = c("Both", 
+                                                    choices = c("All", 
                                                                 "Gastroenterology", 
-                                                                "Neurology"),
+                                                                "Neurology",
+                                                                "Urology"),
                                                     selected = "Gastroenterology")
                                     ),
                                     column(
@@ -120,9 +121,10 @@ dashboardPage(
                                         4,
                                         selectInput("cloud_type_2", 
                                                     "Select specialty",
-                                                    choices = c("Both", 
+                                                    choices = c("All", 
                                                                 "Gastroenterology", 
-                                                                "Neurology"),
+                                                                "Neurology",
+                                                                "Urology"),
                                                     selected = "Neurology")
                                     ),
                                     column(
