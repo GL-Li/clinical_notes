@@ -1,0 +1,2 @@
+We will use two popular clustering analysis techniques k-means and hierarchical clustering to group clinical notes into specialties. We will use the known specialties to examine the quality of clustering and explore possible reasons of miss-clustering. As an simple example, we only look at two specialties: gastroenterology and neurology. This section covers k-means clustering.
+

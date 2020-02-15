@@ -5,6 +5,149 @@
 library(tm)
 library(magrittr)
 library(ggplot2)
+library(data.table)
+library(tidyverse)
+library(tidytext)
+
+
+read_notes <- function(csv_file, 
+                       specialties = NULL,
+                       y_label = NULL, 
+                       cols_keep = c("specialty", "note"),
+                       randomize = TRUE,
+                       duplicate_rm = TRUE, 
+                       clean = TRUE,
+                       id = TRUE){
+    # read clinical notes and add label y to the original data
+    #
+    # Arguments:
+    #   csv_file: string, path to the the data file
+    #   specialties: string vector, selected specialties such as
+    #     c("Gastroenterology", "Neurology")
+    #   cols_keep: string, columns in the orignial data to keep, "all" to keep
+    #     all columns.
+    #   randomize: boolean, randomize row (sample) orders to break grouping
+    #   y_label: boolean, if TRUE, add a class label 0, 1, 2, ... to each note
+    #   duplicate_rm: boolean, remove rows if duplicated in column note
+    #   clean: boolean, if TRUE add missing space after ".", for example,
+    #     "abscess.PROCEDURE".
+    #   id: boolean, add id to each sample after removing duplicates
+    #
+    # Return:
+    #   a data.table
+    
+    dat <- fread(csv_file)
+    if (!is.null(specialties)){
+        dat <- dat[specialty %in% specialties]
+    }
+    if (!identical(cols_keep, "all")){
+        dat <- dat[, ..cols_keep]   # ..var select columns by variable
+    }
+    if (randomize){
+        dat <- dat[sample(nrow(dat))]
+    }
+    if (isTRUE(clean)){
+        # missing space after ".", for example "abscess.PROCEDURE"
+        dat[, note := str_replace_all(note, "\\.", "\\. ")]
+    }
+    if (isTRUE(y_label)){
+        dat[, y := as.integer(factor(specialty)) - 1]
+    }
+    if (duplicate_rm){
+        rows_duplicated <- duplicated(dat$note)
+        dat <- dat[!rows_duplicated]
+        message(paste("Deleted", sum(rows_duplicated), 
+                  "rows with duplicated notes"))
+    }
+    if (id){
+        dat[, id := 1:nrow(dat)]
+        setcolorder(dat, c("id", setdiff(names(dat), "id")))
+    }
+}
+
+top_tfidf <- function(df, col){
+    # Add tfidf columns to a dataframe containing a column of documents and 
+    # count the words in documents using package tidytext
+    #
+    # Arguments:
+    #   df: dataframe containing a column of corpus
+    #   col: string, column name of the corpus selected for tfidf 
+    # return:
+    #   list of two data frames:
+    #     tfidf: include tf, tfidf, top_tf, top_tfidf
+    
+    # count of each word in each document
+    tokens <- as_tibble(df) %>%
+        select(id, !!col) %>%
+        # list all tokens in each document
+        unnest_tokens(word, !!col) %>%
+        # remove stop words. do NOT use tidytext's stop_words, too broad
+        filter(!word %in% tm::stopwords()) %>% 
+        # keep words with letters and "'" only, then remove 's
+        filter(str_detect(word, "^[a-z']+$")) %>%
+        mutate(word = str_remove_all(word, "'s")) %>%
+        # count grouped by id and word
+        count(id, word, sort = TRUE)
+        
+    
+    # times of appearance of each word in all document
+    n_times <- tokens %>%
+        group_by(word) %>%
+        summarise(n_times = sum(n))
+    
+    # words only shows up one time in all document
+    words_1 <- n_times %>%
+        filter(n_times == 1) %>%
+        select(word) %>%
+        pull()
+    
+    # remove the one-time words, which are not represenative
+    tokens <- tokens %>%
+        filter(!word %in% words_1)
+    
+    # nubmer of words in each document    
+    total_words <- tokens %>% 
+        group_by(id) %>%
+        summarise(total = sum(n))
+    
+    # calculate tfidf and combined with total number of words in each documents
+    df_tfidf <- bind_tf_idf(tokens, word, id, n) %>%
+        left_join(total_words)
+
+    # for each word: number of documents, total count, average tf and tfidf
+    word_stats <- df_tfidf %>%
+        group_by(word) %>%
+        summarise(n_documents = n(),
+                  n_times = sum(n),
+                  avg_tf = round(mean(tf),4),
+                  avg_tfidf = round(mean(tf_idf), 4))
+    
+    # top 10 words by term frequency in each document
+    top_tf <- df_tfidf %>%
+        arrange(desc(tf)) %>%
+        group_by(id) %>%
+        slice(1:10) %>%
+        select(id, word) %>%
+        group_by(id) %>%
+        summarise(top_tf = paste(word, collapse = " "))
+    
+    # top 10 words by tfidf in each document
+    top_tfidf <- df_tfidf %>%
+        arrange(desc(tf_idf)) %>%
+        group_by(id) %>%
+        slice(1:10) %>%
+        select(id, word) %>%
+        group_by(id) %>%
+        summarise(top_tfidf = paste(word, collapse = " "))
+    
+    
+    tfidf <- top_tf %>%
+        left_join(top_tfidf) %>%
+        right_join(df) %>%
+        arrange(id)
+    
+    return(list(tfidf = tfidf, word_stats = word_stats))
+}
 
 tfidf_tm <- function(corpus, sparsity = 0.992){
     # Calculate normalized tfidf matrix of a coupus using tm package
@@ -75,6 +218,14 @@ plot_cv <- function(rep_id = NULL, dat = metrics_cv){
 
 metrics_binary <- function(y_true, y_pred, cutoff = 0.5){
     # Get key metrics of binary classification
+    #
+    # Arguments:
+    #   y_true: integer, true class
+    #   y_pred: numeric, predicted probability
+    #   cutoff: numeric in 0 - 1, cutoff probability
+    # Return:
+    #  numeric vector, model metrics auc, f1, sensitity, and specificity
+    
     y_pred_class <- round(y_pred)
     auc <- ModelMetrics::auc(y_true, y_pred)
     f1 <- ModelMetrics::f1Score(y_true, y_pred, cutoff)
@@ -85,5 +236,8 @@ metrics_binary <- function(y_true, y_pred, cutoff = 0.5){
     print(ModelMetrics::confusionMatrix(y_true, y_pred))
     cat("   \n")
     
-    return(c(auc = auc, f1 = f1, sensitivity = sensitivity, specificity = specificity))
+    return(c(auc = auc, 
+             f1 = f1, 
+             sensitivity = sensitivity, 
+             specificity = specificity))
 }

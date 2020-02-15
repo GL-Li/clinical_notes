@@ -1,3 +1,4 @@
+#%% load modules and model
 from medacy.model.model import Model
 import pandas as pd
 from tqdm import tqdm
@@ -5,9 +6,12 @@ import json
 
 mdl = Model.load_external('medacy_model_clinical_notes')
 
-dat = pd.read_csv("../data/mtsample_gastroenterology_neurology.csv")
+#%% prepare data
+
+dat = pd.read_csv("data/mtsamples_gastroenterology_neurology_urology.csv")
 notes = list(dat.note)
 
+#%% get annotaions
 # an annotation looks like:
 # [('Drug', 1405, 1413, 'peroxide'),
 # ('Drug', 2016, 2022, 'Vicryl'),
@@ -23,9 +27,22 @@ def get_annotations(notes):
         mes.append(annotation)
     return(mes)
 
-annotations = get_mes(notes)
 
-category = []
-for ann in annotations:
-    cat = [me[0] for me in list(ann)]
-    category += cat
+annotations = get_annotations(notes)
+
+#%% get medical entities from annotations
+def get_medacy_me(annotations):
+    # annotations: list of medaCy annotations
+    mes = []
+    for annotation in annotations:
+        me = [ann[3].replace(" ", "-") for ann in list(annotation)]
+        me = " ".join(me)
+        mes.append(me)
+    return(mes)
+
+
+mes = get_medacy_me(annotations)
+
+#%% save results
+with open("data/medacy_gastroenterology_neurology_urology.txt", "w") as f:
+    json.dump(mes, f)

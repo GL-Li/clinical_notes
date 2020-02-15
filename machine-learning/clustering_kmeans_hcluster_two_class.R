@@ -5,52 +5,51 @@ library(tm)
 library(caret)
 library(progress)
 library(dendextend)
+source("utilities.R")
 
-load("./shiny-apps/RData/medical_entities_bow.RData")
-note_bows[, target := ifelse(sample_type == "Gastroenterology", 1, 2)]
-target <- note_bows$target
+dat <- read_notes("data/mtsamples_scraped.csv",
+                  specialties = c("Gastroenterology", "Neurology", "Urology"),
+                  clean = TRUE,
+                  y_label = TRUE)
+
+# tfidf matrix
+tfidf <- tfidf_tm(dat$note)
+y <- dat$y
 
 
-# Using the full text tf and tfidf =============================================
-# clean up the document
-dt <- note_bows[, medical_note := str_replace_all(medical_note, "\\.", " ")]
-
-get_tfidf <- function(dt, col, sparsity = 0.995){
-    # make sure dt$col are clean and readable data
-    corpus = Corpus(VectorSource(dt[, get(col)])) %>%
-        tm_map(tolower) %>%
-        tm_map(stripWhitespace) %>%
-        # remove stopwords before removing punctuationo so that stopwords like 
-        # it's and i'll can be removed
-        tm_map(removeWords, stopwords("english")) %>%
-        tm_map(removePunctuation) %>%
-        tm_map(stemDocument)
-    tf_mtx <- DocumentTermMatrix(corpus) %>%
-        removeSparseTerms(sparsity) %>%
-        as.matrix()
-    tf_dt <- tf_mtx %>%
-        as.data.table()
-    
-    tfidf_mtx <- DocumentTermMatrix(
-        corpus,
-        control = list(weighting = function(x) weightTfIdf(x, normalize = FALSE))
-    ) %>%
-        removeSparseTerms(sparsity) %>%
-        as.matrix() 
-    tfidf_dt <- tfidf_mtx %>%
-        as.data.table()
-    
-    return(list(tf_matrix = tf_mtx,
-                tf_datatable = tf_dt,
-                tfidf_matrix = tfidf_mtx,
-                tfidf_datatable = tfidf_dt))
+# how many clusters ============================================================
+# tsne analysis https://github.com/jkrijthe/Rtsne 
+K = 10
+inertia <- c()
+for (k in 1:K){
+    print(k)
+    km <- kmeans(tfidf, k, iter.max = 100)
+    inertia <- c(inertia, km$tot.withinss)
 }
+plot(1:K, inertia)
 
-df_tm <- get_tfidf(note_bows, "medical_note")
+km <- kmeans(tfidf, 3, iter.max = 100)
+inertia <- k$tot.withinss
+
+
+# how to match cluster to true class
+y_clusters <- km$cluster
+table(y, y_clusters)
+# y_clusters
+# y     1   2   3
+#   0  76  87  67
+#   1 202   0  20
+#   2  51   0 103
+# best match would be
+# 1 --> 1, 2 --> 0, 3 --> 2
+y_clusters[y_clusters == 2] <- 0
+y_clusters[y_clusters == 3] <- 2
+table(y, y_clusters)
 
 # kmeans clustering ============================================================
 # https://uc-r.github.io/kmeans_clustering
-get_kmeans <- function(dt, iter=100, n_rep=1){
+kmeans_metrics <- function(tfidf, iter=100, n_rep=1){
+    # repeat kmeans to get average metrics based on known y label
     pred <- rep(0, nrow(dt))
     
     pb <- progress_bar$new(total = n_rep)
@@ -93,9 +92,8 @@ get_kmeans(tf_norm)
 # hierarchical clustering ======================================================
 # https://cran.r-project.org/web/packages/textmineR/vignettes/b_document_clustering.html
 # https://uc-r.github.io/hc_clustering 
-tfidf_mtx <- df_tm[["tfidf_matrix"]]
-tfidf_norm <- tfidf_mtx / sqrt(rowSums(tfidf_mtx * tfidf_mtx))
-cos_sim <- tfidf_norm %*% t(tfidf_norm)
+tfidf_rand <- tfidf[sample(nrow(tfidf)),]
+cos_sim <- tfidf %*% t(tfidf)
 par(mar = rep(0, 4))
 image(cos_sim * 256, col = gray(seq(0, 1, length = 256)))
 image(cos_sim * 256, col = rgb(seq(0, 1, length = 256), 0, 0))
@@ -116,7 +114,12 @@ hc <- hclust(dist, "ward.D")
 # plot dendrogram
 # https://cran.r-project.org/web/packages/dendextend/vignettes/FAQ.html#introduction
 dend <- as.dendrogram(hc)
-sample_colors <- c(rep("red", 230), rep("blue", 221))
+
+# use true y to assign color
+sample_colors <- rep(character(0), nrow(tfidf))
+sample_colors[y == 0] <- "red"
+sample_colors[y == 1] <- "blue"
+sample_colors[y == 2] <- "orange"
 
 dend <- assign_values_to_leaves_edgePar(
     dend=dend, 
@@ -126,7 +129,7 @@ dend <- assign_values_to_leaves_edgePar(
 par(mar = c(0, 0, 2, 0))
 plot(dend, main = "Medical Notes Clustering",
      leaflab = "none", yaxt = "none")
-rect.hclust(hc, 2, border = "gray97")
+rect.hclust(hc, 3, border = "gray97")
 
 
 

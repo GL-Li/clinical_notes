@@ -1,0 +1,7 @@
+This analysis includes the following sections:
+
+- Introduction to clinical notes at [mtsamples.com](https://www.mtsamples.com/)
+- Extraction of medical entities
+- Clustering of clinical notes
+- Binary classification of clinical notes
+- Multiclass classification

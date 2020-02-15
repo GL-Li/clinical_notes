@@ -6,6 +6,7 @@ dashboardPage(
     dashboardSidebar(
         sidebarMenu(
             # use only "list" instead of "glyphicon glyphicon-list"
+            menuItem("Overview", tabName = "overview", icon = icon("home")),
             menuItem("Clinical Notes", tabName = "clinical_note", icon = icon("table")),
             menuItem("Medical Named Entities", tabName = "medical_entity", icon = icon("table")),
             menuItem("Clustering", tabName = "cluster", icon = icon("brain")),
@@ -17,6 +18,12 @@ dashboardPage(
         tags$head(tags$style(includeCSS("asset/custom.css"))),
         
         tabItems(
+            # overview
+            tabItem(
+                "overview",
+                includeMarkdown("Rmd/overview.Rmd")
+            ),
+            
             # clinical note ====================================================
             tabItem(
                 "clinical_note",
@@ -151,11 +158,11 @@ dashboardPage(
                         fluidRow(
                             column(
                                 8,
-                                h2("kmeans")
+                                includeMarkdown("Rmd/kmeans.Rmd")
                             ),
                             column(
                                 4,
-                                plotOutput("kmeans_img", height = "auto")
+                                plotOutput("kmeans_img", height = "400px")
                             )
                         )
                     ),
@@ -165,7 +172,7 @@ dashboardPage(
                         plotOutput("dend")
                     )
                 )
-            ),
+            )
             
             # binary classification ===========================================
 

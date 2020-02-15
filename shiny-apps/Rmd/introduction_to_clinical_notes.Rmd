@@ -9,11 +9,3 @@ As unstructured free-form text, clinical notes poses?? particular challenges to 
 Another obstacle is the restricted access to clincal notes, as the use of protected heath information (PHI) is regulated by Health Insurance Portability and Accountability Act (HIPAA) in the United States. Public datasets such as [MIMIC-III](https://mimic.physionet.org/) and [i2b2 / n2c2](https://portal.dbmi.hms.harvard.edu/) are subject to application and approval. Although the collection of data can be used in text analytics, individual notes are not allowed to be displayed to the public????. 
 
 To get around the restrictions, we will use clinical notes at [mtsamples.com](https://www.mtsamples.com/). This website has a collection of 4999 sample clinical notes and these samples are "free to print, share, link, and distribute". 
-
-This analysis includes the following sections:
-
-- Introduction to clinical notes at [mtsamples.com](https://www.mtsamples.com/)
-- Extraction of medical entities
-- Clustering of clinical notes
-- Binary classification of clinical notes
-- Multiclass classification
