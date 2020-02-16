@@ -14,8 +14,11 @@ dat <- read_notes("data/mtsamples_scraped.csv",
 
 # tfidf matrix
 tfidf <- tfidf_tm(dat$note)
-y <- dat$y
+y_true <- dat$y
 
+
+# preprocess with pca
+pca_mtx <- prcomp(tfidf)$x
 
 # how many clusters ============================================================
 # tsne analysis https://github.com/jkrijthe/Rtsne 
@@ -28,23 +31,19 @@ for (k in 1:K){
 }
 plot(1:K, inertia)
 
-km <- kmeans(tfidf, 3, iter.max = 100)
-inertia <- k$tot.withinss
+km <- kmeans(pca_mtx, 3, iter.max = 100)
 
 
 # how to match cluster to true class
 y_clusters <- km$cluster
 table(y, y_clusters)
-# y_clusters
-# y     1   2   3
-#   0  76  87  67
-#   1 202   0  20
-#   2  51   0 103
-# best match would be
-# 1 --> 1, 2 --> 0, 3 --> 2
-y_clusters[y_clusters == 2] <- 0
-y_clusters[y_clusters == 3] <- 2
-table(y, y_clusters)
+
+y_pred <- rep(integer(0), length(y))
+y_pred[y_clusters == 1] <- 2
+y_pred[y_clusters == 2] <- 1
+y_pred[y_clusters == 3] <- 0
+table(y_true, y_pred)
+confusionMatrix(as.factor(y_pred), as.factor(y_true))
 
 # kmeans clustering ============================================================
 # https://uc-r.github.io/kmeans_clustering
@@ -78,66 +77,3 @@ kmeans_metrics <- function(tfidf, iter=100, n_rep=1){
     pred <- round(pred)
     confusionMatrix(as.factor(pred), as.factor(target))
 }
-
-# tfidf -- must normalize each sample to vector length 1
-tfidf_mtx <- df_tm[["tfidf_matrix"]]
-tfidf_norm <- tfidf_mtx / sqrt(rowSums(tfidf_mtx * tfidf_mtx))
-get_kmeans(tfidf_norm)
-
-# tf
-tf_mtx <- df_tm[["tf_matrix"]]
-tf_norm <- tf_mtx / sqrt(rowSums(tf_mtx * tf_mtx))
-get_kmeans(tf_norm)
-
-# hierarchical clustering ======================================================
-# https://cran.r-project.org/web/packages/textmineR/vignettes/b_document_clustering.html
-# https://uc-r.github.io/hc_clustering 
-tfidf_rand <- tfidf[sample(nrow(tfidf)),]
-cos_sim <- tfidf %*% t(tfidf)
-par(mar = rep(0, 4))
-image(cos_sim * 256, col = gray(seq(0, 1, length = 256)))
-image(cos_sim * 256, col = rgb(seq(0, 1, length = 256), 0, 0))
-
-dist <- as.dist(1 - cos_sim)
-# ward.D and ward.D2 are good for clustering, slight difference
-hc <- hclust(dist, "ward.D")
-#hc <- hclust(dist, "ward.D2")  # one more correct
-# all below not good
-# hc <- hclust(dist, "single")
-# hc <- hclust(dist, "complete")
-# hc <- hclust(dist, "average")
-# hc <- hclust(dist, "mcquitty")
-# hc <- hclust(dist, "median")
-# hc <- hclust(dist, "centroid")
-
-
-# plot dendrogram
-# https://cran.r-project.org/web/packages/dendextend/vignettes/FAQ.html#introduction
-dend <- as.dendrogram(hc)
-
-# use true y to assign color
-sample_colors <- rep(character(0), nrow(tfidf))
-sample_colors[y == 0] <- "red"
-sample_colors[y == 1] <- "blue"
-sample_colors[y == 2] <- "orange"
-
-dend <- assign_values_to_leaves_edgePar(
-    dend=dend, 
-    value = sample_colors[order.dendrogram(dend)], 
-    edgePar = "col"
-)
-par(mar = c(0, 0, 2, 0))
-plot(dend, main = "Medical Notes Clustering",
-     leaflab = "none", yaxt = "none")
-rect.hclust(hc, 3, border = "gray97")
-
-
-
-# confusion matrix
-clustering <- cutree(hc, 2)
-confusionMatrix(as.factor(clustering), as.factor(target))
-
-# save RData ==================================================================
-save(tfidf_norm, cos_sim, dend, hc, clustering, target,
-     file = "./shiny-apps//RData/clustering.RData")
-

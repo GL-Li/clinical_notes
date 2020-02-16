@@ -31,7 +31,8 @@ read_notes <- function(csv_file,
     #   duplicate_rm: boolean, remove rows if duplicated in column note
     #   clean: boolean, if TRUE add missing space after ".", for example,
     #     "abscess.PROCEDURE".
-    #   id: boolean, add id to each sample after removing duplicates
+    #   id: boolean, add id to each sample in the original data. Randomize and 
+    #     remove duplicates does not change note id.
     #
     # Return:
     #   a data.table
@@ -43,9 +44,6 @@ read_notes <- function(csv_file,
     if (!identical(cols_keep, "all")){
         dat <- dat[, ..cols_keep]   # ..var select columns by variable
     }
-    if (randomize){
-        dat <- dat[sample(nrow(dat))]
-    }
     if (isTRUE(clean)){
         # missing space after ".", for example "abscess.PROCEDURE"
         dat[, note := str_replace_all(note, "\\.", "\\. ")]
@@ -53,17 +51,47 @@ read_notes <- function(csv_file,
     if (isTRUE(y_label)){
         dat[, y := as.integer(factor(specialty)) - 1]
     }
-    if (duplicate_rm){
-        rows_duplicated <- duplicated(dat$note)
-        dat <- dat[!rows_duplicated]
-        message(paste("Deleted", sum(rows_duplicated), 
-                  "rows with duplicated notes"))
-    }
     if (id){
         dat[, id := 1:nrow(dat)]
         setcolorder(dat, c("id", setdiff(names(dat), "id")))
     }
+    if (duplicate_rm){
+        rows_duplicated <- duplicated(dat$note)
+        dat <- dat[!rows_duplicated]
+        message(paste("Deleted", sum(rows_duplicated), 
+                  "rows with duplicated notes.",
+                  "Set duplicate_rm = FALSE if you want to keep duplicates."))
+    }
+    if (randomize){
+        dat <- dat[sample(nrow(dat))]
+    }
 }
+
+
+
+word_count <- function(doc_vector){
+    # count word in corpus
+    #
+    # Arguments:
+    #   doc_vector: a vector of documents
+    #
+    # Return:
+    #   data.table
+    
+    count <- tolower(doc_vector) %>%
+        str_split(", | ") %>%
+        unlist() %>%
+        table() %>%
+        as.data.table() %>%
+        set_colnames(c("word", "count")) %>%
+        .[!word %in% tm::stopwords()] %>% # remove stopwords
+        .[word != ""] %>%    # medaCy generate nothing from some notes
+        .[order(-count)] %>%
+        .[count > 1] %>%  # delete useless info to save plotting time
+        .[, word := factor(word, levels = word)]
+}
+
+
 
 top_tfidf <- function(df, col){
     # Add tfidf columns to a dataframe containing a column of documents and 
