@@ -8,6 +8,7 @@ library(ggplot2)
 library(data.table)
 library(tidyverse)
 library(tidytext)
+library(progress)
 
 
 read_notes <- function(csv_file, 
@@ -177,6 +178,7 @@ top_tfidf <- function(df, col){
     return(list(tfidf = tfidf, word_stats = word_stats))
 }
 
+
 tfidf_tm <- function(corpus, sparsity = 0.992){
     # Calculate normalized tfidf matrix of a coupus using tm package
     #
@@ -268,4 +270,76 @@ metrics_binary <- function(y_true, y_pred, cutoff = 0.5){
              f1 = f1, 
              sensitivity = sensitivity, 
              specificity = specificity))
+}
+
+
+best_match <- function(y_true, y_clusters){
+    # Foe 3 clusters match, match each cluster to y_true to get best accuracy
+    #
+    # Arguments:
+    #   y_true: int vector, true classes of each sample, c(0, 2, 1, 1, ...)
+    #   y_clusters: int vector, kmeans cluster number, c(1, 3, 2, 1, ...)
+    # Return:
+    #   int vector, y_pred with best match
+    
+    y_pred <- rep(999, length(y_true))
+    matches <- subset(expand.grid(rep(list(0:2), 3)), 
+                      Var1 != Var2 & Var1 != Var3 & Var2 != Var3)
+    
+    best_diag_sum <- 0  # total number of correct samples
+    for (i in 1:nrow(matches)){
+        match <- as.numeric(matches[i, ])
+        y_pred[y_clusters == 1] <- match[1]
+        y_pred[y_clusters == 2] <- match[2]
+        y_pred[y_clusters == 3] <- match[3]
+        
+        tb <- table(y_true, y_pred)
+        diag_sum <- sum(diag(tb))
+        if (best_diag_sum < diag_sum){
+            best_diag_sum <- diag_sum
+            best_match <- match
+            best_accuracy <- diag_sum / length(y_true)
+            best_y_pred <- y_pred
+        }
+    }
+    print(table(y_true, best_y_pred))
+    cat(paste("accuracy: ", best_accuracy))
+    return(best_y_pred)
+}
+
+
+plot_pc1_pc2 <- function(pca, 
+                         color = NULL, 
+                         color_map = c("red", "blue", "cyan"),
+                         pch = NULL,
+                         title = NULL){
+    # Plot samples in PC1-PC2 space
+    #
+    # Arguments:
+    #   pca: matrix, pca of tfidf
+    #   color: int vector to mark the color of each sample. can be y_true, 
+    #      y_clusters, y_pred, or other vector of the same length as pca
+    #   color_map: string, color to map color
+    #   pch: int vector, shape of data point
+    #   title: string, plot title
+    
+    PC1 <- pca[, 1]
+    PC2 <- pca[, 2]
+    
+    sample_colors <- rep("black", nrow(pca))
+    if (!is.null(color)){
+        sample_colors[color == 0] <- color_map[1]
+        sample_colors[color == 1] <- color_map[2]
+        sample_colors[color == 2] <- color_map[3]
+    }
+    
+    if (!is.null(color) & !is.null(pch)){
+        plot(PC1, PC2, col = sample_colors, pch = pch, main = title)
+    } else if (!is.null(color)){
+        plot(PC1, PC2, col = sample_colors, main = title)
+    } else if (!is.null(pch)){
+        plot(PC1, PC2, pch = pch, main = title)
+    } else {
+        plot(PC1, PC2, main = title)
+    }
 }

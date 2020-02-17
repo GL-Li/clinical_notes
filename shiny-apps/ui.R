@@ -154,24 +154,61 @@ dashboardPage(
                 h1("Identify Medical Subdomains"),
                 
                 tabsetPanel(
-                    # .. kmeans ====
+                    # .. pca ====
                     tabPanel(
-                        "kmeans",
-                        fluidRow(
-                            column(
-                                8,
-                                includeMarkdown("Rmd/kmeans.Rmd")
-                            ),
-                            column(
-                                4,
-                                plotOutput("kmeans_img", height = "400px")
-                            )
-                        )
+                        "Principle Component Analysis",
+                        includeMarkdown("Rmd/pca.Rmd"),
+                        br(),
+                        radioButtons("pca",
+                                     label = "Select corpus",
+                                     choices = c("clinical notes",
+                                                 "amazon medical entities"),
+                                     inline = TRUE),
+                        plotOutput("pca_plot", height = "800px")
                     ),
+                    
                     # .. hcluster ====
                     tabPanel(
                         "hclustering",
-                        plotOutput("dend")
+                        includeMarkdown("Rmd/hcluster.Rmd"),
+                        br(),
+                        
+                        radioButtons("dend",
+                                     label = "Select corpus",
+                                     choices = c("clinical notes",
+                                                 "amazon medical entities"),
+                                     inline = TRUE),
+                        plotOutput("dend_plot"),
+                        br(),
+                        plotOutput("hcluster_plot")
+                    ),
+                    
+                    # .. kmeans ====
+                    tabPanel(
+                        "kmeans",
+                        includeMarkdown("Rmd/kmeans.Rmd"),
+                        br(),
+                        
+                        fluidRow(
+                            column(
+                                5,
+                                radioButtons("kmeans",
+                                             label = "Select corpus",
+                                             choices = c("clinical notes",
+                                                         "amazon medical entities"),
+                                             inline = TRUE)
+                            ),
+                            column(
+                                5,
+                                radioButtons("kmeans_pca",
+                                             label = "Using first two principle components?",
+                                             choices = c("yes", "no"),
+                                             selected = "no",
+                                             inline = TRUE)
+                            )
+                        ),
+                        plotOutput("kmeans_plot", height = "400px")
+
                     )
                 )
             )

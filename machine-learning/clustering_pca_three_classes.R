@@ -12,85 +12,100 @@
 
 source("utilities.R")
 
-# Prepare data =================================================================
-dat <- read_notes("data/amazon_medacy_mtsamples_gastr_neuro_urolo.csv",
-                  cols_keep = c("id", "amazon_me", "specialty", "note"),
-                  clean = TRUE,
-                  y_label = TRUE)
+# # Prepare data =================================================================
+# dat_gas_neu_uro <- read_notes("data/amazon_medacy_mtsamples_gastr_neuro_urolo.csv",
+#                   cols_keep = c("id", "amazon_me", "specialty", "note"),
+#                   clean = TRUE,
+#                   y_label = TRUE)
+# 
+# # tfidf matrix, as sample order is randomized, so save all of them together with
+# # pcas
+# tfidf_note <- tfidf_tm(dat_gas_neu_uro$note)
+# tfidf_amazon <- tfidf_tm(dat_gas_neu_uro$amazon_me)
+# y_true <- dat_gas_neu_uro$y
+# 
+# # the signs of pc1 and pc2 change randomly. For reproducibility in plot, save
+# # them as RData
+# pca_note <- prcomp(tfidf_note)
+# pca_amazon <- prcomp(tfidf_amazon)
+# save(dat_gas_neu_uro, tfidf_note, tfidf_amazon, y_true, pca_note, pca_amazon, 
+#      file = "shiny-apps/RData/pca_note_amazon_gas_neu_uro.RData")
 
-# tfidf matrix
-tfidf_note <- tfidf_tm(dat$note)
-tfidf_amazon <- tfidf_tm(dat$amazon_me)
-y_true <- dat$y
+# load the same data for pca, kmeans, and hcluster
+load("shiny-apps/RData/pca_note_amazon_gas_neu_uro.RData")
+
+# examine quality
+plot_pc1_pc2(pca_note$x, color = y_true)
+plot_pc1_pc2(pca_amazon$x, color = y_true)
 
 
 # pca using note ===============================================================
-# PCA on tfidf generated with clinical notes. Keep 
-# only PC1 and PC2 for clustering visualization and analysis
-
-pca <- prcomp(tfidf_note)
-pc1 <- pca$x[, 1]
-pc2 <- pca$x[, 2]
-
 # Plot samples in pc1 - pc2 space. Spot 3 clusters and add line boundary to 
-# seperate the clusters
-plot(pc1, pc2, col = y + 1)
-curve(-3 * x, from = 0, to = 0.3, add = TRUE, col = "red")
-curve(5 * x, from = 0, to = 0.3, add = TRUE, col = "green")
-curve(0.8 * x, from = 0, to = -0.4, add = TRUE, col = "black")
+# seperate the clusters. The boundaries only good for the saved pca
+pca <- pca_note$x
+plot_pc1_pc2(pca)
+a1 <- 8
+a2 <- 0.8
+a3 <- -2
+curve(a1 * x, from = 0, to = 0.4, add = TRUE, lty = 2)
+curve(a2 * x, from = 0, to = -0.4, add = TRUE, lty = 2)
+curve(a3 * x, from = 0, to = 0.4, add = TRUE, lty = 2)
 
-cluster1 <- (pc2 >= -3 * pc1) & (pc2 < 5 * pc1)
-cluster2 <- (pc2 >= 5 * pc1) & (pc2 > 0.8 * pc1)
-cluster3 <- (pc2 <= 0.8 * pc1) & (pc2 < -3 * pc1)
+pc1 <- pca[, 1]
+pc2 <- pca[, 2]
+cluster1 <- (pc2 >= a1 * pc1) & (pc2 > a2 * pc1)
+cluster2 <- (pc2 <= a2 * pc1) & (pc2 < a3 * pc1)
+cluster3 <- (pc2 >= a3 * pc1) & (pc2 < a1 * pc1)
 
 # assigne a label to each cluster
-y_clusters <- rep(integer(0), length(y_true))
+y_clusters <- rep(999, length(y_true))
 y_clusters[cluster1] <- 1
 y_clusters[cluster2] <- 2
 y_clusters[cluster3] <- 3
 
+table(y_true, y_clusters)
 # As we know the true labels y_true, we can use them to determine each cluster
 # identified by PCA
-table(y_true, y_clusters)
-y_pred[y_clusters == 1] <- 1
-y_pred[y_clusters == 2] <- 2
-y_pred[y_clusters == 3] <- 0
+y_pred_note_pca <- best_match(y_true, y_clusters)
+y_cluster_note_pca <- y_clusters
 
-# report metrics
-caret::confusionMatrix(as.factor(y_pred), as.factor(y_true))
 
 # pca amazon_me ================================================================
 # PCA on tfidf generated with Amazon Comprehend Medical named entities. Keep 
 # only PC1 and PC2 for clustering visualization and analysis
-pca <- prcomp(tfidf_amazon)
-pc1 <- pca$x[, 1]
-pc2 <- pca$x[, 2]
+pca <- pca_amazon$x
 
 # Plot samples in pc1 - pc2 space. Spot 3 clusters and add line boundary to 
 # seperate the clusters
-plot(pc1, pc2, col = y + 1)
-curve(-2 * x, from = 0, to = 0.3, add = TRUE, col = "red")
-curve(0.8 * x, from = 0, to = 0.6, add = TRUE, col = "green")
-curve(-0.8 * x, from = 0, to = -0.4, add = TRUE, col = "black")
+plot_pc1_pc2(pca)
+a1 <- -0.8
+a2 <- 3
+a3 <- 0.8
+curve(a1 * x, from = 0, to = 0.7, add = TRUE, lty = 2)
+curve(a2 * x, from = 0, to = 0.6, add = TRUE, lty = 2)
+curve(a3 * x, from = 0, to = -0.4, add = TRUE, lty = 2)
 
-cluster1 <- (pc2 >= -2 * pc1) & (pc2 < 0.8 * pc1)
-cluster2 <- (pc2 >= 0.8 * pc1) & (pc2 > -0.8 * pc1)
-cluster3 <- (pc2 <= -0.8 * pc1) & (pc2 < -2 * pc1)
+pc1 <- pca[, 1]
+pc2 <- pca[, 2]
+cluster1 <- (pc2 >= a1 * pc1) & (pc2 < a2 * pc1)
+cluster2 <- (pc2 >= a2 * pc1) & (pc2 > a3 * pc1)
+cluster3 <- (pc2 <= a3 * pc1) & (pc2 < a1 * pc1)
 
-# assigne a label to each cluster
-y_clusters <- rep(integer(0), length(y_true))
+
+y_clusters <- rep(999, length(y_true))
 y_clusters[cluster1] <- 1
 y_clusters[cluster2] <- 2
 y_clusters[cluster3] <- 3
 
-# As we know the true labels y_true, we can use them to determine each cluster
-# identified by PCA
-table(y_true, y_clusters)
-y_pred[y_clusters == 1] <- 0
-y_pred[y_clusters == 2] <- 2
-y_pred[y_clusters == 3] <- 1
+# assigne a label to each cluster
+y_pred_amazon_pca <- best_match(y_true, y_clusters)
+y_cluster_amazon_pca <- y_clusters
 
-# report confusion matrix
-caret::confusionMatrix(as.factor(y_pred), as.factor(y_true))
+
+# save pca results for shiny ==================================================
+save(y_pred_note_pca, y_cluster_note_pca, 
+     y_pred_amazon_pca, y_cluster_amazon_pca,
+     file = "shiny-apps/RData/pca_results.RData")
+
 
 
