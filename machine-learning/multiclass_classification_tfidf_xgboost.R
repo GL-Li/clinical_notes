@@ -131,24 +131,6 @@ xgb <- xgboost(data = X_train,
 pred <- predict(xgb, X_test)
 
 
-cm <- table(y_test, pred)  # confusion matrix
-n <- nrow(cm)
-cm_dt <- as.data.table(matrix(unlist(cm), ncol = 1)) %>%
-  .[, x := rep(0:(n-1), n)] %>%
-  .[, y := rep(0:(n-1), each = n)]
-classes <- unique(dat$specialty) %>%
-  str_replace(" / ", "\n")
-
-ggplot() + 
-  geom_jitter(aes(y_test, pred), color = "blue", size = 1,
-              width = 0.15, height = 0.15, alpha = 0.3) +
-  geom_text(data = cm_dt, aes(x, y + 0.3, label = V1), color = "red") +
-  scale_x_continuous(breaks = 0:6, labels = classes) +
-  scale_y_continuous(breaks = 0:6, labels = classes) +
-  labs(x = "True Sample Type",
-       y = "Predicted Sample Type")
-
-
 
 caret::confusionMatrix(as.factor(pred), as.factor(y_test))
 

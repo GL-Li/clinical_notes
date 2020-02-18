@@ -5,6 +5,8 @@
 library(tm)
 library(magrittr)
 library(ggplot2)
+library(grid)
+library(gridExtra)
 library(data.table)
 library(tidyverse)
 library(tidytext)
@@ -343,3 +345,101 @@ plot_pc1_pc2 <- function(pca,
         plot(PC1, PC2, main = title)
     }
 }
+
+
+plot_confusion_matrix <- function(y_true, y_pred, 
+                                  lab_x = NULL, lab_y = NULL,
+                                  grob = FALSE){
+    # plot confusion matrix of classification prediction
+    #
+    # Arguments:
+    #   y_true, int, y_pred: true and predicted class
+    #   classes: string, names of classes
+    #   grob: bool, if TRUE, add colored title to the plot
+    #
+    # Return:
+    #   a ggplot
+    
+    if (is.factor(y_true)){
+        y_true <- as.numeric(as.character(y_true))
+        y_pred <- as.numeric(as.character(y_pred))
+    }
+    
+    n <- length(unique(y_true))
+    if (is.null(lab_x) & is.null(lab_y)){
+        lab_x <- 1:n
+        lab_y <- 1:n
+    } else if (is.null(lab_x)) {
+        lab_x <- lab_y
+    } else if (is.null(lab_y)){
+        lab_y <- lab_x
+    }
+
+    cm <- table(y_true, y_pred)  # confusion matrix
+    # percent
+    cm_pct <- cm / rowSums(cm) 
+    pct_dt <-  as.data.table(matrix(unlist(cm_pct), ncol = 1)) %>%
+        .[, x := rep(0:(n-1), n)] %>%
+        .[, y := rep(0:(n-1), each = n)]
+    
+    # count
+    cm_dt <- as.data.table(matrix(unlist(cm), ncol = 1)) %>%
+        .[, x := rep(0:(n-1), n)] %>%
+        .[, y := rep(0:(n-1), each = n)]
+
+    main_plot <- ggplot() + 
+        geom_jitter(aes(y_true, y_pred), color = "blue", size = 1,
+                    width = 0.1, height = 0.1, alpha = 0.3) +
+        geom_text(data = cm_dt, 
+                  aes(x + 0.03, y + 0.2, label = V1), hjust = 0,
+                  color = "purple") +
+        geom_text(data = pct_dt, 
+                  aes(x - 0.03, y + 0.2, label = paste0(round(100 * V1, 1), "%")), 
+                  color = "red", hjust = 1) +
+        scale_x_continuous(breaks = 0:(n-1), labels = lab_x) +
+        scale_y_continuous(breaks = 0:(n-1), labels = lab_y) +
+        labs(x = "True",
+             y = "Predicted") +
+        theme(panel.background = element_rect(fill = NA, color = "gray20"),
+              panel.grid.major = element_line(color = "gray95"),
+              axis.ticks = element_blank())
+    
+    if (grob){
+        grobs <- grobTree(
+            gp = gpar(fontsize = 12, fontface = "bold"), 
+            textGrob(label = "        Percent", 
+                     name = "title1",
+                     x = unit(0.2, "lines"), 
+                     y = unit(1.4, "lines"), 
+                     hjust = 0, 
+                     vjust = 1, 
+                     gp = gpar(col = "red")),
+            textGrob(label = " and ", 
+                     name = "title2",
+                     x = grobWidth("title1") + unit(0.2, "lines"),
+                     y = unit(1.4, "lines"),
+                     hjust = 0, 
+                     vjust = 1),
+            textGrob(label = "Number", 
+                     name = "title3",
+                     x = grobWidth("title1") + grobWidth("title2") + unit(0.2, "lines"),
+                     y = unit(1.4, "lines"),
+                     gp = gpar(col = "purple"),
+                     hjust = 0, 
+                     vjust = 1),
+            textGrob(label = " of True Specialties Being Predicted as Others",
+                     x = grobWidth("title1") + grobWidth("title2") + grobWidth("title3") + unit(0.2, "lines"),
+                     y = unit(1.4, "lines"),
+                     hjust = 0, 
+                     vjust = 1)
+        )
+        
+        gg <- arrangeGrob(main_plot, top=grobs, padding = unit(2.6, "line"))
+        
+        grid.arrange(gg)
+    } else {
+        main_plot
+    }
+    
+}
+
