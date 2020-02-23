@@ -20,7 +20,8 @@ read_notes <- function(csv_file,
                        randomize = TRUE,
                        duplicate_rm = TRUE, 
                        clean = TRUE,
-                       id = TRUE){
+                       id = TRUE,
+                       random_state = 1234){
     # read clinical notes and add label y to the original data
     #
     # Arguments:
@@ -36,9 +37,12 @@ read_notes <- function(csv_file,
     #     "abscess.PROCEDURE".
     #   id: boolean, add id to each sample in the original data. Randomize and 
     #     remove duplicates does not change note id.
+    #   random_state: int, set random state if randomize is TRUE
     #
     # Return:
     #   a data.table
+    
+    set.seed(random_state)  # only useful when randomize = TRUE
     
     dat <- fread(csv_file)
     if (!is.null(specialties)){
@@ -59,7 +63,8 @@ read_notes <- function(csv_file,
         setcolorder(dat, c("id", setdiff(names(dat), "id")))
     }
     if (duplicate_rm){
-        rows_duplicated <- duplicated(dat$note)
+        # all duplicated including first one
+        rows_duplicated <- duplicated(dat$note) | duplicated(dat$note, fromLast = TRUE)
         dat <- dat[!rows_duplicated]
         message(paste("Deleted", sum(rows_duplicated), 
                   "rows with duplicated notes.",
@@ -275,6 +280,19 @@ metrics_binary <- function(y_true, y_pred, cutoff = 0.5){
 }
 
 
+accuracy <- function(y_true, y_pred){
+    # Calculate classification accuracy
+    #
+    # Arguments:
+    #   y_true: integer, true class
+    #   y_pred: numeric, predicted probability
+    # Return:
+    #  numeric 
+    tb <- table(y_true, y_pred)
+    acc <- sum(diag(tb)) / length(y_true)
+}
+
+
 best_match <- function(y_true, y_clusters){
     # Foe 3 clusters match, match each cluster to y_true to get best accuracy
     #
@@ -347,25 +365,41 @@ plot_pc1_pc2 <- function(pca,
 }
 
 
-plot_confusion_matrix <- function(y_true, y_pred, 
+plot_confusion_matrix <- function(y_true, y_pred,
                                   lab_x = NULL, lab_y = NULL,
+                                  type = "recall",
                                   grob = FALSE){
     # plot confusion matrix of classification prediction
     #
     # Arguments:
     #   y_true, int, y_pred: true and predicted class
+    #   type: string, percent as "recall" or "precision"
     #   classes: string, names of classes
     #   grob: bool, if TRUE, add colored title to the plot
     #
     # Return:
     #   a ggplot
     
-    if (is.factor(y_true)){
-        y_true <- as.numeric(as.character(y_true))
-        y_pred <- as.numeric(as.character(y_pred))
+    stopifnot(type %in% c("recall", "precision"))
+    
+    if (type == "recall"){
+        x <- y_true
+        y <- y_pred
+        x_axis <- "True"
+        y_axis <- "Predicted"
+    } else if (type == "precision"){
+        x <- y_pred
+        y <- y_true
+        x_axis <- "Predicted"
+        y_axis <- "True"
     }
     
-    n <- length(unique(y_true))
+    if (is.factor(x)){
+        x <- as.numeric(as.character(x))
+        y <- as.numeric(as.character(y))
+    }
+    
+    n <- length(unique(x))
     if (is.null(lab_x) & is.null(lab_y)){
         lab_x <- 1:n
         lab_y <- 1:n
@@ -375,7 +409,7 @@ plot_confusion_matrix <- function(y_true, y_pred,
         lab_y <- lab_x
     }
 
-    cm <- table(y_true, y_pred)  # confusion matrix
+    cm <- table(x, y)  # confusion matrix
     # percent
     cm_pct <- cm / rowSums(cm) 
     pct_dt <-  as.data.table(matrix(unlist(cm_pct), ncol = 1)) %>%
@@ -388,18 +422,22 @@ plot_confusion_matrix <- function(y_true, y_pred,
         .[, y := rep(0:(n-1), each = n)]
 
     main_plot <- ggplot() + 
-        geom_jitter(aes(y_true, y_pred), color = "blue", size = 1,
+        geom_jitter(aes(x, y), color = "blue", size = 1,
                     width = 0.1, height = 0.1, alpha = 0.3) +
         geom_text(data = cm_dt, 
-                  aes(x + 0.03, y + 0.2, label = V1), hjust = 0,
+                  # aes(x + 0.03, y + 0.2, label = V1), hjust = 0,
+                  aes(x, y - 0.2, label = V1),
+                  hjust = 0.5,
                   color = "purple") +
         geom_text(data = pct_dt, 
-                  aes(x - 0.03, y + 0.2, label = paste0(round(100 * V1, 1), "%")), 
-                  color = "red", hjust = 1) +
+                  #aes(x - 0.03, y + 0.2, label = paste0(round(100 * V1, 1), "%")), 
+                  aes(x, y + 0.2, label = paste0(round(100 * V1, 1), "%")),
+                  hjust = 0.5,
+                  color = "red") +
         scale_x_continuous(breaks = 0:(n-1), labels = lab_x) +
         scale_y_continuous(breaks = 0:(n-1), labels = lab_y) +
-        labs(x = "True",
-             y = "Predicted") +
+        labs(x = x_axis,
+             y = y_axis) +
         theme(panel.background = element_rect(fill = NA, color = "gray20"),
               panel.grid.major = element_line(color = "gray95"),
               axis.ticks = element_blank())

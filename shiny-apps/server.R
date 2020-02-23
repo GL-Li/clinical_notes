@@ -13,4 +13,7 @@ server <- function(input, output, session){
     
     # clustering
     source("./controllers/clustering.R", local = TRUE)
+    
+    # classification
+    source("./controllers/classification_multiclass.R", local = TRUE)
 }

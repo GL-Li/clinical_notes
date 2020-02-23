@@ -125,3 +125,13 @@ plot_dend <- function(hc, title = NULL){
 #y_pred_note_kmeans, y_pred_note_kmeans_pca,
 # y_pred_amazon_kmeans, y_pred_amazon_kmeans_pca
 load("RData/kmeans_results.RData")
+
+
+# classification ===============================================================
+# .. multiclass ====
+load("RData/ggplot_multiclass_svm.RData")
+load("RData/ggplot_multiclass_xgb.RData")
+load("RData/ggplot_multiclass_nn.RData")
+load("RData/ggplot_multiclass_nn_embedding.RData")
+
+

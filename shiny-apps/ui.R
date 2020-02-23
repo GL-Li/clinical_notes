@@ -2,15 +2,25 @@ library(shiny)
 library(shinydashboard)
 
 dashboardPage(
-    dashboardHeader(title = "Medical Note Analysis"),
+    dashboardHeader(title = "Clinical Note Analysis"),
     dashboardSidebar(
         sidebarMenu(
-            # use only "list" instead of "glyphicon glyphicon-list"
-            menuItem("Overview", tabName = "overview", icon = icon("home")),
-            menuItem("Clinical Notes", tabName = "clinical_note", icon = icon("table")),
-            menuItem("Medical Named Entities", tabName = "medical_entity", icon = icon("table")),
-            menuItem("Clustering", tabName = "cluster", icon = icon("brain")),
-            menuItem("Binary Classification", tabName = "binary", icon = icon("brain"))
+            # sidebar menu =====================================================
+            menuItem("Overview", 
+                     tabName = "overview", 
+                     icon = icon("home")),
+            menuItem("Clinical Notes", 
+                     tabName = "clinical_note", 
+                     icon = icon("table")),
+            menuItem("Medical Named Entities", 
+                     tabName = "medical_entity", 
+                     icon = icon("table")),
+            menuItem("Clustering", 
+                     tabName = "cluster", 
+                     icon = icon("brain")),
+            menuItem("Classification", 
+                     tabName = "classification", 
+                     icon = icon("brain"))
         )
     ),
     dashboardBody(
@@ -18,7 +28,7 @@ dashboardPage(
         tags$head(tags$style(includeCSS("asset/custom.css"))),
         
         tabItems(
-            # overview
+            # overview ====
             tabItem(
                 "overview",
                 includeMarkdown("Rmd/overview.Rmd")
@@ -32,7 +42,13 @@ dashboardPage(
                     # .. clinical notes ====
                     tabPanel(
                         "What is clinical notes", 
-                        includeMarkdown("./Rmd/introduction_to_clinical_notes.Rmd")
+                        includeMarkdown("./Rmd/introduction_to_clinical_notes.Rmd"),
+                        
+                        br(),
+                        tags$a(
+                            href="#top", "Go to Top",
+                            class = "go-to-top"
+                        )
                     ),
                     
                     # .. mtsamples ====
@@ -51,16 +67,25 @@ dashboardPage(
                             )
                         ),
                         p("In the table below, we list one example note for each category."),
-                        DT::dataTableOutput("raw_table")
+                        DT::dataTableOutput("raw_table"),
+                        
+                        br(),
+                        tags$a(
+                            href="#top", "Go to Top",
+                            class = "go-to-top"
+                        )
                     )
                 )
             ),
             
             # medical_entities =====================================================
+            
             tabItem(
                 "medical_entity",
+                
                 h1("Medical Named Entities"),
                 tabsetPanel(
+
                     # .. extraction ====
                     tabPanel(
                         "Extraction",
@@ -72,7 +97,13 @@ dashboardPage(
                         htmlOutput("word_stats"),
                         
                         br(),
-                        DT::dataTableOutput("bows")
+                        DT::dataTableOutput("bows"),
+                        
+                        br(),
+                        tags$a(
+                            href="#top", "Go to Top",
+                            class = "go-to-top"
+                        )
                     ),
                     
                     # .. wordcloud ====
@@ -141,6 +172,12 @@ dashboardPage(
                                 plotOutput("wordcloud_2", width = "90%", height = "300px"),
                                 plotOutput("bar_2", width = "90%", height = "200px")
                             )
+                        ),
+                        
+                        br(),
+                        tags$a(
+                            href="#top", "Go to Top",
+                            class = "go-to-top"
                         )
                     )
                 ),
@@ -164,7 +201,13 @@ dashboardPage(
                                      choices = c("clinical notes",
                                                  "amazon medical entities"),
                                      inline = TRUE),
-                        plotOutput("pca_plot", height = "800px")
+                        plotOutput("pca_plot", height = "800px"),
+                        
+                        br(),
+                        tags$a(
+                            href="#top", "Go to Top",
+                            class = "go-to-top"
+                        )
                     ),
                     
                     # .. hcluster ====
@@ -180,7 +223,13 @@ dashboardPage(
                                      inline = TRUE),
                         plotOutput("dend_plot"),
                         br(),
-                        plotOutput("hcluster_plot")
+                        plotOutput("hcluster_plot"),
+                        
+                        br(),
+                        tags$a(
+                            href="#top", "Go to Top",
+                            class = "go-to-top"
+                        )
                     ),
                     
                     # .. kmeans ====
@@ -207,16 +256,138 @@ dashboardPage(
                                              inline = TRUE)
                             )
                         ),
-                        plotOutput("kmeans_plot", height = "400px")
-
+                        plotOutput("kmeans_plot", height = "400px"),
+                        
+                        br(),
+                        tags$a(
+                            href="#top", "Go to Top",
+                            class = "go-to-top"
+                        )
                     )
                 )
+            ),
+            
+            # classification ===================================================
+            tabItem(
+                "classification",
+                h1("Sub-Domain Classification"),
+                tabsetPanel(
+                    # .. gas-neu-uro ====
+                    tabPanel(
+                        "Gastro-Neuro-Urol",
+                        includeMarkdown("Rmd/gas_neu_uro_classification.Rmd"),
+                        # the html is generated from Rmd and then delete 
+                        # everything outside of <body> ... </body>.
+                        # The js and css in header mess up with shiny's js & css
+                        includeHTML("Rmd/gas_neu_uro_classification_table.html"),
+                        
+                        br(),
+                        tags$a(
+                            href="#top", "Go to Top",
+                            class = "go-to-top"
+                        )
+                    ),
+                    
+                    # .. multiclass ====
+                    tabPanel(
+                        "Multiclass Classification",
+                        includeMarkdown("Rmd/classification_multiclass.Rmd"),
+                        
+                        
+                        fluidRow(
+                            # plot confusion matrix 1
+                            column(
+                                6,
+                                fluidRow(
+                                    column(1),
+                                    column(
+                                        5,
+                                        selectInput("cm_method_1",
+                                                    "Select algorithm and method",
+                                                    choices = c("svm + tfidf", 
+                                                                "svm + tfidf + pca", 
+                                                                "xgboost + tfidf",
+                                                                "xgboost + tfidf + pca",
+                                                                "neural network + tfidf", 
+                                                                "neural network + tfidf + pca",
+                                                                "neural network + embedding"),
+                                                    selected = "svm + tfidf"),
+                                        
+                                        htmlOutput("acc_1")
+                                    ),
+                                    column(
+                                        4,
+                                        radioButtons("cm_type_1",
+                                                    "Select type",
+                                                    choices = c("recall", "precision"),
+                                                    selected = "recall",
+                                                    inline = TRUE)
+                                    )
+                                ),
+                                plotOutput("multiclass_1", width = "90%", height = "400px")
+                            ),
+                            
+                            # plot confusion matrix 2
+                            column(
+                                6,
+                                fluidRow(
+                                    column(1),
+                                    column(
+                                        5,
+                                        selectInput("cm_method_2",
+                                                    "Select algorithm and method",
+                                                    choices = c("svm + tfidf", 
+                                                                "svm + tfidf + pca", 
+                                                                "xgboost + tfidf",
+                                                                "xgboost + tfidf + pca",
+                                                                "neural network + tfidf", 
+                                                                "neural network + tfidf + pca",
+                                                                "neural network + embedding"),
+                                                    selected = "svm + tfidf + pca"),
+                                        
+                                        htmlOutput("acc_2")
+                                    ),
+                                    column(
+                                        4,
+                                        radioButtons("cm_type_2",
+                                                     "Select type",
+                                                     choices = c("recall", "precision"),
+                                                     selected = "recall",
+                                                     inline = TRUE)
+                                    )
+                                ),
+                                plotOutput("multiclass_2", width = "90%", height = "400px")
+                            )
+                        ),
+                        
+                        
+                        
+                        
+                        
+                        
+                        br(),
+                        tags$a(
+                            href="#top", "Go to Top",
+                            class = "go-to-top"
+                        )
+                    ),
+                    
+                    # .. multilabel ====
+                    tabPanel(
+                        "Multilabel Classification",
+                        includeMarkdown("Rmd/classification_multilabel.Rmd"),
+                        
+                        br(),
+                        tags$a(
+                            href="#top", "Go to Top",
+                            class = "go-to-top"
+                        )
+                    )
+                ),
             )
             
-            # binary classification ===========================================
-
-                        
-#---            
+            
+            #---            
         )
     )
 )

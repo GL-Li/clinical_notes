@@ -1,55 +1,199 @@
 library(tensorflow)
 library(keras)
-library(data.table)
-library(magrittr)
-library(stringr)
-library(ggplot2)
-library(grid)
-library(gridExtra)
+source("utilities.R")
 
-# prepare data starting from medical note text
-dat <- fread("data/mtsamples_multi_class.csv") %>%
-  .[, note := str_replace_all(note, "\\.", "\\. ")] %>%
-  # .[specialty != "Radiology"] %>%
-  .[, y := as.integer(factor(specialty)) - 1] 
 
-notes <- dat[, note]
-# initialize tokenizer specifing maximum words
-max_words <- 3000
+# prepare data =================================================================
+specialties <- c(
+  "Gastroenterology", "Obstetrics / Gynecology",  "Cardiovascular / Pulmonary", 
+  "Neurology", "Urology", "Orthopedic"
+)
+cols <- c("specialty", "note")
+dat <- read_notes(
+  "data/mtsamples_multi_class.csv", 
+  duplicate_rm = TRUE,
+  specialties = specialties,
+  cols_keep = cols,
+  id = TRUE,
+  y_label = TRUE
+)
+
+# parameter tuning =============================================================
+corpus <- dat[, note]
+labels <- dat$y
+cnn_tune <- function(corpus,
+                     labels,
+                     max_words = 3000, 
+                     seq_length = 500,
+                     dim_emb = 64, 
+                     dropout = 0.2,
+                     n_filters = 16){
+  # train and evaluate a cnn model using word embedding
+  #
+  # Arguments:
+  #   corpus: string vector, document to trained
+  #   y: integer, labels of documents in corpus
+  #   max_word: int, number of words to keep for text_tokenizer()
+  #   seq_length: int, length of each document after pad_sequence()
+  #   dim_emb: int, length of word embedding
+  #   droput: numeric, ratio to drop in dropout layer
+  #   n_filters: int, number of filters in layer_conv_1d()
+  #
+  # Return:
+  #   
+  tk <- text_tokenizer(num_words = max_words)
+  fit_text_tokenizer(tk, notes)
+  X <- texts_to_sequences(tk, notes)
+  X <- pad_sequences(X, seq_length)
+  y_class <- labels
+  n_class <- length(unique(y_class))
+  y <- to_categorical(y_class, n_class)
+  
+  # split X and y into train and test
+  in_train <- caret::createDataPartition(y_class, p = 0.7, list = FALSE)
+  X_train <- X[in_train,]
+  y_train <- y[in_train,] 
+  X_test <- X[-in_train,]
+  y_test <- y[-in_train,]
+  y_test_class <- y_class[-in_train]
+
+  model <- keras_model_sequential() %>% 
+    layer_embedding(input_dim = max_words,
+                    output_dim = dim_emb,
+                    input_length = seq_length) %>%
+    layer_dropout(dropout) %>%
+    layer_conv_1d(filters = n_filters,
+                  kernel_size = 3,
+                  #activation = "relu",
+                  padding = "valid",
+                  strides = 1) %>%
+    layer_dropout(dropout) %>%
+    layer_global_average_pooling_1d() %>%
+    layer_dense(units = 64, activation = "relu") %>%
+    layer_dropout(dropout) %>%
+    # output layer
+    layer_dense(n_class, activation = "softmax")
+  
+  # summary(model)
+  
+  # compile, fit, and evaluate model in place
+  compile(model,
+          loss = "categorical_crossentropy",
+          optimizer = "adam",
+          metrics = "accuracy"
+  )
+  
+  fit(model,
+      x = X_train, 
+      y = y_train,
+      epochs = 20,
+      batch_size = 32,
+      validation_split = 0.3,
+      verbose = 3
+  )
+  
+  eva <- evaluate(model, X_test, y_test, verbose = 0)
+  
+  return(eva$accuracy)
+}
+
+
+# tune the parameters
+plot_cnn <- function(){
+  corpus <- dat[, note]
+  labels <- dat$y
+  
+  n_rep <- 100
+  param_df <- data.frame(
+    max_words = integer(n_rep),
+    seq_length = integer(n_rep),
+    dim_emb = integer(n_rep), 
+    dropout = numeric(n_rep),
+    n_filters = integer(n_rep),
+    accuracy = numeric(n_rep)
+  )
+  
+  for (i in 1:n_rep){
+    cat(i)
+    maxwords <- sample(3000:4000, 1)
+    seqlength <- sample(300:400, 1)
+    dimemb <- sample(100:200, 1)
+    dropout <- sample(1:5/10, 1)
+    nfilters <- sample(20:200, 1)
+    
+    acc <- cnn_tune(
+      corpus,
+      labels, 
+      max_words = maxwords,
+      seq_length = seqlength,
+      dim_emb = dimemb,
+      dropout = dropout,
+      n_filters = nfilters
+    )
+    
+    param_df[i, ] <- c(maxwords, seqlength, dimemb, dropout, nfilters, acc)
+  }
+  return(param_df)
+}
+
+
+# eyeballing the best paramters
+# results: 
+# first run
+#   max_words: 3500   from range 2000:4000
+#   seq_length: 350   from range 200:500
+#   dim_enb: 120       from range 16:128
+#   dropout: 0.4      from range 0.1:0.5
+#   n_filters: 32     from range 8:64
+
+# second run
+#   max_words: xxxx   from range 3000:4000
+#   seq_length: xxx   from range 300:400
+#   dim_enb: xx       from range 100:200
+#   dropout: xxx      from range 0.1:0.5
+#   n_filters: xx     from range 20:100
+
+try_1 <- plot_cnn()
+try_2 <- plot_cnn()
+
+plot(param_df$max_words, param_df$accuracy)
+plot(param_df$seq_length, param_df$accuracy)
+plot(param_df$dim_emb, param_df$accuracy)
+plot(param_df$dropout, param_df$accuracy)
+plot(param_df$n_filters, param_df$accuracy)
+
+
+# one model ====================================================================
+max_words = 3500
+seq_length = 350
+dim_emb = 120
+dropout = 0.4
+n_filters = 32
+
+notes <- dat$note
 tk <- text_tokenizer(num_words = max_words)
-# update tk in place with a vector or list of documents
 fit_text_tokenizer(tk, notes)
-# convert the documents into a list of sequence
 X <- texts_to_sequences(tk, notes)
-# examine sequence length, the longest is 2471, mean 430
-len <- sapply(X, function(x) length(x))
-summary(len)
-# pad the sequence to get a matrix
-seq_length <- 500
 X <- pad_sequences(X, seq_length)
-y_class <- dat[, y]
+y_class <- dat$y
 n_class <- length(unique(y_class))
 y <- to_categorical(y_class, n_class)
 
 # split X and y into train and test
-set.seed(1234)
-in_train <- sample(1:nrow(X), round(0.7 * nrow(X)))
-in_test <- setdiff(1:nrow(X), in_train) %>%
-  sample()  # to shuffle the row numbers
+set.seed(11111)
+in_train <- caret::createDataPartition(y_class, p = 0.7, list = FALSE)
 X_train <- X[in_train,]
 y_train <- y[in_train,] 
-X_test <- X[in_test,]
-y_test <- y[in_test,]
-y_test_class <- y_class[in_test]
+X_test <- X[-in_train,]
+y_test <- y[-in_train,]
+y_test_class <- y_class[-in_train]
 
-dim_emb <- 64
-dropout <- 0.3
 model <- keras_model_sequential() %>% 
   layer_embedding(input_dim = max_words,
                   output_dim = dim_emb,
                   input_length = seq_length) %>%
   layer_dropout(dropout) %>%
-  layer_conv_1d(filters = 16,
+  layer_conv_1d(filters = n_filters,
                 kernel_size = 3,
                 #activation = "relu",
                 padding = "valid",
@@ -61,7 +205,7 @@ model <- keras_model_sequential() %>%
   # output layer
   layer_dense(n_class, activation = "softmax")
 
-summary(model)
+# summary(model)
 
 # compile, fit, and evaluate model in place
 compile(model,
@@ -71,101 +215,34 @@ compile(model,
 )
 
 fit(model,
-    x = X_train, y = y_train,
-    epochs = 30,
+    x = X_train, 
+    y = y_train,
+    epochs = 20,
     batch_size = 32,
     validation_split = 0.3,
-    verbose = 2
+    verbose = 3
 )
 
-evaluate(model, X_test, y_test, verbose = 0)
 
+y_pred <- predict(model, X_test)
+y_pred_class <- predict_classes(model, X_test)
+table(y_test_class, y_pred_class)
 
-# retrieve validation metrics
-val_history <- model$history$history$val_accuracy %>% 
-  unlist()
-acc <- max(val_history)
-epoch <- which.min(val_history)
-
-
-# evaluate model with test data ================================================
-# get model metrics use custum defined function
-evaluate(model, X_test, y_test, verbose = 0)
-
-pred <- predict(model, X_test)
-pred_class <- predict_classes(model, X_test)
-
-
-cm <- table(y_test_class, pred_class)  # confusion matrix
-n <- nrow(cm)
-# percent
-cm_pct <- cm / rowSums(cm) 
-pct_dt <-  as.data.table(matrix(unlist(cm_pct), ncol = 1)) %>%
-  .[, x := rep(0:(n-1), n)] %>%
-  .[, y := rep(0:(n-1), each = n)]
-
-# count
-cm_dt <- as.data.table(matrix(unlist(cm), ncol = 1)) %>%
-  .[, x := rep(0:(n-1), n)] %>%
-  .[, y := rep(0:(n-1), each = n)]
-classes <- unique(dat$specialty) %>%
-  str_replace(" / ", "\n")
-
-main_plot <- ggplot() + 
-  geom_jitter(aes(y_test_class, pred_class), color = "blue", size = 1,
-              width = 0.1, height = 0.1, alpha = 0.3) +
-  geom_text(data = cm_dt, aes(x - 0.05, y + 0.3, label = V1), hjust = 1,
-            color = "red") +
-  geom_text(data = pct_dt, 
-            aes(x + 0.05, y + 0.3, label = paste0(round(100 * V1, 1), "%")), 
-            color = "purple", hjust = 0) +
-  scale_x_continuous(breaks = 0:5, labels = classes) +
-  scale_y_continuous(breaks = 0:5, labels = classes) +
-  labs(x = "True Sample Type",
-       y = "Predicted Sample Type")
-
-grobs <- grobTree(
-  gp = gpar(fontsize = 12, fontface = "bold"), 
-  textGrob(label = "    Number", 
-           name = "title1",
-           x = unit(0.2, "lines"), 
-           y = unit(1.4, "lines"), 
-           hjust = 0, 
-           vjust = 1, 
-           gp = gpar(col = "red")),
-  textGrob(label = " and ", 
-           name = "title2",
-           x = grobWidth("title1") + unit(0.2, "lines"),
-           y = unit(1.4, "lines"),
-           hjust = 0, 
-           vjust = 1),
-  textGrob(label = "Percentage", 
-           name = "title3",
-           x = grobWidth("title1") + grobWidth("title2") + unit(0.2, "lines"),
-           y = unit(1.4, "lines"),
-           gp = gpar(col = "purple"),
-           hjust = 0, 
-           vjust = 1),
-  textGrob(label = " of True Sample Types Being Predicted as Other Types",
-           x = grobWidth("title1") + grobWidth("title2") + grobWidth("title3") + unit(0.2, "lines"),
-           y = unit(1.4, "lines"),
-           hjust = 0, 
-           vjust = 1)
+classes_x <- c(
+  "Gastroenterology", "Obstetrics\nGynecology",  "Cardiovascular\nPulmonary", 
+  "Neurology", "Urology", "Orthopedic"
 )
+classes_y <- c(
+  "Gastro-\nenterology", "Obstetrics\nGynecology",  "Cardiovascular\nPulmonary", 
+  "Neurology", "Urology", "Orthopedic"
+)
+ggplot_multiclass_nn_embedding_recall <- plot_confusion_matrix(y_test_class, y_pred_class, classes_x, classes_y)
+ggplot_multiclass_nn_embedding_precision <- plot_confusion_matrix(y_test_class, y_pred_class, classes_x, classes_y, type = "precision")
 
-gg <- arrangeGrob(main_plot, top=grobs, padding = unit(2.6, "line"))
-
-grid.arrange(gg)
-
-
-
-caret::confusionMatrix(as.factor(pred_class), as.factor(y_test_class))
-ModelMetrics::mauc(y_test_class, pred)
-
+accuracy_nn_embedding <- accuracy(y_test_class, y_pred_class)
 
 
-# save tensorflow model, different from traditional ML mode ====================
-save_model_tf(object = model, filepath = "model")
-
-reloaded_model <- load_model_tf("model")
-all.equal(predict(model, mnist$test$x), predict(reloaded_model, mnist$test$x))
+save(ggplot_multiclass_nn_embedding_recall, 
+     ggplot_multiclass_nn_embedding_precision,
+     accuracy_nn_embedding,
+     file = "shiny-apps/RData/ggplot_multiclass_nn_embedding.RData")

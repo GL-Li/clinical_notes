@@ -1,0 +1,202 @@
+<body>
+
+
+<div class="container-fluid main-container">
+
+
+
+
+<div class="fluid-row" id="header">
+
+
+
+
+</div>
+
+
+<style type="text/css">
+.main-container {
+  max-width: 100%;
+  margin-left: auto;
+  margin-right: auto;
+}
+</style>
+<table style="width:100%;">
+<colgroup>
+<col width="11%"></col>
+<col width="11%"></col>
+<col width="16%"></col>
+<col width="16%"></col>
+<col width="16%"></col>
+<col width="16%"></col>
+<col width="11%"></col>
+</colgroup>
+<thead>
+<tr class="header">
+<th>algorithm</th>
+<th>data</th>
+<th>process</th>
+<th>accuracy</th>
+<th>f1 gastroenterology</th>
+<th>f1 neurology</th>
+<th>f1 urology</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td>svm</td>
+<td>note</td>
+<td>tfidf + pca</td>
+<td><strong>0.969</strong> <span class="math inline">\(\pm\)</span> 0.011</td>
+<td><strong>0.970</strong> <span class="math inline">\(\pm\)</span> 0.013</td>
+<td>0.972 <span class="math inline">\(\pm\)</span> 0.013</td>
+<td><strong>0.965</strong> <span class="math inline">\(\pm\)</span> 0.018</td>
+</tr>
+<tr class="even">
+<td>svm</td>
+<td>amazon</td>
+<td>tfidf + pca</td>
+<td><strong>0.973</strong> <span class="math inline">\(\pm\)</span> 0.011</td>
+<td>0.969 <span class="math inline">\(\pm\)</span> 0.014</td>
+<td><strong>0.976</strong> <span class="math inline">\(\pm\)</span> 0.012</td>
+<td><strong>0.975</strong> <span class="math inline">\(\pm\)</span> 0.015</td>
+</tr>
+<tr class="odd">
+<td>xgb</td>
+<td>note</td>
+<td>tfidf</td>
+<td>0.925 <span class="math inline">\(\pm\)</span> 0.018</td>
+<td>0.928 <span class="math inline">\(\pm\)</span> 0.021</td>
+<td>0.933 <span class="math inline">\(\pm\)</span> 0.018</td>
+<td>0.907 <span class="math inline">\(\pm\)</span> 0.031</td>
+</tr>
+<tr class="even">
+<td>xgb</td>
+<td>amazon</td>
+<td>tfidf</td>
+<td>0.932 <span class="math inline">\(\pm\)</span> 0.016</td>
+<td>0.936 <span class="math inline">\(\pm\)</span> 0.019</td>
+<td>0.940 <span class="math inline">\(\pm\)</span> 0.019</td>
+<td>0.914 <span class="math inline">\(\pm\)</span> 0.026</td>
+</tr>
+<tr class="odd">
+<td>xgb</td>
+<td>note</td>
+<td>tfidf + pca</td>
+<td>0.950 <span class="math inline">\(\pm\)</span> 0.016</td>
+<td>0.947 <span class="math inline">\(\pm\)</span> 0.019</td>
+<td>0.960 <span class="math inline">\(\pm\)</span> 0.016</td>
+<td>0.939 <span class="math inline">\(\pm\)</span> 0.025</td>
+</tr>
+<tr class="even">
+<td>xgb</td>
+<td>amazon</td>
+<td>tfidf + pca</td>
+<td>0.954 <span class="math inline">\(\pm\)</span> 0.017</td>
+<td>0.957 <span class="math inline">\(\pm\)</span> 0.017</td>
+<td>0.963 <span class="math inline">\(\pm\)</span> 0.013</td>
+<td>0.937 <span class="math inline">\(\pm\)</span> 0.028</td>
+</tr>
+<tr class="odd">
+<td>nn</td>
+<td>note</td>
+<td>tfidf</td>
+<td>0.957 <span class="math inline">\(\pm\)</span> 0.017</td>
+<td>0.963 <span class="math inline">\(\pm\)</span> 0.017</td>
+<td>0.967 <span class="math inline">\(\pm\)</span> 0.017</td>
+<td>0.936 <span class="math inline">\(\pm\)</span> 0.027</td>
+</tr>
+<tr class="even">
+<td>nn</td>
+<td>amazon</td>
+<td>tfidf</td>
+<td><strong>0.969</strong> <span class="math inline">\(\pm\)</span> 0.011</td>
+<td><strong>0.974</strong> <span class="math inline">\(\pm\)</span> 0.013</td>
+<td><strong>0.979</strong> <span class="math inline">\(\pm\)</span> 0.012</td>
+<td>0.946 <span class="math inline">\(\pm\)</span> 0.020</td>
+</tr>
+<tr class="odd">
+<td>nn</td>
+<td>note</td>
+<td>tfidf + pca</td>
+<td>0.967 <span class="math inline">\(\pm\)</span> 0.014</td>
+<td>0.969 <span class="math inline">\(\pm\)</span> 0.014</td>
+<td>0.972 <span class="math inline">\(\pm\)</span> 0.016</td>
+<td>0.958 <span class="math inline">\(\pm\)</span> 0.022</td>
+</tr>
+<tr class="even">
+<td>nn</td>
+<td>amazon</td>
+<td>tfidf + pca</td>
+<td><strong>0.972</strong> <span class="math inline">\(\pm\)</span> 0.011</td>
+<td><strong>0.972</strong> <span class="math inline">\(\pm\)</span> 0.014</td>
+<td><strong>0.977</strong> <span class="math inline">\(\pm\)</span> 0.011</td>
+<td><strong>0.968</strong> <span class="math inline">\(\pm\)</span> 0.019</td>
+</tr>
+<tr class="odd">
+<td>cnn</td>
+<td>note</td>
+<td>embedding</td>
+<td>0.928 <span class="math inline">\(\pm\)</span> 0.026</td>
+<td>0.929 <span class="math inline">\(\pm\)</span> 0.028</td>
+<td>0.946 <span class="math inline">\(\pm\)</span> 0.025</td>
+<td>0.904 <span class="math inline">\(\pm\)</span> 0.045</td>
+</tr>
+<tr class="even">
+<td>cnn</td>
+<td>amazon</td>
+<td>embedding</td>
+<td>0.957 <span class="math inline">\(\pm\)</span> 0.019</td>
+<td>0.960 <span class="math inline">\(\pm\)</span> 0.021</td>
+<td>0.964 <span class="math inline">\(\pm\)</span> 0.019</td>
+<td>0.942 <span class="math inline">\(\pm\)</span> 0.031</td>
+</tr>
+</tbody>
+</table>
+
+
+
+
+</div>
+
+<script>
+
+// add bootstrap table styles to pandoc tables
+function bootstrapStylePandocTables() {
+  $('tr.header').parent('thead').parent('table').addClass('table table-condensed');
+}
+$(document).ready(function () {
+  bootstrapStylePandocTables();
+});
+
+
+</script>
+
+<!-- tabsets -->
+
+<script>
+$(document).ready(function () {
+  window.buildTabsets("TOC");
+});
+
+$(document).ready(function () {
+  $('.tabset-dropdown > .nav-tabs > li').click(function () {
+    $(this).parent().toggleClass('nav-tabs-open')
+  });
+});
+</script>
+
+<!-- code folding -->
+
+
+<!-- dynamically load mathjax for compatibility with self-contained -->
+<script>
+  (function () {
+    var script = document.createElement("script");
+    script.type = "text/javascript";
+    script.src  = "https://mathjax.rstudio.com/latest/MathJax.js?config=TeX-AMS-MML_HTMLorMML";
+    document.getElementsByTagName("head")[0].appendChild(script);
+  })();
+</script>
+
+</body>

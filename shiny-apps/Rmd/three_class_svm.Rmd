@@ -1,2 +1,0 @@
-
-The R e1071 package `svm()` function has trouble dealing with constant columns. This is problematic for tfidf, which is a very sparse matrix. The training set could have columns with all values 0. To get around this problem, we use PCA and keep the top principle components. 

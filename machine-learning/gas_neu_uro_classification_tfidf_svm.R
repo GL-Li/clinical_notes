@@ -1,29 +1,44 @@
+# Use support vector machine to train model 
+# three specialties: Gastroenterology, Neurology, and Urology
+# Use clinical notes or Amazon Comprehend Medical entities
+
+
 library(e1071)
 library(progress)
 source("utilities.R")
 
 
 # prepare data =================================================================
-# for the 3 class, we use the same data as those used in clustering
-load("shiny-apps/RData/pca_note_amazon_gas_neu_uro.RData")
+set.seed(12345)
+dat <- read_notes(
+  "data/amazon_medacy_mtsamples_gastr_neuro_urolo.csv",
+  duplicate_rm = T,
+  cols_keep = "all",
+  y_label = TRUE
+)
 
 
-# split train and test, also used in xgb and nn
-# the data are already randomized, so no need to sample again
 
-X <- pca_note$x
-y <- as.factor(dat_gas_neu_uro$y)
 
+# find best n_pca ==============================================================
+# result: keep first 20 - 50 principle components have the best accuracy.
+# We will use n_pca = 25 considering accuracy and speed.
+# choose from note or amazon_me
+tfidf <- tfidf_tm(dat$amazon_me, sparsity = 0.95)
+# run only if need pca
+tfidf <- prcomp(tfidf)$x
+X <- tfidf
+y <- as.factor(dat$y)  # svm requires y to be factor
+
+set.seed(1111)
 in_train <- caret::createDataPartition(y, p = 0.7, list = FALSE)
+
 X_train <- X[in_train,]
-y_train <- y[in_train]
 X_test <- X[-in_train,]
+
+y_train <- y[in_train]
 y_test <- y[-in_train]
 
-
-# use tfidf_note ==============================================================
-# svm reject constant columns. As tfidf is sparse, the train data often contains
-# columns with only value 0. Use pca to solve the problem
 
 svm_pca <- function(n_pc, X_train, y_train, n_split){
   # Calculate the accuracy for number of principle components used in SVM
@@ -58,7 +73,7 @@ svm_pca <- function(n_pc, X_train, y_train, n_split){
 }
 
 
-plot_n_pca <- function(n_pcas, n_split = 10){
+plot_n_pca <- function(n_pcas, X_train, y_train, n_split = 100){
   # Plot accuracy ~ n_pca to find best n_pca values
   #
   # n_pcas: int, vector of number of principle components to keep
@@ -70,7 +85,7 @@ plot_n_pca <- function(n_pcas, n_split = 10){
   pb <- progress_bar$new()
   for (i in 1:n) {
     pb$tick()
-    n_pc <- points[i]
+    n_pc <- n_pcas[i]
     m <- svm_pca(n_pc, X_train, y_train, n_split)
     pc_acc[i, ] <- m
   }
@@ -78,24 +93,109 @@ plot_n_pca <- function(n_pcas, n_split = 10){
   plot(pc_acc$n_pc, pc_acc$acc, type = "p")
 }
 
-points <- c(2:50, 2 * (26:50), 5 * (21:45))
 
-par(mfrow = c(1, 2))
-plot_n_pca(points, 1)
-plot_n_pca(points, 10)
+# # find the best n_pca
+n_pcas <- c(2:50, 2 * (26:50), 5 * (21:45))
+plot_n_pca(n_pcas, X_train, y_train, 10)
 
-# visually pick 40 as the best n_pca to train model
-mdl <- svm(X_train[, 1:40], y_train)
-y_pred <- predict(mdl, X_test[, 1:40])
-table(truth = y_test, predict = y_pred)
+# one model pca====
+
+# visually pick 25 as the best n_pca to train model
+mdl <- svm(X_train[, 1:25], y_train)
+y_pred <- predict(mdl, X_test[, 1:25])
+table(truth = y_test, predict = y_pred_note_svm)
 
 
 
 plot_pc1_pc2(X_test, color = y_test)
 plot_pc1_pc2(X_test, color = y_pred)
-plot_pc1_pc2(X_test, color = y_test == y_pred, color_map = c("orange", "gray"))
+plot_pc1_pc2(X_test, color = y_test == y_pred, color_map = c("black", "gray"))
 
 classes_x <- c("Gastronenterology", "Neurology", "Urology")
 classes_y <- c("Gastro-\nenterology", "Neurology", "Urology")
-plot_confusion_matrix(y_test, y_pred, classes_x, classes_y)
+plot_confusion_matrix(y_test, y_pred_note_svm, classes_x, classes_y)
+
+
+# one model tfidf ====
+tfidf <- tfidf_tm(dat$amazon_me, sparsity = 0.992)
+X <- tfidf
+y <- as.factor(dat$y)  # svm requires y to be factor
+
+set.seed(1111)
+in_train <- caret::createDataPartition(y, p = 0.7, list = FALSE)
+
+X_train <- X[in_train,]
+X_test <- X[-in_train,]
+
+y_train <- y[in_train]
+y_test <- y[-in_train]
+
+mdl <- svm(X_train, y_train)
+y_pred <- predict(mdl, X_test)
+table(truth = y_test, predict = y_pred)
+
+classes_x <- c("Gastronenterology", "Neurology", "Urology")
+classes_y <- c("Gastro-\nenterology", "Neurology", "Urology")
+plot_confusion_matrix(y_test, y_pred, classes_x, classes_y, type = "precision")
+
+
+# average f1 score and accuracy ==================
+# for convenience, copy data praparation here
+svm_metrics <- function(corpus){
+  # Calculate accuracy and f1 score
+  #
+  # corpus: string, "note" or "amazon_me"
+  
+  # choose from note or amazon_me
+  tfidf <- tfidf_tm(dat[, get(corpus)])
+  # run only if need pca
+  X <- prcomp(tfidf)$x[, 1:25]
+  y <- as.factor(dat$y)  # svm requires y to be factor
+  
+  n_rep <- 100
+  df_acc_f1 <- data.frame(
+    acc = numeric(n_rep),
+    f1_gas = numeric(n_rep),
+    f1_neu = numeric(n_rep),
+    f1_uro = numeric(n_rep)
+  )
+  set.seed(6789)
+  in_trains <- caret::createDataPartition(y, times = n_rep, p = 0.7)
+  for (i in 1:100){
+    cat(i)
+    in_train <- in_trains[[i]]
+    X_train <- X[in_train, ]
+    y_train <- y[in_train]
+    X_test <- X[-in_train,]
+    y_test <- y[-in_train]
+    
+    mdl <- svm(X_train, y_train)
+    y_pred <- predict(mdl, X_test)
+    
+    tb <- table(y_test, y_pred)
+    acc <- sum(diag(tb)) / length(y_test)
+    
+    f1_score <- function(tb, k){
+      recall <- diag(tb)[k] / sum(y_test == k - 1)
+      precision <- diag(tb)[k] / sum(y_pred == k - 1)
+      f1 <- 2 * (recall * precision) / (recall + precision)
+    }
+    
+    f1_gas <- f1_score(tb, 1)
+    f1_neu <- f1_score(tb, 2)
+    f1_uro <- f1_score(tb, 3)
+    
+    df_acc_f1[i, ] <- c(acc, f1_gas, f1_neu, f1_uro)
+  }
+  
+  return(df_acc_f1)
+}
+# mean and standard deviation of accuracy and f1 score
+df_acc_f1 <- svm_metrics("note")
+sapply(df_acc_f1, mean)
+sapply(df_acc_f1, sd)
+
+df_acc_f1 <- svm_metrics("amazon_me")
+sapply(df_acc_f1, mean)
+sapply(df_acc_f1, sd)
 

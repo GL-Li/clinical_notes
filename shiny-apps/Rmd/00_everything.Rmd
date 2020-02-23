@@ -1,0 +1,15 @@
+
+### data preprocess
+There are many duplicated clinical notes assigned into different sample type / medical specialties. Out of 4999 samples, only 221 have no duplicates. Most of the duplication are caused by sample types of "Consult - History and Phy.", "Discharge Summary", "Radiology", "SOAP / Chart / Progress Notes", and "Surgery", as they are expected to cover varous medical specialty. If we keep only the true medical specialties like "Gastroenterology", "Obstetrics / Gynecology", "Cardiovascular / Pulmonary", "Neurology", "Urology", and "Orthopedic", the duplicatation is much less severe; we will have 1402 non-duplicated samples out of 1498.
+
+For clustering and mulitclass classification task, we will simply delete all clinical notes having duplications. 
+
+
+The entire dataset is good one for multilable classification.https://towardsdatascience.com/multi-label-text-classification-with-scikit-learn-30714b7819c5 
+
+### svm
+Use svm function with default setting and treat the number of principle components as hyper-parameter. Tune it with best accuray and found to keep the first 25 principle components has the best metrics.
+
+
+### hyper-parameter tuning
+Do not choose the best based on one point. Instead, use a small subset of data point for fast training and evaluation and then plot metrics against each hyper parameters. Data is going to be noisy and eyes are good at catch trend. 

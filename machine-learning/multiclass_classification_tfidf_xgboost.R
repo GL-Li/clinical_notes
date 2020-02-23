@@ -1,69 +1,68 @@
 library(xgboost)
-library(tensorflow)
-library(keras)
-library(data.table)
-library(magrittr)
-library(stringr)
-library(ggplot2)
-library(tidyr)
+source("utilities.R")
 
-
-# prepare data starting from medical note text==================================
-
-dat <- fread("data/mtsamples_multi_class.csv") %>%
-  .[, note := str_replace_all(note, "\\.", "\\. ")] %>%
-  .[, y := as.integer(factor(specialty)) - 1]
-
-notes <- dat[, note]
-# initialize tokenizer specifing maximum words
-tk <- text_tokenizer(num_words = 3000)
-# update tk in place with a vector or list of documents
-fit_text_tokenizer(tk, notes)
-# convert the documents into a matrix of tfidf
-X <- texts_to_matrix(tk, notes, mode = "tfidf")
-# normalize the matrix so that length of each row vector is 1
-X <- X / sqrt(rowSums(X * X))
-
-# for multiclass, y should be converted to a matrix 
-y <- dat[, y]
+# prepare data =================================================================
+specialties <- c(
+  "Gastroenterology", "Obstetrics / Gynecology",  "Cardiovascular / Pulmonary", 
+  "Neurology", "Urology", "Orthopedic"
+)
+cols <- c("specialty", "note")
+set.seed(1234)
+dat <- read_notes(
+  "data/mtsamples_multi_class.csv", 
+  duplicate_rm = TRUE,
+  specialties = specialties,
+  cols_keep = cols,
+  id = TRUE,
+  y_label = TRUE
+)
+tfidf <- tfidf_tm(dat$note)
+y <- dat$y
 n_class <- length(unique(y))
 
-# split X and y into train and test
-set.seed(1234)
-in_train <- sample(1:nrow(X), round(0.7 * nrow(X)))
-in_test <- setdiff(1:nrow(X), in_train) %>%
-  sample()  # to shuffle the row numbers
+
+
+# hyper-parameters tuning ======================================================
+# results: optimal paramters for both tfidf and pca25:
+#   max_depth = 5
+#   eta = 0.4
+#   nround = 25
+
+# run only if need pca
+tfidf <- prcomp(tfidf)$x[, 1:25]
+X <- tfidf
+
+set.seed(12345)
+in_train <- caret::createDataPartition(y, p = 0.7, list = FALSE)
+
 X_train <- X[in_train,]
-y_train <- y[in_train] 
-X_test <- X[in_test,]
-y_test <- y[in_test]
+X_test <- X[-in_train,]
 
+y_train <- y[in_train]
+y_test <- y[-in_train]
 
-# train model ==================================================================
-
-n_rep <- 20
-# placeholder for hyperparamters
+n_rep <- 100
+# placeholder for hyperparamters and metrics
 param_df = data.frame(max_depth = numeric(n_rep),
                       eta = numeric(n_rep),
-                      seed_number = integer(n_rep),
-                      best_metric = numeric(n_rep),
-                      best_metric_round = integer(n_rep))
+                      metrics = numeric(n_rep),
+                      nround = integer(n_rep))
 metrics_cv <- vector("list", n_rep)
 
-best_metric <- Inf
 pb <- progress_bar$new(total = n_rep)
 for (i in 1:n_rep) {
   pb$tick()
+  maxdepth <- sample(2:10, 1)
+  eta <- runif(1, 0.1, 0.5)
+  
   param <- list(objective = "multi:softmax",
                 num_class = n_class,
                 eval_metric = "merror",  # check for metric for multiclass
-                max_depth = sample(2:10, 1),
-                eta = runif(1, 0.1, 0.5)
+                max_depth = maxdepth,
+                eta = eta
   )
-  cv_nround = 20
+  cv_nround = 30
   cv_nfold = 3
-  seed_number = sample.int(10000, 1)
-  set.seed(seed_number)
   xgb_cv <- xgb.cv(data=X_train, label = y_train, params = param, 
                    nthread=3, nfold=cv_nfold, nrounds=cv_nround,
                    verbose = TRUE, early_stop_round=10, maximize=FALSE)
@@ -72,70 +71,112 @@ for (i in 1:n_rep) {
     set_colnames(c("iter", "train_mean", "train_std", "test_mean", "test_std"))
   
   if(as.data.frame(param)[1, "eval_metric"] %in% c("auc")){
-    metric = max(cv_metrics[, test_mean])
-    metric_round = which.max(cv_metrics[, test_mean])
-    if (best_metric < metric) {
-      best_metric <- metric
-      best_metric_round <- metric_round
-      best_seednumber <- seed_number
-      best_param <- param
-    }
+    best_metric = max(cv_metrics[, test_mean])
+    best_metric_round = which.max(cv_metrics[, test_mean])
   } else {
-    metric = min(cv_metrics[, test_mean])
-    metric_round = which.min(cv_metrics[, test_mean])
-    if (best_metric > metric) {
-      best_metric <- metric
-      best_metric_round <- metric_round
-      best_seednumber <- seed_number
-      best_param <- param
-    }
+    best_metric = min(cv_metrics[, test_mean])
+    best_metric_round = which.min(cv_metrics[, test_mean])
   }
   
-  
-  param_df[i, ] <- c(as.data.frame(param)[1, "max_depth"],
-                     as.data.frame(param)[1, "eta"],
-                     seed_number,
-                     metric,
-                     metric_round)
+  param_df[i, ] <- c(maxdepth, eta, best_metric, best_metric_round)
   metrics_cv[[i]] <- cv_metrics
-  
-  
 }
 
-# help function to plot xgb.cv metrics
-plot_cv <- function(rep_id){
-  dt <- metrics_cv[[rep_id]]
-  ggplot(dt) +
-    geom_line(aes(iter, train_mean), color = "blue") +
-    geom_line(aes(iter, test_mean), color = "red")
-}
+# plot to find best parameters
+plot(param_df$max_depth, param_df$metrics)
+plot(param_df$eta, param_df$metrics)
+plot(param_df$nround, param_df$metrics)
 
-plot_cv(3)  # plot cv result of nth repeat
 
-# final training ===============================================================
-set.seed(best_seednumber)
+
+
+# one model: tfidf =============================================================
+X <- tfidf
+
+set.seed(11111)
+in_train <- caret::createDataPartition(y, p = 0.7, list = FALSE)
+
+X_train <- X[in_train,]
+X_test <- X[-in_train,]
+
+y_train <- y[in_train]
+y_test <- y[-in_train]
+param <- list(objective = "multi:softmax",
+              num_class = n_class,
+              eval_metric = "merror",
+              max_depth = 5,
+              eta = 0.4
+)
 xgb <- xgboost(data = X_train, 
                label = y_train, 
-               params = best_param,
+               params = param,
                nthread = 3, 
-               nrounds = best_metric_round)
+               nrounds = 25)
+
+y_pred <- predict(xgb, X_test)
+table(y_test, y_pred)
+
+classes_x <- c(
+  "Gastroenterology", "Obstetrics\nGynecology",  "Cardiovascular\nPulmonary", 
+  "Neurology", "Urology", "Orthopedic"
+)
+classes_y <- c(
+  "Gastro-\nenterology", "Obstetrics\nGynecology",  "Cardiovascular\nPulmonary", 
+  "Neurology", "Urology", "Orthopedic"
+)
+ggplot_multiclass_xgb_tfidf_recall<- plot_confusion_matrix(y_test, y_pred, classes_x, classes_y)
+ggplot_multiclass_xgb_tfidf_precision <- plot_confusion_matrix(y_test, y_pred, classes_x, classes_y, type = "precision")
+
+accuracy_xgb_tfidf <- accuracy(y_test, y_pred)
 
 
 
 
+# one model: pca   =============================================================
+X <- prcomp(tfidf)$x[, 1:25]
+
+set.seed(11111)
+in_train <- caret::createDataPartition(y, p = 0.7, list = FALSE)
+
+X_train <- X[in_train,]
+X_test <- X[-in_train,]
+
+y_train <- y[in_train]
+y_test <- y[-in_train]
+param <- list(objective = "multi:softmax",
+              num_class = n_class,
+              eval_metric = "merror",
+              max_depth = 5,
+              eta = 0.4
+)
+xgb <- xgboost(data = X_train, 
+               label = y_train, 
+               params = param,
+               nthread = 3, 
+               nrounds = 25)
+
+y_pred <- predict(xgb, X_test)
+table(y_test, y_pred)
+
+classes_x <- c(
+  "Gastroenterology", "Obstetrics\nGynecology",  "Cardiovascular\nPulmonary", 
+  "Neurology", "Urology", "Orthopedic"
+)
+classes_y <- c(
+  "Gastro-\nenterology", "Obstetrics\nGynecology",  "Cardiovascular\nPulmonary", 
+  "Neurology", "Urology", "Orthopedic"
+)
+ggplot_multiclass_xgb_pca_recall <- plot_confusion_matrix(y_test, y_pred, classes_x, classes_y)
+ggplot_multiclass_xgb_pca_precision <- plot_confusion_matrix(y_test, y_pred, classes_x, classes_y, type = "precision")
+
+accuracy_xgb_pca <- accuracy(y_test, y_pred)
 
 
-# evaluate model with test data ================================================
-# get model metrics use custum defined function
-
-pred <- predict(xgb, X_test)
 
 
+# save for shiny
+save(ggplot_multiclass_xgb_pca_recall, ggplot_multiclass_xgb_pca_precision,
+     ggplot_multiclass_xgb_tfidf_recall, ggplot_multiclass_xgb_tfidf_precision,
+     accuracy_xgb_tfidf, accuracy_xgb_pca,
+     file = "shiny-apps/RData/ggplot_multiclass_xgb.RData")
 
-caret::confusionMatrix(as.factor(pred), as.factor(y_test))
-
-# save the model for future prediction =========================================
-saveRDS(xgb, file = "trained_models/multiclass_classification_tfidf_xgboost.rda")
-multi_xgb <- readRDS("trained_models/multiclass_classification_tfidf_xgboost.rda")
-pred_1 <- predict(multi_xgb, X_test)
-identical(pred, pred_1)
