@@ -134,4 +134,5 @@ load("RData/ggplot_multiclass_xgb.RData")
 load("RData/ggplot_multiclass_nn.RData")
 load("RData/ggplot_multiclass_nn_embedding.RData")
 
-
+# .. load trained models ====
+model_svm <- readRDS("trained_models/model_svm_pca.rda")

@@ -42,7 +42,7 @@ dashboardPage(
                     # .. clinical notes ====
                     tabPanel(
                         "What is clinical notes", 
-                        includeMarkdown("./Rmd/introduction_to_clinical_notes.Rmd"),
+                        includeMarkdown("./Rmd/clinical_note_introduction.Rmd"),
                         
                         br(),
                         tags$a(
@@ -57,7 +57,7 @@ dashboardPage(
                         fluidPage(
                             column(
                                 6,
-                                includeMarkdown("./Rmd/mtsamples.Rmd"),
+                                includeMarkdown("./Rmd/clinical_note_mtsamples.Rmd"),
                                 style = "padding-left: 0;"
                             ),
                             column(
@@ -89,7 +89,7 @@ dashboardPage(
                     # .. extraction ====
                     tabPanel(
                         "Extraction",
-                        includeMarkdown("Rmd/medical_named_entity.Rmd"),
+                        includeMarkdown("Rmd/medical_named_entity_extraction.Rmd"),
                         textInput("word", 
                                   "",
                                   width = "415px",
@@ -109,7 +109,7 @@ dashboardPage(
                     # .. wordcloud ====
                     tabPanel(
                         "Wordcloud",
-                        includeMarkdown("Rmd/wordcloud.Rmd"),
+                        includeMarkdown("Rmd/medical_named_entity_wordcloud.Rmd"),
                         br(),
                         
                         fluidRow(
@@ -194,7 +194,7 @@ dashboardPage(
                     # .. pca ====
                     tabPanel(
                         "Principle Component Analysis",
-                        includeMarkdown("Rmd/pca.Rmd"),
+                        includeMarkdown("Rmd/clustering_pca.Rmd"),
                         br(),
                         radioButtons("pca",
                                      label = "Select corpus",
@@ -213,7 +213,7 @@ dashboardPage(
                     # .. hcluster ====
                     tabPanel(
                         "hclustering",
-                        includeMarkdown("Rmd/hcluster.Rmd"),
+                        includeMarkdown("Rmd/clustering_hcluster.Rmd"),
                         br(),
                         
                         radioButtons("dend",
@@ -235,7 +235,7 @@ dashboardPage(
                     # .. kmeans ====
                     tabPanel(
                         "kmeans",
-                        includeMarkdown("Rmd/kmeans.Rmd"),
+                        includeMarkdown("Rmd/clustering_kmeans.Rmd"),
                         br(),
                         
                         fluidRow(
@@ -275,11 +275,11 @@ dashboardPage(
                     # .. gas-neu-uro ====
                     tabPanel(
                         "Gastro-Neuro-Urol",
-                        includeMarkdown("Rmd/gas_neu_uro_classification.Rmd"),
+                        includeMarkdown("Rmd/classification_gas_neu_uro.Rmd"),
                         # the html is generated from Rmd and then delete 
                         # everything outside of <body> ... </body>.
                         # The js and css in header mess up with shiny's js & css
-                        includeHTML("Rmd/gas_neu_uro_classification_table.html"),
+                        includeHTML("Rmd/classification_gas_neu_uro_table.html"),
                         
                         br(),
                         tags$a(
@@ -372,10 +372,15 @@ dashboardPage(
                         )
                     ),
                     
-                    # .. multilabel ====
+                    # .. prediction ====
                     tabPanel(
-                        "Multilabel Classification",
-                        includeMarkdown("Rmd/classification_multilabel.Rmd"),
+                        "Prediction",
+                        includeMarkdown("Rmd/classification_prediction.Rmd"),
+                        
+                        # input from text field
+                        
+                        
+                        # input using uploaded data
                         
                         br(),
                         tags$a(

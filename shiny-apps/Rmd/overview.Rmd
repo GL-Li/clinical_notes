@@ -1,7 +1,8 @@
-This analysis includes the following sections:
+As part of electronic health records, clinical notes contains rich???? information of patients' health. As unstructured data in free-form text, however, clinical notes pose special challenge to the the retrieval and application of these inforamtion. 
 
-- Introduction to clinical notes at [mtsamples.com](https://www.mtsamples.com/)
-- Extraction of medical entities
-- Clustering of clinical notes
-- Binary classification of clinical notes
-- Multiclass classification
+In this project, we extract medical entities from clinical notes openly available at [mtsamples.com](https://www.mtsamples.com/), use un-supervised machine learning techiniques to cluster these clinical notes and build supervised machine learning models to predict the medical specialties each clinical note belongs to. This project includes the following sections as shown in the sidebar:
+
+- **Clinical Notes**:  Use clinical notes at [mtsamples.com](https://www.mtsamples.com/) to show the major components and complexity???? of a clinical notes.
+- **Medical Named Entities**: Use the commercial service Amazon Comprehend Medical and he open source Python library medaCy to extract medical entities.
+- **Clustering**: Use principle component analysis, hierarchical clustering and K-means clustering to group the clinical notes.
+- **Classification**: Use support vector machine, xgboost, and neural netword to make predictive models of clinical subdomain.

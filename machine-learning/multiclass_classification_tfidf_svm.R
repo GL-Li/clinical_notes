@@ -161,7 +161,7 @@ ggplot_multiclass_svm_pca_recall <- plot_confusion_matrix(y_test, y_pred, classe
 ggplot_multiclass_svm_pca_precision <- plot_confusion_matrix(y_test, y_pred, classes_x, classes_y, type = "precision")
 
 accuracy_svm_pca <- accuracy(y_test, y_pred)
-
+model_svm_pca <- mdl
 
 
 # save for shiny ===============================================================
@@ -170,3 +170,7 @@ save(ggplot_multiclass_svm_pca_recall, ggplot_multiclass_svm_pca_precision,
      accuracy_svm_tfidf, accuracy_svm_pca,
      file = "shiny-apps/RData/ggplot_multiclass_svm.RData")
 
+saveRDS(model_svm_pca, file = "shiny-apps/trained_models/model_svm_pca.rda")
+
+# # to load model
+# loaded_model <- readRDS("shiny-apps/trained_models/model_svm_pca.rda")
