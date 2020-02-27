@@ -23,7 +23,7 @@ h1{
 }
 .nav-tabs{
     font-weight: normal;
-    font-size: 25px;
+    font-size: 23px;
 }
 .tab-content {
     margin-top: 5px;
@@ -48,4 +48,10 @@ tbody {
     -webkit-appearance: button;
     -moz-appearance: button;
     appearance: button;
+}
+#file_upload_progress{
+    margin-bottom: 0;
+}
+.form-group{
+    margin-bottom: 0;
 }

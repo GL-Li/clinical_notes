@@ -1,0 +1,1 @@
+The txt/csv file should only have one column without header, that is, each paragraph is a clinical note.

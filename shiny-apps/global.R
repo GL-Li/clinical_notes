@@ -7,13 +7,13 @@ library(RColorBrewer)
 library(caret)
 library(progress)
 library(dendextend)
+library(text2vec)
+library(e1071)
 
-# mtsamples_all ===============================================================
+# clinical note ===============================================================
 # load all mtsamples as scraped for all specialties and then keep three columns 
 # for shiny
 load("RData/mtsamples_all.RData")
-dat_all <- mtsamples_all[, .(specialty, note, sections)]
-
 
 # word_stats ==================================================================
 # load word statistics including n_documents, n_time, avg_tf, avg_tfidf for all
@@ -135,4 +135,68 @@ load("RData/ggplot_multiclass_nn.RData")
 load("RData/ggplot_multiclass_nn_embedding.RData")
 
 # .. load trained models ====
-model_svm <- readRDS("trained_models/model_svm_pca.rda")
+load("RData/multiclass_classification_tfidf_pca_models.RData")
+svm_model_deploy <- readRDS("trained_models/svm_model_deploy.rds")
+
+
+# .. text2vec functions ====
+get_iter <- function(corpus, ids = NULL, stem = TRUE){
+    # create iterator for text2vec
+    #
+    # Arguments:
+    #   corpus: string vector
+    #   ids: id of corpus
+    #   stem: bool, use stem tokenizer if TRUE, word tokenizer if not
+    #
+    # Return:
+    #   a text2vec iterator
+    #
+    
+    if (stem){
+        tokenizer <- function(x) {
+            word_tokenizer(x) %>% 
+                lapply( function(x) SnowballC::wordStem(x, language="en"))
+        }
+    } else {
+        tokenizer <- word_tokenizer
+    }
+    it <- itoken(corpus, tolower, tokenizer, ids = ids)
+}
+
+
+get_vocab <- function(corpus){
+    # Crate text2vec vocabularoy of a corpus
+    it <- get_iter(corpus)
+    vocab <- create_vocabulary(it, stopwords = tm::stopwords())
+}
+
+
+get_vectorizer <- function(corpus){
+    # Create text2vec vectorizer from corpus for use in create_dtm
+    vocab <- get_vocab(corpus)
+    vocab_vectorizer(vocab)
+}
+
+
+get_dtm <- function(corpus, vectorizer){
+    # Get dtm of a corpus using existing vectorizer
+    it <- get_iter(corpus)
+    dtm <- create_dtm(it, vectorizer)
+}
+
+
+fit_tfidf <- function(dtm){
+    # create a tfidf model using dtm
+    mdl <- TfIdf$new()
+    fit_transform(dtm, mdl)  # fit does not work
+    return(mdl)
+}
+
+
+transform_tfidf <- function(dtm, tfidf_model){
+    # Get normalized tfidf matrix of dtm using tfidf_model
+    tfidf <- transform(dtm, tfidf_model)
+    tfidf <- as.matrix(tfidf)
+    tfidf <- tfidf / sqrt(rowSums(tfidf * tfidf))
+}
+

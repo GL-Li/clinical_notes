@@ -478,6 +478,87 @@ plot_confusion_matrix <- function(y_true, y_pred,
     } else {
         main_plot
     }
-    
 }
 
+
+# text2vec functions ===========================================================
+get_iter <- function(corpus, ids = NULL, stem = TRUE){
+    # create iterator for text2vec
+    #
+    # Arguments:
+    #   corpus: string vector
+    #   ids: id of corpus
+    #   stem: bool, use stem tokenizer if TRUE, word tokenizer if not
+    #
+    # Return:
+    #   a text2vec iterator
+    #
+    
+    if (stem){
+        tokenizer <- function(x) {
+            word_tokenizer(x) %>% 
+                lapply( function(x) SnowballC::wordStem(x, language="en"))
+        }
+    } else {
+        tokenizer <- word_tokenizer
+    }
+    it <- itoken(corpus, tolower, tokenizer, ids = ids)
+}
+
+
+get_vocab <- function(corpus, min_count = 5, min_doc = 5){
+    # Crate text2vec vocabularoy of a corpus and 
+    # keep words count more than min_count and document count more than min_doc
+    it <- get_iter(corpus)
+    vocab <- create_vocabulary(it, stopwords = tm::stopwords())
+    vocab <- prune_vocabulary(
+        vocab, 
+        term_count_min = min_count,
+        doc_count_min = min_doc
+    )
+}
+
+
+get_vectorizer <- function(vocab){
+    # Create text2vec vectorizer from vocab for use in create_dtm
+    vocab_vectorizer(vocab)
+}
+#train_vectorizer <- get_vectorizer(train)
+
+
+get_dtm <- function(corpus, vectorizer){
+    # Get dtm of a corpus using existing vectorizer
+    it <- get_iter(corpus)
+    dtm <- create_dtm(it, vectorizer)
+}
+# train_dtm <- get_dtm(train, train_vectorizer)
+# test_dtm <- get_dtm(test, train_vectorizer)
+
+
+fit_tfidf <- function(dtm){
+    # create a tfidf model using dtm
+    mdl <- TfIdf$new()
+    fit_transform(dtm, mdl)  # fit does not work
+    return(mdl)
+}
+# tfidf_model <- fit_tfidf(train_dtm)
+
+
+transform_tfidf <- function(dtm, tfidf_model){
+    # Get normalized tfidf matrix of dtm using tfidf_model
+    tfidf <- transform(dtm, tfidf_model)
+    tfidf <- as.matrix(tfidf)
+    tfidf <- tfidf / sqrt(rowSums(tfidf * tfidf))
+}
+# train_tfidf <- transform_tfidf(train_dtm, tfidf_model)
+# test_tfidf <- transform_tfidf(test_dtm, tfidf_model)
+
+
+fit_pca <- function(tfidf, ...){
+    # crate a pca model
+    prcomp(tfidf, ...)
+}
+# pca_model <- fit_pca(train_tfidf)
+
+# train_pca <- predict(pca_model, train_tfidf)
+# test_pca <- predict(pca_model, test_tfidf)

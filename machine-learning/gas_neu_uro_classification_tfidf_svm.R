@@ -16,6 +16,7 @@ dat <- read_notes(
   cols_keep = "all",
   y_label = TRUE
 )
+y <- as.factor(dat$y)  # svm requires y to be factor
 
 
 
@@ -28,7 +29,6 @@ tfidf <- tfidf_tm(dat$amazon_me, sparsity = 0.95)
 # run only if need pca
 tfidf <- prcomp(tfidf)$x
 X <- tfidf
-y <- as.factor(dat$y)  # svm requires y to be factor
 
 set.seed(1111)
 in_train <- caret::createDataPartition(y, p = 0.7, list = FALSE)
@@ -98,12 +98,26 @@ plot_n_pca <- function(n_pcas, X_train, y_train, n_split = 100){
 n_pcas <- c(2:50, 2 * (26:50), 5 * (21:45))
 plot_n_pca(n_pcas, X_train, y_train, 10)
 
+
+
 # one model pca====
+tfidf <- tfidf_tm(dat$amazon_me, sparsity = 0.992)
+# run only if need pca
+X <- prcomp(tfidf)$x
+
+set.seed(1111)
+in_train <- caret::createDataPartition(y, p = 0.7, list = FALSE)
+
+X_train <- X[in_train,]
+X_test <- X[-in_train,]
+
+y_train <- y[in_train]
+y_test <- y[-in_train]
 
 # visually pick 25 as the best n_pca to train model
 mdl <- svm(X_train[, 1:25], y_train)
 y_pred <- predict(mdl, X_test[, 1:25])
-table(truth = y_test, predict = y_pred_note_svm)
+table(truth = y_test, predict = y_pred)
 
 
 
@@ -113,13 +127,13 @@ plot_pc1_pc2(X_test, color = y_test == y_pred, color_map = c("black", "gray"))
 
 classes_x <- c("Gastronenterology", "Neurology", "Urology")
 classes_y <- c("Gastro-\nenterology", "Neurology", "Urology")
-plot_confusion_matrix(y_test, y_pred_note_svm, classes_x, classes_y)
+plot_confusion_matrix(y_test, y_pred, classes_x, classes_y)
 
 
 # one model tfidf ====
+# result: svm does not work in this case
 tfidf <- tfidf_tm(dat$amazon_me, sparsity = 0.992)
 X <- tfidf
-y <- as.factor(dat$y)  # svm requires y to be factor
 
 set.seed(1111)
 in_train <- caret::createDataPartition(y, p = 0.7, list = FALSE)

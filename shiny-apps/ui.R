@@ -54,10 +54,13 @@ dashboardPage(
                     # .. mtsamples ====
                     tabPanel(
                         "Clincal notes at mtsamples.com", 
+                        includeMarkdown("./Rmd/clinical_note_mtsamples.Rmd"),
+                        br(),
+                        
                         fluidPage(
                             column(
                                 6,
-                                includeMarkdown("./Rmd/clinical_note_mtsamples.Rmd"),
+                                plotOutput("specialty_count"),
                                 style = "padding-left: 0;"
                             ),
                             column(
@@ -66,7 +69,11 @@ dashboardPage(
                                 style = "padding-right: 0;"
                             )
                         ),
-                        p("In the table below, we list one example note for each category."),
+                        
+                        br(),
+                        h3("Clinical note examples"),
+                        p("In the table below, we list one example note for each 
+                          category, as well as the section headers for each note."),
                         DT::dataTableOutput("raw_table"),
                         
                         br(),
@@ -85,15 +92,15 @@ dashboardPage(
                 
                 h1("Medical Named Entities"),
                 tabsetPanel(
-
+                    
                     # .. extraction ====
                     tabPanel(
                         "Extraction",
                         includeMarkdown("Rmd/medical_named_entity_extraction.Rmd"),
                         textInput("word", 
-                                  "",
+                                  "Search word in the table",
                                   width = "415px",
-                                  placeholder = "Input a word and see its stats"),
+                                  placeholder = "Input a word to see its stats and highlight in the table"),
                         htmlOutput("word_stats"),
                         
                         br(),
@@ -136,7 +143,7 @@ dashboardPage(
                                                                 "medacy_me", 
                                                                 "top_tf", 
                                                                 "top_tfidf"),
-                                                    selected = "amazon_me")
+                                                    selected = "top_tfidf")
                                     )
                                 ),
                                 plotOutput("wordcloud_1", width = "90%", height = "300px"),
@@ -156,7 +163,7 @@ dashboardPage(
                                                                 "Gastroenterology", 
                                                                 "Neurology",
                                                                 "Urology"),
-                                                    selected = "Neurology")
+                                                    selected = "Gastroenterology")
                                     ),
                                     column(
                                         4,
@@ -180,7 +187,7 @@ dashboardPage(
                             class = "go-to-top"
                         )
                     )
-                ),
+                )
                 
                 
             ),
@@ -200,6 +207,7 @@ dashboardPage(
                                      label = "Select corpus",
                                      choices = c("clinical notes",
                                                  "amazon medical entities"),
+                                     # selected = "amazon medical entities",
                                      inline = TRUE),
                         plotOutput("pca_plot", height = "800px"),
                         
@@ -318,10 +326,10 @@ dashboardPage(
                                     column(
                                         4,
                                         radioButtons("cm_type_1",
-                                                    "Select type",
-                                                    choices = c("recall", "precision"),
-                                                    selected = "recall",
-                                                    inline = TRUE)
+                                                     "Select type",
+                                                     choices = c("recall", "precision"),
+                                                     selected = "recall",
+                                                     inline = TRUE)
                                     )
                                 ),
                                 plotOutput("multiclass_1", width = "90%", height = "400px")
@@ -360,11 +368,6 @@ dashboardPage(
                             )
                         ),
                         
-                        
-                        
-                        
-                        
-                        
                         br(),
                         tags$a(
                             href="#top", "Go to Top",
@@ -377,11 +380,47 @@ dashboardPage(
                         "Prediction",
                         includeMarkdown("Rmd/classification_prediction.Rmd"),
                         
-                        # input from text field
+                        fluidRow(
+                            column(
+                                3,
+                                fileInput("file_upload", "Choose a file",
+                                          multiple = FALSE,
+                                          accept = c("text/csv",
+                                                     "text/comma-separated-values,text/plain",
+                                                     ".csv")),
+                                includeText("Rmd/file_upload.txt")
+                            ),
+                            
+                            column(
+                                9,
+                                # input from text field
+                                textAreaInput(
+                                    "text_input",
+                                    "Input clinical notes",
+                                    placeholder = "One line per note",
+                                    height = "200px"
+                                ) %>% 
+                                    # bug in width when set at "100%"
+                                    shiny::tagAppendAttributes(style = 'width: 100%;'),
+                                
+                                ## do not use submitButton, it control all input
+                                #submitButton("Submit"),
+                                actionButton("submit_text_input", "submit")
+                            )
+                        ),
                         
+                        
+                        h4("Prediction:"),
+                        verbatimTextOutput("print_prediction"),
+                        br(),
+                        downloadButton("download", "Download prediciton"),
                         
                         # input using uploaded data
+                        br(),
                         
+                        
+                        
+                        br(),
                         br(),
                         tags$a(
                             href="#top", "Go to Top",

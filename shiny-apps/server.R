@@ -16,4 +16,7 @@ server <- function(input, output, session){
     
     # classification
     source("./controllers/classification_multiclass.R", local = TRUE)
+    
+    # multiclass model deploy model 
+    source("./controllers/classification_multiclass_deploy_models.R", local = TRUE)
 }

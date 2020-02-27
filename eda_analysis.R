@@ -4,8 +4,13 @@ library(stringr)
 library(ggplot2)
 library(wordcloud)
 library(RColorBrewer)
+source("utilities.R")
 
-mt <- fread("mtsample_scraped.csv", header = TRUE)
+mt <- fread("data/mtsamples_scraped.csv", header = TRUE)
+
+# duplicated note
+dup_note <- mt[, .N, by = note]
+table(as.integer(dup_note$N))
 
 # headers used in transcription ===============================================
 # all headers in individual word
