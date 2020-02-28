@@ -1,2 +1,8 @@
-We will use two popular clustering analysis techniques k-means and hierarchical clustering to group clinical notes into specialties. We will use the known specialties to examine the quality of clustering and explore possible reasons of miss-clustering. As an simple example, we only look at two specialties: gastroenterology and neurology. This section covers k-means clustering.
+### Method
+For each corpus, we first generate a term frequency inverse document frequence (tfidf) matrix for each corpus, in which each row is normalized to a vector of unit length. K-means clustering analysis is then performed on this matrix. For comparison, we also perform principle component (pca) analysis on the tfidf matrix to get a pca matrix and run PCA on this matrix.
+
+This most challenge step for K-means clustering analysis is to determine the number of clusters. We take the liberty to assume that we already know, as the corpus has three medical specialties.
+
+### Results
+The K-means clustering with and without PCA changes the identified specialty of a few sample points but overall accuracy is almost the same, but there is no meaningful difference between the results. Using the medical named entities extracted with Amazon comprehend medical improves the accuracy from 64% to 70%. 
 

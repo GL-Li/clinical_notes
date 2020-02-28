@@ -28,7 +28,7 @@ Python package medaCy is under development and currently focuses on the recogini
 ```
  
 ### Compare Amazon Comprehend and medaCy
-In the table below, we display the medical named entities extracted with the two methods from clinical notes in three specialties gastroenterology, neurology, and urology. Amazon Comprehend Medical (amazon_me) extracts much more information than medaCy does. Obviously, medaCy (medacy_me) misses many medical entities other than medication using its currently available [light clinical notes model](https://github.com/NLPatVCU/medaCy/blob/master/examples/models/clinical_notes_model.md). 
+In the table below, we display the medical named entities extracted with the two methods from clinical notes in three specialties: gastroenterology, neurology, and urology. Amazon Comprehend Medical (amazon_me) extracts much more information than medaCy does. Obviously, medaCy (medacy_me) misses many medical entities other than medication using its currently available [light clinical notes model](https://github.com/NLPatVCU/medaCy/blob/master/examples/models/clinical_notes_model.md).
  
-For comparison, we also listed top 10 words having the highest term frequency (top_tf) and term frequency inverse document frequency (top_tfidf) in the table. 
+For comparison, we also listed top 10 words having the highest term frequency (top_tf) and term frequency inverse document frequency (top_tfidf) in the table. Common English stopwords were removed from the calculation.
 

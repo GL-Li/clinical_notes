@@ -14,16 +14,16 @@ output$pca_plot <- renderPlot(
             curve(a1 * x, from = 0, to = 0.4, add = TRUE, lty = 2)
             curve(a2 * x, from = 0, to = -0.4, add = TRUE, lty = 2)
             curve(a3 * x, from = 0, to = 0.4, add = TRUE, lty = 2)
-            
-            plot_pc1_pc2(pca, color = y_true, title = "True Specialties")
+
+            plot_pc1_pc2(pca, color = y_pred_note_pca, 
+                         title = "Identified Specialties")
             legend("bottomright", 
                    legend = c("Gastroenterology", "Neurology", "Urology"),
                    col = c("red", "blue", "cyan"), 
                    pch = 1,
                    cex = 0.8)
             
-            plot_pc1_pc2(pca, color = y_pred_note_pca, 
-                         title = "Identified Specialties")
+            plot_pc1_pc2(pca, color = y_true, title = "True Specialties")
             legend("bottomright", 
                    legend = c("Gastroenterology", "Neurology", "Urology"),
                    col = c("red", "blue", "cyan"), 
@@ -54,16 +54,16 @@ output$pca_plot <- renderPlot(
             curve(a1 * x, from = 0, to = 0.7, add = TRUE, lty = 2)
             curve(a2 * x, from = 0, to = 0.6, add = TRUE, lty = 2)
             curve(a3 * x, from = 0, to = -0.4, add = TRUE, lty = 2)
-            
-            plot_pc1_pc2(pca, color = y_true, title = "True Specialties")
+
+            plot_pc1_pc2(pca, color = y_pred_amazon_pca, 
+                         title = "Identified Specialties")
             legend("bottomright", 
                    legend = c("Gastroenterology", "Neurology", "Urology"),
                    col = c("red", "blue", "cyan"), 
                    pch = 1,
                    cex = 0.8)
-            
-            plot_pc1_pc2(pca, color = y_pred_amazon_pca, 
-                         title = "Identified Specialties")
+
+            plot_pc1_pc2(pca, color = y_true, title = "True Specialties")
             legend("bottomright", 
                    legend = c("Gastroenterology", "Neurology", "Urology"),
                    col = c("red", "blue", "cyan"), 
@@ -96,9 +96,9 @@ output$pca_plot <- renderPlot(
 output$dend_plot <- renderPlot(
     {
         if (input$dend == "clinical notes"){
-            plot_dend(hc_note)
+            plot_dend(hc_note, title = "Dendrogram colored with true specialties")
         } else if (input$dend == "amazon medical entities"){
-            plot_dend(hc_amazon)
+            plot_dend(hc_amazon, title = "Dendrogram colored with true specialties")
         }
     }
 )

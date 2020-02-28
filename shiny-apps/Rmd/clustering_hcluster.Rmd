@@ -1,2 +1,7 @@
+### Method
+For each corpus, we first generate a term frequency inverse document frequence (tfidf) matrix, in which each row is normalized to a vector of unit length. A cosine similarity matrix is calculated from the tfidf matrix and then the distance is taken as $1 - similary$. Hierarchcal clustering analysis is performed on the disimilarity matrix using ward.D method ([code](https://github.com/GL-Li/clinical_notes/blob/master/machine-learning/clustering_hcluster_three_classes.R)). 
 
-test
+### Results
+**Corpus of original clinical notes**: As we know the true specialties of each sample, we color the leaves of the dendrogram with the true specialties. The dendrogram shows three distinct clusters with one is much smaller than the other two. This small cluster is purely gastroenterology. The other two are mixes of all three specialties with the majority of neurology and urology respectively. The overall accuracy is 68%, comparable to what we get from principle component analysis.
+
+**Corpus of medical named entity extracted by Amazon Comprehend Medical**: The dendrogram is very different. Practically there are only two clusters. One is almost purely neuroglogy and the other is a mix of gastroenterolgy and urology with a few neurology. If we force to split the dendrogram into three clusters to match the three know specialties, we can get a very small cluster with pure gastroenterology. The overall accuracy is 66%, no improvement from using original clinical notes. However, it is exellent at identifying neurology.

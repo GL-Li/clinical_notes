@@ -44,7 +44,7 @@ dend <- as.dendrogram(hc_note)
 sample_colors <- rep(character(0), nrow(tfidf))
 sample_colors[y_true == 0] <- "red"
 sample_colors[y_true == 1] <- "blue"
-sample_colors[y_true == 2] <- "orange"
+sample_colors[y_true == 2] <- "cyan"
 
 dend <- assign_values_to_leaves_edgePar(
     dend=dend, 
@@ -60,7 +60,7 @@ legend("topright",
        lty = 1,
        col = c("red", "blue", "orange"),
        bty = "n")
-rect.hclust(hc, 3, border = "lightgreen")
+rect.hclust(hc_note, 3, border = "lightgreen")
 dev.off()
 
 # confusion matrix
@@ -95,7 +95,7 @@ dend <- as.dendrogram(hc_amazon)
 sample_colors <- rep(character(0), nrow(tfidf))
 sample_colors[y_true == 0] <- "red"
 sample_colors[y_true == 1] <- "blue"
-sample_colors[y_true == 2] <- "orange"
+sample_colors[y_true == 2] <- "cyan"
 
 dend <- assign_values_to_leaves_edgePar(
     dend=dend, 
@@ -111,7 +111,7 @@ legend("topright",
        lty = 1,
        col = c("red", "blue", "orange"),
        bty = "n")
-rect.hclust(hc, 3, border = "green")
+rect.hclust(hc_amazon, 3, border = "lightgreen")
 dev.off()
 
 # confusion matrix
@@ -153,3 +153,4 @@ plot_dend <- function(hc){
            bty = "n")
     rect.hclust(hc, 3, border = "lightgreen")
 }
+

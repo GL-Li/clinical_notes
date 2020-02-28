@@ -20,6 +20,7 @@ observeEvent(input$word, {
 # displace stats of a word =====================================================
 output$word_stats <- renderText({
     wd <- input$word
+    print(wd)
     if (nchar(wd) > 0){
         word <- word_stats %>%
             filter(word == wd) 
@@ -32,7 +33,7 @@ output$word_stats <- renderText({
             pull(avg_tf)
         avg_tfidf <- word %>%
             pull(avg_tfidf)
-        if(is_empty(n_doc)){
+        if(purrr::is_empty(n_doc)){
             n_doc <- 0
             n_time <- 0
             avg_tf <- 0

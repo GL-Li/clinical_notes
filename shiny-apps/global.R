@@ -1,11 +1,10 @@
 library(data.table)
 library(magrittr)
 library(stringr)
+library(dplyr)
 library(ggplot2)
 library(wordcloud)
 library(RColorBrewer)
-library(caret)
-library(progress)
 library(dendextend)
 library(text2vec)
 library(e1071)
@@ -36,7 +35,8 @@ get_word_count <- function(type, col){
         table() %>%
         as.data.table() %>%
         set_colnames(c("word", "count")) %>%
-        .[!word %in% tm::stopwords()] %>% # remove stopwords
+        .[!word %in% tm::stopwords()] %>%  # remove stopwords
+        .[word != "mg"] %>%  # unit of medication, too common for medacy 
         .[word != ""] %>%    # medaCy generate nothing from some notes
         .[order(-count)] %>%
         .[count > 1] %>%  # delete useless info to save plotting time
@@ -99,7 +99,7 @@ plot_dend <- function(hc, title = NULL){
     sample_colors <- rep(NA, length(hc$labels))
     sample_colors[y_true == 0] <- "red"
     sample_colors[y_true == 1] <- "blue"
-    sample_colors[y_true == 2] <- "orange"
+    sample_colors[y_true == 2] <- "cyan"
     
     dend <- assign_values_to_leaves_edgePar(
         dend=dend, 
@@ -114,7 +114,7 @@ plot_dend <- function(hc, title = NULL){
            legend = c("Gastroenterology", "Neurology", "Urology"),
            lty = 1,
            cex = 0.8,
-           col = c("red", "blue", "orange"),
+           col = c("red", "blue", "cyan"),
            bty = "n")
     rect.hclust(hc, 3, border = "lightgreen")
 }

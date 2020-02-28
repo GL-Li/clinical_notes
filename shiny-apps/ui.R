@@ -196,11 +196,12 @@ dashboardPage(
             tabItem(
                 "cluster",
                 h1("Identify Medical Subdomains"),
+                includeMarkdown("Rmd/clustering_intro.Rmd"),
                 
                 tabsetPanel(
                     # .. pca ====
                     tabPanel(
-                        "Principle Component Analysis",
+                        "Principle Component",
                         includeMarkdown("Rmd/clustering_pca.Rmd"),
                         br(),
                         radioButtons("pca",
@@ -220,7 +221,7 @@ dashboardPage(
                     
                     # .. hcluster ====
                     tabPanel(
-                        "hclustering",
+                        "hierarchical Clustering",
                         includeMarkdown("Rmd/clustering_hcluster.Rmd"),
                         br(),
                         
@@ -242,7 +243,7 @@ dashboardPage(
                     
                     # .. kmeans ====
                     tabPanel(
-                        "kmeans",
+                        "K-means Clustering",
                         includeMarkdown("Rmd/clustering_kmeans.Rmd"),
                         br(),
                         
@@ -258,7 +259,7 @@ dashboardPage(
                             column(
                                 5,
                                 radioButtons("kmeans_pca",
-                                             label = "Using first two principle components?",
+                                             label = "Using principle components?",
                                              choices = c("yes", "no"),
                                              selected = "no",
                                              inline = TRUE)
@@ -278,7 +279,7 @@ dashboardPage(
             # classification ===================================================
             tabItem(
                 "classification",
-                h1("Sub-Domain Classification"),
+                h1("Medical Specialty Classification"),
                 tabsetPanel(
                     # .. gas-neu-uro ====
                     tabPanel(

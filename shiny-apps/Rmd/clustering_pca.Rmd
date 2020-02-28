@@ -1,1 +1,7 @@
-pca test
+### Method
+For each corpus, we first generate a term frequency inverse document frequence (tfidf) matrix for each corpus and then perform principle component (pca) analysis on the tfidf matrix to get a pca matrix ([code](https://github.com/GL-Li/clinical_notes/blob/master/machine-learning/clustering_pca_three_classes.R)). To visualize the clusters, we plot each sample on the the space of the first two priciple components, PC1 and PC2.
+
+## Results 
+**Corpus of original clinical notes**: Lucky enough, the plot shows three branches joint at the origin. We manaully draw three dashed lines from the origin to seperate the samples into three clusters. As we know the corpus contains three medical specialties, we assign a specialty to each cluster in a way that the clustering has the best accuracy. This method acheives an accuracy of 66%??? while baseline is 38%??? if assuming all to be the most popular gastroenterology. The plot of the true spcialties indicates that many gastroenterology samples spread into the other two specialties and a lot of urology samples mixed with neurology ones. The last plot displays incorrectly assigned samples in orange.
+
+**Corpus of medical named entity extracted by Amazon Comprehend Medical**: Similarly we can draw three dashed lines from origin to seprate all samples into three clusters. This clustering achieves 77% accuracy, an improvement from 66% using original clinical notes. If we compare the plots of true specialties between these two corpus, we see that the neurology and urology clusters are more condensed in the corpus of Amazon medical entities than in the original clinical notes. We will have a better visualization with hieracical clustering.
