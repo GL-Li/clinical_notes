@@ -54,3 +54,34 @@ save(train_tfidf, test_tfidf,
 
 save(train_vectorizer, tfidf_model, pca_model,
      file = "shiny-apps/RData/multiclass_classification_tfidf_pca_models.RData")
+
+
+# create and saved model for deployment ========================================
+load("multiclass_classification_train_test_tfidf_pca_models.RData")
+
+X_train <- train_pca[, 1:25]
+X_test <- test_pca[, 1:25]
+
+y_train <- as.factor(train_y)
+y_test <- as.factor(test_y)
+
+svm_model_deploy <- svm(X_train, y_train)
+y_pred <- predict(svm_model_deploy, X_test)
+
+classes_x <- c(
+    "Gastroenterology", "Obstetrics\nGynecology",  "Cardiovascular\nPulmonary", 
+    "Neurology", "Urology", "Orthopedic"
+)
+classes_y <- c(
+    "Gastro-\nenterology", "Obstetrics\nGynecology",  "Cardiovascular\nPulmonary", 
+    "Neurology", "Urology", "Orthopedic"
+)
+
+plot_confusion_matrix(y_test, y_pred, classes_x, classes_y, type = "recall")
+plot_confusion_matrix(y_test, y_pred, classes_x, classes_y, type = "precision")
+
+accuracy_svm_tfidf <- accuracy(y_test, y_pred)
+
+saveRDS(svm_model_deploy, 
+        file = "shiny-apps/trained_models/svm_model_deploy.rds")
+

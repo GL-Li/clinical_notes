@@ -5,7 +5,7 @@
   margin-right: auto;
 }
 </style>
-
+    
 | algorithm | data    | process     | accuracy              |f1 gastroenterology    | f1 neurology          | f1 urology            |
 | --        | --      | ---         | ---                   | ---                   | ---                   | --                    |
 | svm       | note    | tfidf + pca | **0.969** $\pm$ 0.011 | **0.970** $\pm$ 0.013 | 0.972 $\pm$ 0.013     | **0.965** $\pm$ 0.018 |
@@ -20,3 +20,5 @@
 | nn        | amazon  | tfidf + pca | **0.972** $\pm$ 0.011 | **0.972** $\pm$ 0.014 | **0.977** $\pm$ 0.011 | **0.968** $\pm$ 0.019 |
 | cnn       | note    | embedding   | 0.928 $\pm$ 0.026     | 0.929 $\pm$ 0.028     | 0.946 $\pm$ 0.025     | 0.904 $\pm$ 0.045     |
 | cnn       | amazon  | embedding   | 0.957 $\pm$ 0.019     | 0.960 $\pm$ 0.021     | 0.964 $\pm$ 0.019     | 0.942 $\pm$ 0.031     |
+| cnn       | note    | pre-trained | 0.934 $\pm$ 0.021     | 0.935 $\pm$ 0.024     | 0.952 $\pm$ 0.020     | 0.905 $\pm$ 0.035     |
+| cnn       | amazon  | pre-trained | 0.954 $\pm$ 0.024     | 0.956 $\pm$ 0.026     | 0.968 $\pm$ 0.025     | 0.933 $\pm$ 0.039     |

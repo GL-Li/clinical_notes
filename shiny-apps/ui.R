@@ -280,6 +280,7 @@ dashboardPage(
             tabItem(
                 "classification",
                 h1("Medical Specialty Classification"),
+                includeMarkdown("Rmd/classification_intro.Rmd"),
                 tabsetPanel(
                     # .. gas-neu-uro ====
                     tabPanel(
@@ -315,11 +316,8 @@ dashboardPage(
                                                     "Select algorithm and method",
                                                     choices = c("svm + tfidf", 
                                                                 "svm + tfidf + pca", 
-                                                                "xgboost + tfidf",
-                                                                "xgboost + tfidf + pca",
                                                                 "neural network + tfidf", 
-                                                                "neural network + tfidf + pca",
-                                                                "neural network + embedding"),
+                                                                "neural network + tfidf + pca"),
                                                     selected = "svm + tfidf"),
                                         
                                         htmlOutput("acc_1")
@@ -347,11 +345,8 @@ dashboardPage(
                                                     "Select algorithm and method",
                                                     choices = c("svm + tfidf", 
                                                                 "svm + tfidf + pca", 
-                                                                "xgboost + tfidf",
-                                                                "xgboost + tfidf + pca",
                                                                 "neural network + tfidf", 
-                                                                "neural network + tfidf + pca",
-                                                                "neural network + embedding"),
+                                                                "neural network + tfidf + pca"),
                                                     selected = "svm + tfidf + pca"),
                                         
                                         htmlOutput("acc_2")
@@ -378,7 +373,7 @@ dashboardPage(
                     
                     # .. prediction ====
                     tabPanel(
-                        "Prediction",
+                        "Deploy Model",
                         includeMarkdown("Rmd/classification_prediction.Rmd"),
                         
                         fluidRow(
@@ -402,11 +397,11 @@ dashboardPage(
                                     height = "200px"
                                 ) %>% 
                                     # bug in width when set at "100%"
-                                    shiny::tagAppendAttributes(style = 'width: 100%;'),
+                                    shiny::tagAppendAttributes(style = 'width: 100%;')
                                 
                                 ## do not use submitButton, it control all input
                                 #submitButton("Submit"),
-                                actionButton("submit_text_input", "submit")
+                                #actionButton("submit_text_input", "submit")
                             )
                         ),
                         

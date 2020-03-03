@@ -165,7 +165,7 @@ get_iter <- function(corpus, ids = NULL, stem = TRUE){
 
 
 get_vocab <- function(corpus){
-    # Crate text2vec vocabularoy of a corpus
+    # Create text2vec vocabularoy of a corpus
     it <- get_iter(corpus)
     vocab <- create_vocabulary(it, stopwords = tm::stopwords())
 }

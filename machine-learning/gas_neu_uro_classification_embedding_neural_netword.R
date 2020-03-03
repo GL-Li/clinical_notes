@@ -1,99 +1,68 @@
 library(tensorflow)
 library(keras)
 source("utilities.R")
+library(data.table)
+library(progress)
 
-# prepare data =================================================================
-set.seed(12345)
-dat <- read_notes(
-  "data/amazon_medacy_mtsamples_gastr_neuro_urolo.csv",
-  duplicate_rm = T,
-  cols_keep = "all",
-  y_label = TRUE
-)
-
-
-# try out cnn construction =====================================================
-notes <- dat$note
-# initialize tokenizer specifing maximum words
-max_words <- 3000
-tk <- text_tokenizer(num_words = max_words)
-# update tk in place with a vector or list of documents
-fit_text_tokenizer(tk, notes)
-# convert the documents into a list of sequence
-X <- texts_to_sequences(tk, notes)
-
-# pad the sequence to get a matrix
-seq_length <- 500
-X <- pad_sequences(X, seq_length)
-y_class <- dat$y
-n_class <- length(unique(y_class))
-y <- to_categorical(y_class, n_class)
-
-# split X and y into train and test
-set.seed(1234)
-in_train <- caret::createDataPartition(y_class, p = 0.7, list = FALSE)
-X_train <- X[in_train,]
-y_train <- y[in_train,] 
-X_test <- X[-in_train,]
-y_test <- y[-in_train,]
-y_test_class <- y_class[-in_train]
-
-dim_emb <- 64
-dropout <- 0.3
-model <- keras_model_sequential() %>% 
-  layer_embedding(input_dim = max_words,
-                  output_dim = dim_emb,
-                  input_length = seq_length) %>%
-  layer_dropout(dropout) %>%
-  layer_conv_1d(filters = 16,
-                kernel_size = 3,
-                #activation = "relu",
-                padding = "valid",
-                strides = 1) %>%
-  layer_dropout(dropout) %>%
-  layer_global_average_pooling_1d() %>%
-  layer_dense(units = 64, activation = "relu") %>%
-  layer_dropout(dropout) %>%
-  # output layer
-  layer_dense(n_class, activation = "softmax")
-
-summary(model)
-
-# compile, fit, and evaluate model in place
-compile(model,
-        loss = "categorical_crossentropy",
-        optimizer = "adam",
-        metrics = "accuracy"
-)
-
-fit(model,
-    x = X_train, y = y_train,
-    epochs = 30,
-    batch_size = 32,
-    validation_split = 0.3,
-    verbose = 3
-)
+get_pretrained_matrix <- function(tokens, pretrained_file){
+  # Calculate pretrained matrix for the top max_words tokens in a corpus
+  #
+  # Arguments:
+  #   tokens: string vector, tokens tokenized using keras
+  #   pretrained_file: str, csv file of saved pretrained matrix, from which to
+  #     subset and get the pretrained matrix of tokens
+  #   max_words: int, number of top frequent token to keep
+  #
+  # Return:
+  #   a matrix
+  
+  # load the saved pretrained matrix and keep only those in tokens
+  # make sure all tokens are included in pretrained vacob, usually the case
+  pretrained_dt <- fread(pretrained_file)
+  stopifnot(length(setdiff(tokens, pretrained_dt$V1)) == 0) 
+  pretrained_dt <- pretrained_dt[V1 %in% tokens] 
+  
+  # reorder the pretrained matrix so the row order agrees with words order
+  cat("Calculate pretrained matrix:\n")
+  order_factor <- factor(tokens, levels = tokens)
+  pb <- progress_bar$new(total = length(tokens))
+  for (wd in tokens){
+    pb$tick()
+    pretrained_dt[V1 == wd, levels := which(levels(order_factor) == wd)]
+  }
+  
+  # only return the matrix 
+  pretrained_matrix <- pretrained_dt[order(levels)] %>%
+    .[, V1 := NULL] %>%
+    .[, levels := NULL] %>%
+    as.matrix()
+}
 
 
-# repeat 100 times to get average metrics =======
-cnn_metrics <- function(corpus, seq_length = 500){
+cnn_metrics <- function(corpus, pretrained_file, seq_length = 500){
   # calculate average accuracy and f1 score out of 100 repeat
   # 
   # Arguments:
-  #   corpus: string, "note" or "amazon_me"
+  #   corpus: string vector
+  #   pretrained_file: str, csv file of saved pretrained matrix, from which to
+  #     subset and get the pretrained matrix of tokens
   #
   # Return:
   #   numeric vector 
   #
   
-  notes <- dat[, get(corpus)]
   # initialize tokenizer specifing maximum words
   max_words <- 3000
   tk <- text_tokenizer(num_words = max_words)
   # update tk in place with a vector or list of documents
-  fit_text_tokenizer(tk, notes)
+  fit_text_tokenizer(tk, corpus)
+  
+  token_index <- tk$word_index
+  tokens <- names(token_index)[1:max_words]
+  pretrained_matrix <- get_pretrained_matrix(tokens, pretrained_file)
+  
   # convert the documents into a list of sequence
-  X <- texts_to_sequences(tk, notes)
+  X <- texts_to_sequences(tk, corpus)
   
   # pad the sequence to get a matrix
   seq_length <- seq_length
@@ -112,8 +81,12 @@ cnn_metrics <- function(corpus, seq_length = 500){
   )
   set.seed(6789)
   in_trains <- caret::createDataPartition(y_class, times = n_rep, p = 0.7)
+  
+  cat("Train 100 models:\n")
+  pb <- progress_bar$new(total = 100)
+  pb$tick(0)   # display progress bar right away. 
   for (i in 1:100){
-    cat(i)
+    pb$tick()
     in_train <- in_trains[[i]]
     X_train <- X[in_train,]
     y_train <- y[in_train,] 
@@ -121,7 +94,7 @@ cnn_metrics <- function(corpus, seq_length = 500){
     y_test <- y[-in_train,]
     y_test_class <- y_class[-in_train]
     
-    dim_emb <- 64
+    dim_emb <- 200
     dropout <- 0.3
     model <- keras_model_sequential() %>% 
       layer_embedding(input_dim = max_words,
@@ -140,6 +113,10 @@ cnn_metrics <- function(corpus, seq_length = 500){
       # output layer
       layer_dense(n_class, activation = "softmax")
     
+    # use pretrained embedding
+    get_layer(model, index = 1) %>% 
+      set_weights(list(pretrained_matrix))
+    
     # compile, fit, and evaluate model in place
     compile(model,
             loss = "categorical_crossentropy",
@@ -149,10 +126,10 @@ cnn_metrics <- function(corpus, seq_length = 500){
     
     fit(model,
         x = X_train, y = y_train,
-        epochs = 30,
+        epochs = 50,
         batch_size = 32,
         validation_split = 0.3,
-        verbose = 2
+        verbose = 3
     )
     
     
@@ -176,11 +153,103 @@ cnn_metrics <- function(corpus, seq_length = 500){
   return(df_acc_f1)
 }
 
+
+
+# prepare data =================================================================
+set.seed(12345)
+dat <- read_notes(
+  "data/amazon_medacy_mtsamples_gastr_neuro_urolo.csv",
+  duplicate_rm = T,
+  cols_keep = "all",
+  y_label = TRUE
+)
+
+
+# try out cnn construction using clinical notes ================================
+notes <- dat$note
+# initialize tokenizer specifing maximum words
+max_words <- 3000
+tk <- text_tokenizer(num_words = max_words)
+# update tk in place with a vector or list of documents
+fit_text_tokenizer(tk, notes)
+
+clinical_word_index <- tk$word_index
+clinical_words <- names(clinical_word_index)[1:max_words]
+
+# convert the documents into a list of sequence
+X <- texts_to_sequences(tk, notes)
+
+# pad the sequence to get a matrix
+seq_length <- 500
+X <- pad_sequences(X, seq_length)
+y_class <- dat$y
+n_class <- length(unique(y_class))
+y <- to_categorical(y_class, n_class)
+
+# split X and y into train and test
+set.seed(1234)
+in_train <- caret::createDataPartition(y_class, p = 0.7, list = FALSE)
+X_train <- X[in_train,]
+y_train <- y[in_train,] 
+X_test <- X[-in_train,]
+y_test <- y[-in_train,]
+y_test_class <- y_class[-in_train]
+
+
+# build model =================================================================
+dim_emb <- 200  # vector length of pretrained embedding
+dropout <- 0.3
+model <- keras_model_sequential() %>% 
+  layer_embedding(input_dim = max_words,
+                  output_dim = dim_emb,
+                  input_length = seq_length) %>%
+  layer_dropout(dropout) %>%
+  layer_conv_1d(filters = 16,
+                kernel_size = 3,
+                #activation = "relu",
+                padding = "valid",
+                strides = 1) %>%
+  layer_dropout(dropout) %>%
+  layer_global_average_pooling_1d() %>%
+  layer_dense(units = 64, activation = "relu") %>%
+  layer_dropout(dropout) %>%
+  # output layer
+  layer_dense(n_class, activation = "softmax")
+
+summary(model)
+
+
+# set the embedding layer to pretrained matrix
+pretrained_file <- "data/gas_neu_uro_token_embeddings_note.csv"
+pretrained_matrix <- get_pretrained_matrix(words, pretrained_file)
+get_layer(model, index = 1) %>% 
+  set_weights(list(pretrained_matrix))
+
+# compile, fit, and evaluate model in place
+compile(model,
+        loss = "categorical_crossentropy",
+        optimizer = "adam",
+        metrics = "accuracy"
+)
+
+fit(model,
+    x = X_train, y = y_train,
+    epochs = 50,
+    batch_size = 32,
+    validation_split = 0.3,
+    verbose = 3
+)
+
+
+# repeat 100 times to get average metrics =======
+
 # mean and standard deviation
-df_acc_f1 <- cnn_metrics("note")
+pretrained_file <- "data/gas_neu_uro_token_embeddings_note.csv"
+df_acc_f1 <- cnn_metrics(dat$note, pretrained_file)
 sapply(df_acc_f1, mean)
 sapply(df_acc_f1, sd)
 
-df_acc_f1 <- cnn_metrics("amazon_me", seq_length = 500)
+pretrained_file <- "data/gas_neu_uro_token_embeddings_amazon.csv"
+df_acc_f1 <- cnn_metrics(dat$amazon_me, pretrained_file)
 sapply(df_acc_f1, mean)
 sapply(df_acc_f1, sd)

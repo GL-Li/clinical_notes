@@ -94,7 +94,7 @@ n_class <- length(unique(y_class))
 y <- to_categorical(y_class, n_class)
 
 # split X and y into train and test
-set.seed(11111)
+set.seed(11112)
 in_train <- caret::createDataPartition(y_class, p = 0.7, list = FALSE)
 X_train <- X[in_train,]
 y_train <- y[in_train,] 
@@ -188,7 +188,7 @@ model <- keras_model_sequential() %>%
   # output layer
   layer_dense(n_class, activation = "softmax")
 
-#summary(model)
+summary(model)
 
 # compile, fit, and evaluate model in place
 compile(model,
