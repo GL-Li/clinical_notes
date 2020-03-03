@@ -375,6 +375,7 @@ dashboardPage(
                     tabPanel(
                         "Deploy Model",
                         includeMarkdown("Rmd/classification_prediction.Rmd"),
+                        br(),
                         
                         fluidRow(
                             column(
@@ -393,7 +394,7 @@ dashboardPage(
                                 textAreaInput(
                                     "text_input",
                                     "Input clinical notes",
-                                    placeholder = "One line per note",
+                                    placeholder = "One paragraph per note",
                                     height = "200px"
                                 ) %>% 
                                     # bug in width when set at "100%"
@@ -404,6 +405,7 @@ dashboardPage(
                                 #actionButton("submit_text_input", "submit")
                             )
                         ),
+                        br(),
                         
                         
                         h4("Prediction:"),
@@ -413,9 +415,6 @@ dashboardPage(
                         
                         # input using uploaded data
                         br(),
-                        
-                        
-                        
                         br(),
                         br(),
                         tags$a(
@@ -425,9 +424,6 @@ dashboardPage(
                     )
                 ),
             )
-            
-            
-            #---            
         )
     )
 )
