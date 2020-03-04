@@ -1,2 +1,6 @@
+---
+title: " "
+---
 
-We use three methods to cluster the clinical notes: principle component analysis, hierarchical clustering, and K-means clustering. The corpuses used are the original clinical notes and medical named entities extracted with Amazon Comprehend Medical. We will only include three medical specialites: gastroenterology, neurology, and urology for better visualizaton.
+We use three methods to cluster the clinical notes: principle component analysis, hierarchical clustering, and K-means clustering. The corpora used are the original clinical notes and medical named entities extracted with Amazon Comprehend Medical. We will only include three medical specialties: gastroenterology, neurology, and urology for better visualization.
+  

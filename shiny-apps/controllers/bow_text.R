@@ -2,7 +2,7 @@
 bow_proxy <- dataTableProxy("bows")
 
 output$bows <- DT::renderDataTable({
-    note_bows[, sum_tfidf := NULL]  # no need to show it
+    note_bows
 },
 rownames = FALSE,
 #filter = list(position = 'top', clear = FALSE),
@@ -20,7 +20,6 @@ observeEvent(input$word, {
 # displace stats of a word =====================================================
 output$word_stats <- renderText({
     wd <- input$word
-    print(wd)
     if (nchar(wd) > 0){
         word <- word_stats %>%
             filter(word == wd) 

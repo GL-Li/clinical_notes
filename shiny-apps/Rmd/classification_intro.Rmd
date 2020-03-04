@@ -1,1 +1,5 @@
-We built supervised learning models to classify the medical specialties of clinical notes. In the first tab, we focused on three medical specialties: gastroenterology, neuralology, and urology and compared models based on the corpuses of original clinical notes and medical named entities extracted with Amazon Comprehend Medical. In the second tab, we build multiclass classification models for the six medical specialties having more than 100 samples. In the third tab, a support vector machine was deployed to predict the specialties of new clinical notes. 
+---
+title: " "
+---
+
+In this section we build supervised learning models to predict the medical specialties of clinical notes. The best model, a radial kernel support vector machine model, is deployed to predict the specialties of new clinical notes. 

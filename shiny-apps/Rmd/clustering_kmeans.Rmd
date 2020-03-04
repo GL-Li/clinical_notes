@@ -1,8 +1,12 @@
-### Method
-For each corpus, we first generate a term frequency inverse document frequence (tfidf) matrix for each corpus, in which each row is normalized to a vector of unit length. K-means clustering analysis is then performed on this matrix. For comparison, we also perform principle component (pca) analysis on the tfidf matrix to get a pca matrix and run PCA on this matrix.
+---
+title: " "
+---
 
-This most challenge step for K-means clustering analysis is to determine the number of clusters. We take the liberty to assume that we already know, as the corpus has three medical specialties.
+### Method
+For each corpus, we first generate a term frequency inverse document frequency (TFIDF) matrix for each corpus, in which each row is normalized to a vector of unit length. K-means clustering analysis is then performed on this matrix. For comparison, we also perform principle component (PCA) analysis on the TFIDF matrix to get a PCA matrix and run K-means clustering on this matrix.
+
+The most challenge step for K-means clustering analysis is to determine the number of clusters. We take the liberty to assume that we already know the number to be three as the corpus has three medical specialties.
 
 ### Results
-The K-means clustering with and without PCA changes the identified specialty of a few sample points but overall accuracy is almost the same, but there is no meaningful difference between the results. Using the medical named entities extracted with Amazon comprehend medical improves the accuracy from 64% to 70%. 
+The K-means clustering with and without PCA changes the identified specialty of a few samples but overall accuracy is almost the same. Using the medical named entities extracted with Amazon Comprehend Medical improves the accuracy from 64% to 70%. 
 

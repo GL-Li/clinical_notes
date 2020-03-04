@@ -1,10 +1,17 @@
-Clinical notes are the integra part of electronic health records (EHR) and contains rich data about patients' diagnosis, disease, medication, and many other health related information. As unstructured data in free-form text, however, clinical notes pose special challenges to the the retrieval and application of these inforamtion. 
+---
+title: " "
+---
 
-This project explores methods and techiniques to mine and analyze cinical notes, including medical named entities extraction, clincal note clustering with un-supervised learning, and medical specialty prediciton with supervised learning. Currently, this project includes the following sections:
+Clinical notes are an integral part of electronic health records (EHR) and contains rich data about patients' diagnosis, disease, medication, and many other health related information. As unstructured data in free-form text, however, clinical notes pose particular challenges to the the retrieval and application of these information. 
 
-- **Clinical Notes**:  In this section, we give an introduciton to clinical notes and use clinical notes openly available at [mtsamples.com](https://www.mtsamples.com/) to show the major components of a note and examine the complexity of real-world clinical notes.
-- **Medical Named Entities**: We compare two methods that extract medical named entities: 1) the commercial service Amazon Comprehend Medical and 2) the open source Python library medaCy. In addiiton, the extracted entities are also compared to top words selected based on term frequency and term frequency - inverse document frequency.
+This project explores methods and techniques to mine and analyze clinical notes, including medical named entities extraction, clinical note clustering with unsupervised learning, and medical specialty classification with supervised learning. Currently, this project includes the following sections:
+
+- **Clinical Notes**:  In this section, we first give an introduction and then examine the major components and the complexity of real-world clinical notes using samples openly available at [mtsamples.com](https://www.mtsamples.com/).
+- **Medical Named Entities**: We compare two methods to extract medical named entities: 1) the commercial service Amazon Comprehend Medical and 2) the open source Python library medaCy. In addition, the extracted entities are also compared to top words selected based on term frequency and term frequency - inverse document frequency.
 - **Clustering**: We use principle component analysis, hierarchical clustering and K-means clustering to group the clinical notes and compare the results of clustering based the original text of the clinical notes and the named entities extracted with Amazon Comprehend Medical. 
-- **Classification**: We try three popular algorithms, support vector machine, xgboost, and neural netword to build models to predict medical specialties. The best model is deployed for the prediction of new clinical notes.
+- **Classification**: We try three popular algorithms, support vector machine, xgboost, and neural network to build models to predict medical specialties. The best model is deployed for the prediction of new clinical notes.
 
 We found that medical named entities extracted by Amazon Comprehend Medical improves the qualities of clustering and predictive modeling. Among the models we tried, support vector machine performs the best in predicting the medical specialty. The conclusions may be only valid for clinical notes collected from mtsamples.com. More data are needed to test the techniques.
+
+---
+This web application is built using R Shiny so most scripts are writen in R. In cases R has no convenient tools for a task, we use python instead, for example in using Amazon Comprehend Medical, medaCy, and pre-trained word embedding. All code can be found at [this github repo](https://github.com/GL-Li/clinical_notes).

@@ -1,28 +1,32 @@
-In the clustering session, we found that the extraction of medical named entities using Amazon Comprehend Medical improved the quality of clustering. In this tab panel, we will show that it also boosts the performance of various classification algorithms using support vector machine, xgboost, and neural network.  
+---
+title: " "
+---
 
-### Method  link to code for each??????
-**Train, validation, and test**: The entire data was first randomly split into 70% train-validation and 30% test sets in a stratified fashion. In cross validation, 70% of the train-validation set was used for training and 30% for validation. The best hyperparemters obtained from cross validation were then used to build a model on the train-validation set and make prediciton on the test set. Accuracy and f1 scores were calculated for the predication. Repeat the whole process 100 times and the mean and standardard deviaiton of the accuracy and f1 scores are reported in the table below.
+In the clustering session, we found that the extraction of medical named entities using Amazon Comprehend Medical improved the quality of clustering. In this tab panel, we will show that it also boosts the performance of various classification algorithms including support vector machine, XGBoost, and neural network. Like in clustering section, we focused on three medical specialties: gastroenterology, neuralology, and urology. 
 
-**Support vector machine (SVM)**: To apply radial kernel SVM, we first calculated term frequency inverse termfrequency (tfidf) of the corpus and then keep the top $N$ princple components. The number of component $N$ was treated as a tuned hyper parameter, which worded best when $N=25$.
+### Method
+**Train, validation, and test**: The entire dataset was first randomly split into 70% train-validation and 30% test sets in a stratified fashion. In cross validation, 70% of the train-validation set was used for training and 30% for validation. The best hyperparemters obtained from cross validation were then used to build a model on the train-validation set and make prediction on the test set. Accuracy and f1 scores were calculated for the predication. Repeat the whole process 100 times. The mean and standard deviation of the accuracy and f1 scores are reported in the table below.
 
-We did not run linear kernel SVM on tfidf matrix. The total number of samples is only 599 while the matrix has over 1500 columns, many of which have just a few non-zero cells. During random split, there is a chance that one of columns in train set has all zero cells. As we repeat the process for 100 times, the chance is even larger. SVM is unable to handel the constant columns.
+**Support vector machine (SVM)**: To apply radial kernel SVM, we first calculated term frequency inverse term frequency (TFIDF) of the corpus and then run principle component analysis (PCA) on the TFIDF matrix. The top $N$ principle components were kept for the modeling. The number of component $N$ was treated as a tuned hyper parameter. We found that the model performed the best when $N=25$.
 
-**xgboost**: We applied xgboost algorithm to both tfidf matrix and the top 25 principle components of the pca mattrix. 
+We did not run linear kernel SVM on the TFIDF matrix. The total number of samples is only 599 while the matrix has over 1500 columns, many of which have just a few non-zero cells. During random split, there is a chance that one of columns in train set has all zero cells. SVM is unable to handle constant columns.
 
-**Neural network (nn)**: Neural network has too many variants but we will only try three of them.
+**XGBoost**: We applied XGBoost algorithm to both TFIDF matrix and the top 25 principle components of the PCA matrix. 
 
-- Two dense layer with dropout regulartion: This is very simple neural network. We will apply it to both tfidf matrix and pca matrix.
-- Embedding layer followed by cov_1D layer: We will train the embedding layer with the data we have. This method catches the order of words in clinical notes and Amazon medical entities. Many Amazon medical entites are short phrases.
+**Neural network (NN)**: We used the following constructions of neural network:
+
+- Two dense layer with dropout regulation: This is very simple neural network. We will apply it to both TFIDF matrix and PCA matrix.
+- Embedding layer followed by cov_1D layer: We will train the embedding layer with the data we have. This method catches the order of words in clinical notes and Amazon medical entities. Many Amazon medical entities are short phrases.
 - Pre-trained embedding layer followed by conv_1D: We will use pre-trained [BioWordVec](https://github.com/ncbi-nlp/BioSentVec), which was created using PubMed and the clinical notes from MIMIC-III Clinical Database.
 
 ### Results
-The mean and standard deviation of the overall accuracy, f1 scores of gastroenteology, neurology, and urology  are listed in the table below, in which the top 3 performers of each metric are highlighted in bold text. We can have the fowlloing conclusion:
+The mean and standard deviation of the overall accuracy, f1 scores of gastroenterology, neurology, and urology  are listed in the table below, in which the top 3 performers of each metric are highlighted in bold text. We can have the following conclusion:
 
-- The Amazon medical entities gives better result than the original clinical notes. Most top performers are from experiments using amzon medical entites.
-- PCA transformation improves metrics for the same algorithm by a larger margin if the algorithm behaves poorly on tfidf.
+- The Amazon medical entities gives better result than the original clinical notes. Most top performers are from experiments using amzon medical entities.
+- PCA transformation improves metrics for the same algorithm by a larger margin if the algorithm behaves poorly on TFIDF alone.
 - Support vector machine performs well on both the original notes and the Amazon medical entities.
 - Simple neural network with two dense layers yield decent results.
 - Neural networks with embedding, pretrained or not, failed to elevate the metrics.
-- xgboost is not the right tool for this job.
+- XGBoost is not the right tool for this job.
 
-In summary, SVM and simple neural network are among the top algorithms. As the neural network took much longer time to train, the much faster SVM should be the best to choose.
+In summary, SVM and simple neural network are among the top algorithms. As the neural network took much longer time to train, the much faster SVM should be the best choice.

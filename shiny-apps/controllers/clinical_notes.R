@@ -47,7 +47,7 @@ output$specialty_count <- renderPlot({
         scale_y_continuous(expand = c(0, 0)) +
         labs(x = NULL,
              y = NULL,
-             title = "Count of Top 20 Medical Specialties") +
+             title = "Counts of Top 20 Medical Specialties") +
         coord_flip() + 
         theme(panel.background = element_blank(),
               axis.ticks = element_blank(),

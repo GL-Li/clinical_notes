@@ -17,14 +17,14 @@ observeEvent(input$text_input, {
         unlist()
 })
 observeEvent(input$file_upload, {
-   dat <- read.csv(
-       input$file_upload$datapath, 
-       sep = "\n", 
-       header = FALSE,
-       stringsAsFactors = FALSE
-   )
-   
-   input_val$notes <- dat$V1
+    dat <- read.csv(
+        input$file_upload$datapath, 
+        sep = "\n", 
+        header = FALSE,
+        stringsAsFactors = FALSE
+    )
+    
+    input_val$notes <- dat$V1
 })
 
 # # use the reactive value inside reactive environment

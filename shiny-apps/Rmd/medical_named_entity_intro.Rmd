@@ -1,0 +1,5 @@
+---
+title: " "
+---
+
+One central task of clinical text mining is medical named entity recognition. In this section, we use two methods to extract medical named entities from clinical notes and visually represent the extractions with wordcloud, alongside top words picked by term frequency and term frequency inverse document frequency.

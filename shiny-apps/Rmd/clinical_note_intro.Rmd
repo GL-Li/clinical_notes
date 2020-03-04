@@ -1,0 +1,5 @@
+---
+title: " "
+---
+
+This section answers what clinical note is, why it is important, and what the challenges are. We will also look into the details of clinical notes using samples at [mtsamples.com](https://www.mtsamples.com/).

@@ -1,0 +1,12 @@
+name: Clinical_notes
+title: Clinical_notes
+username:
+account: gl-li
+server: shinyapps.io
+hostUrl: https://api.shinyapps.io/v1
+appId: 1901504
+bundleId: 2850859
+url: https://gl-li.shinyapps.io/Clinical_notes/
+when: 1583337784.61591
+asMultiple: FALSE
+asStatic: FALSE

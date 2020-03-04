@@ -50,14 +50,14 @@ save(train_tfidf, test_tfidf,
      train_pca, test_pca,
      train_y, test_y,
      train_vectorizer, tfidf_model, pca_model,
-     file = "multiclass_classification_train_test_tfidf_pca_models.RData")
+     file = "machine-learning/multiclass_classification_train_test_tfidf_pca_models.RData")
 
 save(train_vectorizer, tfidf_model, pca_model,
      file = "shiny-apps/RData/multiclass_classification_tfidf_pca_models.RData")
 
 
 # create and saved model for deployment ========================================
-load("multiclass_classification_train_test_tfidf_pca_models.RData")
+load("machine-learning/multiclass_classification_train_test_tfidf_pca_models.RData")
 
 X_train <- train_pca[, 1:25]
 X_test <- test_pca[, 1:25]

@@ -165,7 +165,7 @@ top_tfidf <- function(df, col){
         slice(1:10) %>%
         select(id, word) %>%
         group_by(id) %>%
-        summarise(top_tf = paste(word, collapse = " "))
+        summarise(top_tf = paste(word, collapse = ", "))
     
     # top 10 words by tfidf in each document
     top_tfidf <- df_tfidf %>%
@@ -174,7 +174,7 @@ top_tfidf <- function(df, col){
         slice(1:10) %>%
         select(id, word) %>%
         group_by(id) %>%
-        summarise(top_tfidf = paste(word, collapse = " "))
+        summarise(top_tfidf = paste(word, collapse = ", "))
     
     
     tfidf <- top_tf %>%

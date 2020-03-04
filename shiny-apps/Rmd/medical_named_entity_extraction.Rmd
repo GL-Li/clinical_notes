@@ -1,9 +1,13 @@
-One central task of clinical text mining is medical named entity recognition. Medical named entities are specific terms that have medical meaning, such as diseases, drugs, symptoms, and tests. We will try to extract medical named entities from the clinical notes with tow methods: [Amazon Comprehend Medical](https://aws.amazon.com/comprehend/medical/), a commercial service provided by Amazon and Python package [medaCy](https://github.com/NLPatVCU/medaCy), a open source project developed by a team of researchers at Virginia Commonwealth University.
+---
+title: " "
+---
+
+Medical named entities are specific terms that have medical meaning, such as diseases, drugs, symptoms, and tests. We will extract medical named entities from the clinical notes with tow methods: [Amazon Comprehend Medical](https://aws.amazon.com/comprehend/medical/), a commercial service provided by Amazon and Python package [medaCy](https://github.com/NLPatVCU/medaCy), a open source project developed by a team of researchers at Virginia Commonwealth University.
 
 ### Amazon Comprehend Medical
-With Amazon Comprehend Medical, a recoganized medical entity is assigned in one of the categories of 'ANATOMY', 'MEDICAL_CONDITION', 'MEDICATION', 'PROTECTED_HEALTH_INFORMATION', and 'TEST_TREATMENT_PROCEDURE' and labeled with one of the types of 'ADDRESS', 'AGE', 'BRAND_NAME', 'DATE', 'DX_NAME', 'GENERIC_NAME', 'ID', 'NAME', 'PROCEDURE_NAME', 'PROFESSION', 'SYSTEM_ORGAN_SITE', 'TEST_NAME', 'TREATMENT_NAME'. The entity may also has a traits, though often the traits remain empty. One of the most useful information in traits is negate, which means the patient does not have what described by the text.
+With Amazon Comprehend Medical, a recognized medical entity is assigned to one of the categories of ANATOMY, MEDICAL_CONDITION, MEDICATION, PROTECTED_HEALTH_INFORMATION, and TEST_TREATMENT_PROCEDURE. It is also labeled with one of the types of ADDRESS, AGE, BRAND_NAME, DATE, DX_NAME, GENERIC_NAME, ID, NAME, PROCEDURE_NAME, PROFESSION, SYSTEM_ORGAN_SITE, TEST_NAME, and TREATMENT_NAME. An entity may also has a traits, though often the traits remain empty. One of the most useful trait is negate, which means the patient does not have what described by the entity text.
 
-Here is an example of a medical entity recognized by Comprehend Medical. It has an Id for the text, the starting and ending position of the text in the string of clinical notes, the probability score of the recognition, the exact text extracted, category, type, and traits of the extracted text.
+Here is an example of a medical entity recognized by Comprehend Medical. It has an Id, the starting and ending position of the text in the string of clinical notes, the probability score of the recognition, the exact text extracted, category, type, and traits of the extracted text.
 
 ```
 {'Id': 6,
@@ -15,11 +19,11 @@ Here is an example of a medical entity recognized by Comprehend Medical. It has 
  'Type': 'PROCEDURE_NAME',
  'Traits': []}
 ```
-Medical named entities of bulk clincal notes can be extracted easily with Python API ([code](https://github.com/GL-Li/clinical_notes/blob/master/python/extract_medical_named_entity_with_amazon_comprehend_medical.py)). But keep in mind that one entity costs one cent and typically a collection of clinical notes of size 1M characters costs you about $100. New users have 3-month free tier with 25000 entities quota per month. Be cautious, do not bankrupt yourself.
+Medical named entities of bulk clinical notes can be extracted easily with Python API ([code](https://github.com/GL-Li/clinical_notes/blob/master/python/extract_medical_named_entity_with_amazon_comprehend_medical.py)). But keep in mind that one entity costs one cent and typically a collection of clinical notes of size 1M characters costs you about $100. New users have 3-month free tier with 25000 entities quota per month. Be cautious, do not bankrupt yourself.
 
 
 ### medaCy
-Python package medaCy is under development and currently focuses on the recoginition of medications. It uses categories 'ADE', 'Dosage', 'Drug', 'Duration', 'Form', 'Frequency', 'Reason', 'Route', 'Strength' to discribe the extracted entities ([code](https://github.com/GL-Li/clinical_notes/blob/master/python/extract_medical_named_entity_with_medacy.py)). The examples below shows three entities extracted from one clinical notes. The entity is in a simpler form than that extracted by Amazon Comprehend Medical, having only category, starting and ending position in the string of clinical notes, and the extracted text.
+Python package medaCy is under development and currently focuses on the recognition of medications. It uses categories 'ADE', 'Dosage', 'Drug', 'Duration', 'Form', 'Frequency', 'Reason', 'Route', 'Strength' to describe the extracted entities ([code](https://github.com/GL-Li/clinical_notes/blob/master/python/extract_medical_named_entity_with_medacy.py)). The examples below shows three entities extracted from one clinical notes. The entity is in a simpler form than that extracted by Amazon Comprehend Medical, having only category, starting and ending position in the string of clinical notes, and the extracted text.
 
 ```
 [('Drug', 1397, 1405, 'peroxide'),
@@ -30,5 +34,5 @@ Python package medaCy is under development and currently focuses on the recogini
 ### Compare Amazon Comprehend and medaCy
 In the table below, we display the medical named entities extracted with the two methods from clinical notes in three specialties: gastroenterology, neurology, and urology. Amazon Comprehend Medical (amazon_me) extracts much more information than medaCy does. Obviously, medaCy (medacy_me) misses many medical entities other than medication using its currently available [light clinical notes model](https://github.com/NLPatVCU/medaCy/blob/master/examples/models/clinical_notes_model.md).
  
-For comparison, we also listed top 10 words having the highest term frequency (top_tf) and term frequency inverse document frequency (top_tfidf) in the table. Common English stopwords were removed from the calculation.
+For comparison, we also listed top 10 words having the highest term frequency (top_tf) and term frequency inverse document frequency (top_tfidf) in the table. Common English stopwords have been removed from the calculation.
 

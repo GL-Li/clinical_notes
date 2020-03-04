@@ -1,1 +1,5 @@
+---
+title: " "
+---
+
 A radial kernel SVM model is deployed and ready to make predictions. Provide the clinical notes by uploading a plain text file or pasting into the text input area. You can view and download the prediction below.

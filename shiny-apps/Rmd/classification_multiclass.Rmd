@@ -1,17 +1,19 @@
-We have six medical specialites having over 100 clinical notes in each. We will build classificaiton models to predict for the six specialties. We will use only the original notes, as it is too expensive to acquire the Amazon medical entites for all of them. But anyway, from the experiment in the Gastro-Neuro_Urol tab, the improvement by Amazon medical entities is marginal if we use SVM and simple neural network??be specific??? algorithms.
+---
+title: " "
+---
+
+We have six medical specialties having over 100 clinical notes in each. In this tab panel we build classification models to predict for the six specialties. We use only the original notes, as it is too expensive to acquire the Amazon medical entities for all of them. But anyway, from the experiment in the Gastro-Neuro_Urol tab, the improvement by Amazon medical entities is not significant if we use SVM and the simple neural network algorithms on PCA matrix.
 
 ### Method
-**train, validation and test**: The entire data was first randomly split into 70% train-validation and 30% test sets in a stratified fashion. In cross validation, 70% of the train-validation set was used for training and 30% for validation. The best hyperparemters obtained from cross validation were then used to build a model on the train-validation set and make prediciton on the test set. 
+**train, validation and test**: The entire data was first randomly split into 70% train-validation and 30% test sets in a stratified fashion. In cross validation, 70% of the train-validation set was used for training and 30% for validation. The best hyperparemters obtained from cross validation were then used to build a model on the train-validation set and make prediction on the test set. All algorithms used the same data split. To compare their results, confusion matrices are plotted side by side, as shown in the bottom of the page.
 
-All lagorithms used the same data split. To compare their results, confusion matrices are plotted side by side from the predictions, as shown in the bottom of the page.
-
-**Algorithms**: We only built models using support vector machine (SVM) and a simple neural network, as xgboost and neural network with word embedding did not produce promissing results. We applied linear kernel SVM to the tfidf matrix and radial kernel SVM to pca matrix with top 25 principle components. The simple neural network with two dense layer with dropout regulartion was applied to both tfidf matrix and pca matrix.
+**Algorithms**: We only built models using support vector machine (SVM) and a simple neural network, as XGBoost and neural network with word embedding did not produce promising results. We applied linear kernel SVM to the TFIDF matrix and radial kernel SVM to PCA matrix with top 25 principle components. The simple neural network with two dense layer with dropout regulation was applied to both TFIDF matrix and PCA matrix.
 
 ### Results
-We can select from two types of plot: recall or precision. The recall plot shows the ratio and number of predicted specialties of a true specialty. The percentages on the diagnal are the recall (or sensitivity). The precision plot shows the ratio and number of actual specialties in a predicted specialty. The diagonal values are the precison (or positive predictive value). In the plot, each dot represents a clinical note.
+We can select from two types of plot: recall or precision. The recall plot shows the ratio and number of predicted specialties of a true specialty. The percentages on the diagonal are the recall (or sensitivity). The precision plot shows the ratio and number of actual specialties in a predicted specialty. The diagonal values are the precision (or positive predictive value). In the plot, each dot represents a clinical note.
 
-The four algorithms we tried yield similar accuracy except for neural network with pca matrix, which has a low accuracy at 90.2%. This is, however, just an unlucky data split. We tried a few more and the algorithm achieved similar results with others. 
+The four algorithms we tried yield similar accuracy except for neural network with PCA matrix, which has a low accuracy at 90.2%. This is, however, just an unlucky data split. We tried a few other random split and the algorithm achieved similar results as the others. 
 
-Considering the speed, we choose radial kernel SVM on pca matrix for deployment in the next tab.
+Considering the speed, we choose radial kernel SVM on PCA matrix for deployment in the next tab.
 
 ---
